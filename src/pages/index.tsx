@@ -19,9 +19,9 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>forg</title>
-        <meta name="description" content="a questions about frogs" />
-        <link rel="icon" href="/favicon.ico" />
+        <title>Form</title>
+        <meta name="description" content="HRT research form" />
+        {/* <link rel="icon" href="/favicon.ico" /> */}
       </Head>
       <main /*className="flex min-h-screen flex-col items-center justify-center"*/>
         <Form />

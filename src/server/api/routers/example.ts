@@ -34,7 +34,7 @@ export const formRouter = createTRPCRouter({
 
       return db.formData.create({
         data: {
-          dateOfBirth: dateOfBirth,
+          dateOfBirth
         }
       })
     })
