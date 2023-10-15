@@ -19,3 +19,10 @@ model Example {
 
     @@index([name])
 }
+
+model FrogQuestion {
+    id          Int      @id @default(autoincrement())
+    submittedAt DateTime @default(now())
+    submittedBy String 
+    response    String 
+}

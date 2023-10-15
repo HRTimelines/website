@@ -1,16 +1,25 @@
+import { TRPCError } from "@trpc/server";
 import { z } from "zod";
+import { db } from "~/server/db";
 
-import { createTRPCRouter, publicProcedure } from "~/server/api/trpc";
+import {
+  createTRPCRouter,
+  publicProcedure,
+} from "~/server/api/trpc";
 
-export const exampleRouter = createTRPCRouter({
-  hello: publicProcedure
-    .input(z.object({ text: z.string() }))
-    .query(({ input }) => {
-      return {
-        greeting: `Hello ${input.text}`,
-      };
-    }),
-  getAll: publicProcedure.query(({ ctx }) => {
-    return ctx.db.example.findMany();
-  }),
+
+export const submitRouter = createTRPCRouter({
+  create: publicProcedure
+    .input(z.object({ name: z.string(), opinion: z.string()}))
+    .mutation(({ input }) => {
+      const name = input.name
+      const opinion = input.opinion
+
+      return db.frogQuestion.create({
+        data: {
+          submittedBy: name,
+          response: opinion
+        }
+      })
+    })
 });
