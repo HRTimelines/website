@@ -27,7 +27,7 @@ export default function Home() {
       <main className="flex min-h-screen flex-col items-center justify-center">
         <div className="border-black border-solid p-4 border-solid border-2">
           <form>
-            <label htmlFor="opinionQuestion" >How do you feel about frogs?</label><br />
+            <label htmlFor="opinionQuestion">How do you feel about frogs?</label><br />
             <input 
               type="text" 
               id="opinionQuestion" 
