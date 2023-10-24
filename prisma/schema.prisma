@@ -32,4 +32,8 @@ model FormData {
   dateOfBirth String
   country String
   transStart String
+  transEnd String
+  comingOutStart String
+  comingOutEnd String
+  hrtStart String
 }
