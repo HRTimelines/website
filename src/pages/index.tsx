@@ -4,7 +4,8 @@ import Link from "next/link";
 import { useState } from "react";
 
 import { api } from "~/utils/api";
-import { Form } from "./form";
+import { MainForm } from "./mainForm";
+import { MilestonesForm } from "./majorMilestonesForm";
 
 export default function Home() {
 
@@ -24,7 +25,7 @@ export default function Home() {
         {/* <link rel="icon" href="/favicon.ico" /> */}
       </Head>
       <main /*className="flex min-h-screen flex-col items-center justify-center"*/>
-        <Form />
+        <MilestonesForm />
       </main>
     </>
   );

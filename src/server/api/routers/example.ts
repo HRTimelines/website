@@ -27,14 +27,20 @@ export const submitRouter = createTRPCRouter({
 export const formRouter = createTRPCRouter({
   create: publicProcedure
     .input(z.object({
-      dateOfBirth: z.string()
+      dateOfBirth: z.string(),
+      country: z.string(),
+      transStart: z.string()
     }))
     .mutation(({ input }) => {
       const dateOfBirth = input.dateOfBirth
+      const country = input.country
+      const transStart = input.transStart
 
       return db.formData.create({
         data: {
-          dateOfBirth
+          dateOfBirth: dateOfBirth,
+          country: country,
+          transStart: transStart
         }
       })
     })

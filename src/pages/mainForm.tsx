@@ -13,7 +13,7 @@ const genderArray = ["Male",
 "Demigirl", 
 "Questioning"]
 
-export const Form = () => {
+export const MainForm = () => {
     
     const [dateOfBirth, setDateOfBirth] = useState("")
     const [genderChecked, genderSetChecked] = useState([])
@@ -61,7 +61,7 @@ export const Form = () => {
                 <div id="genderContainer">
                     {genderArray.map((item, index) => (
                         <div key={index}>
-                            <input value={item} type="checkbox" onClick = {handleCheck} />
+                            {/* <input value={item} type="checkbox" onClick = {handleCheck} /> */}
                             <span>{item}</span>
                         </div>
                     ))}

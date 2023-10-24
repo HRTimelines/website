@@ -30,4 +30,6 @@ model FormData {
   id Int @id @default(autoincrement())
   submittedAt DateTime @default(now())
   dateOfBirth String
+  country String
+  transStart String
 }
