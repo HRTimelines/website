@@ -70,12 +70,12 @@ export const MainForm = () => {
 
             {/* <RaceQuestion /> */}
 
-            <button 
+            {/* <button 
                 type="button" 
                 className="border-solid border-black border-2 p-1" 
                 onClick={() => mutate({ dateOfBirth: dateOfBirth })}>
                     Submit
-            </button>
+            </button> */}
         </>
     )
 }
