@@ -1,3 +1,42 @@
 @import "tailwindcss/base";
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
+
+@layer base {
+    /* * {
+        border: 1px;
+        border-color: black;
+        border-style: dotted;
+    } */
+    h1 {
+        font-weight: bold;
+        font-size: xx-large;
+    }
+    /* div {
+        text-align: left;
+        margin-right: auto;
+        margin-left: auto;
+        padding: 1%;
+        width: 85%;
+        border-style: dashed;
+        border-color: blue;
+        border-width: 2px;
+    } */
+    .header > * {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: auto;
+    }
+    .nav-links li{
+        display: inline-block;
+        margin: 0 15px;
+    }
+    .question > label {
+        padding-right: 15px;
+    }
+    div > input {
+        margin: 1%;
+    }
+    
+}

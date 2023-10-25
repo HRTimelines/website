@@ -26,83 +26,98 @@ export const MilestonesForm = () => {
     return (
         <>
             <div>
-                <label htmlFor="dateOfBirth">What is your date of birth?</label><br />
-                <input 
-                    type="date" 
-                    id="dateOfBirth" 
-                    defaultValue={dateOfBirth} 
-                    onChange={(e) => setDateOfBirth(e.target.value)}
-                    className = ""
-                /><br /><br />
+                <div className="question">
+                    <label htmlFor="dateOfBirth">What is your date of birth?</label><br />
+                    <input 
+                        type="date" 
+                        id="dateOfBirth" 
+                        defaultValue={dateOfBirth} 
+                        onChange={(e) => setDateOfBirth(e.target.value)}
+                        className = ""
+                    />
+                </div>
 
-                <label htmlFor="country">In which country do you currently reside?</label><br />
-                <input 
-                    type="text" 
-                    id="country" 
-                    defaultValue={country} 
-                    onChange={(e) => setCountry(e.target.value)}
-                    className = "border border-black"
-                /><br /><br />
+                <div className="question">
+                    <label htmlFor="country">In which country do you currently reside?</label><br />
+                    <input 
+                        type="text" 
+                        id="country" 
+                        defaultValue={country} 
+                        onChange={(e) => setCountry(e.target.value)}
+                        className = "border border-black rounded-sm"
+                    />
+                </div>
 
-                <label htmlFor="transStart">What is the earliest date you realized you were trans?</label><br />
-                <input 
-                    type="date" 
-                    id="transStart" 
-                    defaultValue={transStart} 
-                    onChange={(e) => setTransStart(e.target.value)}
-                    className = ""
-                /><br /><br />
+                <div className="question">
+                    <span>When did you realize you were trans?  If this is a range, please input approximate start and end dates.  If you have an exact date, just input the same date twice</span><br />
 
-                <label htmlFor="transEnd">What is the latest date you realized you were trans?</label><br />
-                <input 
-                    type="date" 
-                    id="transEnd" 
-                    defaultValue={transEnd} 
-                    onChange={(e) => setTransEnd(e.target.value)}
-                    className = ""
-                /><br /><br />
+                    <label htmlFor="transStart">Start:</label>
+                    <input 
+                        type="date" 
+                        id="transStart" 
+                        defaultValue={transStart} 
+                        onChange={(e) => setTransStart(e.target.value)}
+                        className = ""
+                    /><br />
+                
 
-                <label htmlFor="comingOutStart">When is the earliest date you came out?</label><br />
-                <input 
-                    type="date" 
-                    id="comingOutStart" 
-                    defaultValue={comingOutStart} 
-                    onChange={(e) => setComingOutStart(e.target.value)}
-                    className = ""
-                /><br /><br />
+                    <label htmlFor="transEnd">End:</label>
+                    <input 
+                        type="date" 
+                        id="transEnd" 
+                        defaultValue={transEnd} 
+                        onChange={(e) => setTransEnd(e.target.value)}
+                        className = ""
+                    />
+                </div>
 
-                <label htmlFor="comingOutEnd">When is the latest date you came out?</label><br />
-                <input 
-                    type="date" 
-                    id="comingOutEnd" 
-                    defaultValue={comingOutEnd} 
-                    onChange={(e) => setComingOutEnd(e.target.value)}
-                    className = ""
-                /><br /><br />
+                <div className="question">
+                    <span>When did you come out?  If this is a range, please input approximate start and end dates.  If you have an exact date, just input the same date twice</span><br />
+                    <label htmlFor="comingOutStart">Start:</label>
+                    <input 
+                        type="date" 
+                        id="comingOutStart" 
+                        defaultValue={comingOutStart} 
+                        onChange={(e) => setComingOutStart(e.target.value)}
+                        className = ""
+                    /><br />
 
-                <label htmlFor="hrtStart">On which day did you start HRT?</label><br />
-                <input 
-                    type="date" 
-                    id="hrtStart" 
-                    defaultValue={hrtStart} 
-                    onChange={(e) => setHrtStart(e.target.value)}
-                    className = ""
-                /><br /><br />
+                    <label htmlFor="comingOutEnd">End:</label>
+                    <input 
+                        type="date" 
+                        id="comingOutEnd" 
+                        defaultValue={comingOutEnd} 
+                        onChange={(e) => setComingOutEnd(e.target.value)}
+                        className = ""
+                    />
+                </div>
 
+                <div className="question">
+                    <label htmlFor="hrtStart">On which day did you start HRT?</label><br />
+                    <input 
+                        type="date" 
+                        id="hrtStart" 
+                        defaultValue={hrtStart} 
+                        onChange={(e) => setHrtStart(e.target.value)}
+                        className = ""
+                    />
+                </div>
 
-                <button 
-                    type="button" 
-                    className="border-solid border-black border-2 p-1" 
-                    onClick={() => mutate({ 
-                        dateOfBirth, 
-                        country,
-                        transStart,
-                        transEnd,
-                        comingOutStart,
-                        comingOutEnd,
-                        hrtStart })}>
-                        Submit
-                </button>
+                <div>
+                    <button 
+                        type="button" 
+                        className="border-solid border-black border-2 p-1 rounded-xl" 
+                        onClick={() => mutate({ 
+                            dateOfBirth, 
+                            country,
+                            transStart,
+                            transEnd,
+                            comingOutStart,
+                            comingOutEnd,
+                            hrtStart })}>
+                            Submit
+                    </button>
+                </div>
             </div>
         </>
     )

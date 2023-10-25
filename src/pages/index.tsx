@@ -6,6 +6,7 @@ import { useState } from "react";
 import { api } from "~/utils/api";
 import { MainForm } from "./mainForm";
 import { MilestonesForm } from "./majorMilestonesForm";
+import { Header } from "./components/header";
 
 export default function Home() {
 
@@ -24,8 +25,9 @@ export default function Home() {
         <meta name="description" content="HRT research form" />
         {/* <link rel="icon" href="/favicon.ico" /> */}
       </Head>
-      <main /*className="flex min-h-screen flex-col items-center justify-center"*/>
-        <MilestonesForm />
+      <main className="flex justify-center">
+        <Header />
+        {/* <MilestonesForm /> */}
       </main>
     </>
   );
