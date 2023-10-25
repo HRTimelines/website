@@ -10,6 +10,8 @@ export const MilestonesForm = () => {
     const [comingOutStart, setComingOutStart] = useState("")
     const [comingOutEnd, setComingOutEnd] = useState("")
     const [hrtStart, setHrtStart] = useState("")
+    const [feedback, setFeedback] = useState("")
+    const [future, setFuture] = useState("")
 
     const { mutate } = api.form.create.useMutation({
         onSuccess: () => {
@@ -20,6 +22,8 @@ export const MilestonesForm = () => {
             setComingOutStart("")
             setComingOutEnd("")
             setHrtStart("")
+            setFeedback("")
+            setFuture("")
         }
     })
 
@@ -103,6 +107,31 @@ export const MilestonesForm = () => {
                     />
                 </div>
 
+                {/* feedback */}
+                <div className="question">
+                    <label htmlFor="feedback">Do you have any feedback about this form that you would like us to know about?</label><br />
+                    <textarea
+                        id="feedback"
+                        defaultValue={feedback}
+                        onChange={(e) => setFeedback(e.target.value)}
+                        className="border border-black rounded-sm"
+                        rows={5}
+                        cols={50}
+                    />
+                </div>
+
+                <div className="question">
+                    <label htmlFor="future">What kinds of information would you like to see in the future?  Is there some question about trans health care that you've always been curious about?  Maybe a particular piece of data you're interested in?</label><br />
+                    <textarea
+                        id="future"
+                        defaultValue={future}
+                        onChange={(e) => setFuture(e.target.value)}
+                        className="border border-black rounded-sm"
+                        rows={5}
+                        cols={50}
+                    />
+                </div>
+
                 <div>
                     <button 
                         type="button" 
@@ -114,11 +143,15 @@ export const MilestonesForm = () => {
                             transEnd,
                             comingOutStart,
                             comingOutEnd,
-                            hrtStart })}>
-                            Submit
+                            hrtStart,
+                            feedback,
+                            future 
+                        })}>Submit
                     </button>
                 </div>
             </div>
         </>
     )
 }
+
+export default MilestonesForm
