@@ -10,6 +10,7 @@ export const MilestonesForm = () => {
     const [comingOutStart, setComingOutStart] = useState("")
     const [comingOutEnd, setComingOutEnd] = useState("")
     const [hrtStart, setHrtStart] = useState("")
+    const [notes, setNotes] = useState("")
     const [feedback, setFeedback] = useState("")
     const [future, setFuture] = useState("")
 
@@ -24,6 +25,7 @@ export const MilestonesForm = () => {
             setHrtStart("")
             setFeedback("")
             setFuture("")
+            setNotes("")
         }
     })
 
@@ -63,7 +65,6 @@ export const MilestonesForm = () => {
                         onChange={(e) => setTransStart(e.target.value)}
                         className = ""
                     /><br />
-                
 
                     <label htmlFor="transEnd">End:</label>
                     <input 
@@ -107,6 +108,19 @@ export const MilestonesForm = () => {
                     />
                 </div>
 
+                {/* notes */}
+                <div className="question">
+                    <label htmlFor="notes">Do you have any notes or additional information you would like to provide about any of these responses?</label><br />
+                    <textarea
+                        id="notes"
+                        defaultValue={notes}
+                        onChange={(e) => setNotes(e.target.value)}
+                        className="border border-black rounded-sm"
+                        rows={5}
+                        cols={50}
+                    />
+                </div>
+
                 {/* feedback */}
                 <div className="question">
                     <label htmlFor="feedback">Do you have any feedback about this form that you would like us to know about?</label><br />
@@ -120,6 +134,7 @@ export const MilestonesForm = () => {
                     />
                 </div>
 
+                {/* future */}
                 <div className="question">
                     <label htmlFor="future">
                         {`
@@ -148,6 +163,7 @@ export const MilestonesForm = () => {
                             comingOutStart,
                             comingOutEnd,
                             hrtStart,
+                            notes,
                             feedback,
                             future 
                         })}>Submit

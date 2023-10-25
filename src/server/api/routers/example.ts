@@ -34,6 +34,7 @@ export const formRouter = createTRPCRouter({
       comingOutStart: z.string(),
       comingOutEnd: z.string(),
       hrtStart: z.string(),
+      notes: z.string(),
       feedback: z.string(),
       future: z.string()
     }))
@@ -45,6 +46,7 @@ export const formRouter = createTRPCRouter({
       const comingOutStart = input.comingOutStart
       const comingOutEnd = input.comingOutEnd
       const hrtStart = input.hrtStart
+      const notes = input.notes
       const feedback = input.feedback
       const future = input.future
 
@@ -57,6 +59,7 @@ export const formRouter = createTRPCRouter({
           comingOutStart,
           comingOutEnd,
           hrtStart,
+          notes,
           feedback,
           future,
         }

@@ -36,6 +36,7 @@ model FormData {
   comingOutStart String
   comingOutEnd String
   hrtStart String
+  notes String
   feedback String
   future String
 }
