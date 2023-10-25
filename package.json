@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "build": "next build",
+    "build": "CI= npm run build",
     "db:push": "prisma db push",
     "dev": "next dev",
     "postinstall": "prisma generate",
