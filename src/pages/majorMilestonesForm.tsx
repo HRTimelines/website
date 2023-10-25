@@ -121,7 +121,11 @@ export const MilestonesForm = () => {
                 </div>
 
                 <div className="question">
-                    <label htmlFor="future">What kinds of information would you like to see in the future?  Is there some question about trans health care that you've always been curious about?  Maybe a particular piece of data you're interested in?</label><br />
+                    <label htmlFor="future">
+                        {`
+                            What kinds of information would you like to see in the future?  Is there some question about trans health care that you've always been curious about?  Maybe a particular piece of data you're interested in?
+                        `}
+                    </label><br />
                     <textarea
                         id="future"
                         defaultValue={future}
