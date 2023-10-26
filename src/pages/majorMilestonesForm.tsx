@@ -31,7 +31,7 @@ export const MilestonesForm = () => {
 
     return (
         <>
-            <div className="m-20">
+            <div className="m-10 w-[95%]">
                 <div className="question">
                     <label htmlFor="dateOfBirth">What is your date of birth?</label><br />
                     <input 
@@ -50,7 +50,7 @@ export const MilestonesForm = () => {
                         id="country" 
                         defaultValue={country} 
                         onChange={(e) => setCountry(e.target.value)}
-                        className = "border border-black rounded-sm"
+                        className = ""
                     />
                 </div>
 
@@ -117,7 +117,7 @@ export const MilestonesForm = () => {
                         onChange={(e) => setNotes(e.target.value)}
                         className="border border-black rounded-sm"
                         rows={5}
-                        cols={50}
+                        cols={40}
                     />
                 </div>
 
@@ -130,7 +130,7 @@ export const MilestonesForm = () => {
                         onChange={(e) => setFeedback(e.target.value)}
                         className="border border-black rounded-sm"
                         rows={5}
-                        cols={50}
+                        cols={40}
                     />
                 </div>
 
@@ -147,7 +147,7 @@ export const MilestonesForm = () => {
                         onChange={(e) => setFuture(e.target.value)}
                         className="border border-black rounded-sm"
                         rows={5}
-                        cols={50}
+                        cols={40}
                     />
                 </div>
 

@@ -12,16 +12,14 @@
         font-weight: bold;
         font-size: xx-large;
     }
-    /* div {
-        text-align: left;
-        margin-right: auto;
-        margin-left: auto;
-        padding: 1%;
-        width: 85%;
-        border-style: dashed;
+    div {
+        /* border-style: dashed;
         border-color: blue;
-        border-width: 2px;
-    } */
+        border-width: 2px; */
+    }
+    div .question {
+        margin-bottom: 20px
+    }
     .header > * {
         display: flex;
         justify-content: center;
@@ -36,7 +34,10 @@
         padding-right: 15px;
     }
     div > input {
-        margin: 1%;
+        border: solid;
+        border-color: black;
+        border-width: 1px;
+        border-radius: 5px;
     }
     
 }
