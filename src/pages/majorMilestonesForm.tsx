@@ -31,7 +31,7 @@ export const MilestonesForm = () => {
 
     return (
         <>
-            <div>
+            <div className="m-20">
                 <div className="question">
                     <label htmlFor="dateOfBirth">What is your date of birth?</label><br />
                     <input 
