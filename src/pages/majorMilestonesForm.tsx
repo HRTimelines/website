@@ -55,7 +55,7 @@ export const MilestonesForm = () => {
                 </div>
 
                 <div className="question">
-                    <span>When did you realize you were trans?  If this is a range, please input approximate start and end dates.  If you have an exact date, just input the same date twice</span><br />
+                    <span>When did you realize you were trans?  If this is a range, please input approximate start and end dates.  If you have an exact date, just input the same date twice.</span><br />
 
                     <label htmlFor="transStart">Start:</label>
                     <input 
@@ -77,7 +77,7 @@ export const MilestonesForm = () => {
                 </div>
 
                 <div className="question">
-                    <span>When did you come out?  If this is a range, please input approximate start and end dates.  If you have an exact date, just input the same date twice</span><br />
+                    <span>When did you come out?  If this is a range, please input approximate start and end dates.  If you have an exact date, just input the same date twice.</span><br />
                     <label htmlFor="comingOutStart">Start:</label>
                     <input 
                         type="date" 
