@@ -152,22 +152,24 @@ export const MilestonesForm = () => {
                 </div>
 
                 <div>
-                    <button 
-                        type="button" 
-                        className="border-solid border-black border-2 p-1 rounded-xl" 
-                        onClick={() => mutate({ 
-                            dateOfBirth, 
-                            country,
-                            transStart,
-                            transEnd,
-                            comingOutStart,
-                            comingOutEnd,
-                            hrtStart,
-                            notes,
-                            feedback,
-                            future 
-                        })}>Submit
-                    </button>
+                    <a href="./submitted">
+                        <button 
+                            type="button" 
+                            className="border-solid border-black border-2 p-1 rounded-xl" 
+                            onClick={() => mutate({ 
+                                dateOfBirth, 
+                                country,
+                                transStart,
+                                transEnd,
+                                comingOutStart,
+                                comingOutEnd,
+                                hrtStart,
+                                notes,
+                                feedback,
+                                future 
+                            })}>Submit
+                        </button>
+                    </a>
                 </div>
             </div>
         </>

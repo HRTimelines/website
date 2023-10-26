@@ -8,8 +8,8 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>forg</title>
-        <meta name="description" content="a questions about frogs" />
+        <title>Thank you for submitting!</title>
+        <meta name="description" content="HRT reasearch form submission page" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className="flex min-h-screen flex-col items-center justify-center">
