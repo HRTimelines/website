@@ -7,9 +7,9 @@ import { api } from "~/utils/api";
 import { MainForm } from "./mainForm";
 import { MilestonesForm } from "./majorMilestonesForm";
 import { Header } from "./components/header";
+import { Description } from "./components/text";
 
 export default function Home() {
-
   // const [dateOfBirth, setDateOfBirth] = useState("")
 
   // const { mutate } = api.form.create.useMutation({
@@ -26,8 +26,8 @@ export default function Home() {
         {/* <link rel="icon" href="/favicon.ico" /> */}
       </Head>
       <main className="flex justify-center">
-        {/* <Header /> */}
-        <MilestonesForm />
+        <Header />
+        <Description />
       </main>
     </>
   );

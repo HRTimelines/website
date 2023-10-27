@@ -2,8 +2,8 @@
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 datasource db {
-  provider = "mysql"
-  url      = env("DATABASE_URL")
+  provider     = "mysql"
+  url          = env("DATABASE_URL")
   relationMode = "prisma"
 }
 
@@ -12,31 +12,31 @@ generator client {
 }
 
 model Example {
-    id        Int      @id @default(autoincrement())
-    name      String
-    createdAt DateTime @default(now())
+  id        Int      @id @default(autoincrement())
+  name      String
+  createdAt DateTime @default(now())
 
-    @@index([name])
+  @@index([name])
 }
 
 model FrogQuestion {
-    id          Int      @id @default(autoincrement())
-    submittedAt DateTime @default(now())
-    submittedBy String 
-    response    String 
+  id          Int      @id @default(autoincrement())
+  submittedAt DateTime @default(now())
+  submittedBy String
+  response    String
 }
 
 model FormData {
-  id Int @id @default(autoincrement())
-  submittedAt DateTime @default(now())
-  dateOfBirth String
-  country String
-  transStart String
-  transEnd String
+  id             Int      @id @default(autoincrement())
+  submittedAt    DateTime @default(now())
+  dateOfBirth    String
+  country        String
+  transStart     String
+  transEnd       String
   comingOutStart String
-  comingOutEnd String
-  hrtStart String
-  notes String
-  feedback String
-  future String
+  comingOutEnd   String
+  hrtStart       String
+  notes          String
+  feedback       String
+  future         String
 }

@@ -3,41 +3,44 @@
 @import "tailwindcss/utilities";
 
 @layer base {
-    /* * {
+  /* * {
         border: 1px;
         border-color: black;
         border-style: dotted;
     } */
-    h1 {
-        font-weight: bold;
-        font-size: xx-large;
-    }
-    div {
-        /* border-style: dashed;
+  h1 {
+    font-weight: bold;
+    font-size: xx-large;
+  }
+  h2 {
+    font-weight: bold;
+    font-size: x-large;
+  }
+  /* div {
+        border-style: dashed;
         border-color: blue;
-        border-width: 2px; */
-    }
-    div .question {
-        margin-bottom: 20px
-    }
-    .header > * {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        margin: auto;
-    }
-    .nav-links li{
-        display: inline-block;
-        margin: 0 15px;
-    }
-    .question > label {
-        padding-right: 15px;
-    }
-    div > input {
-        border: solid;
-        border-color: black;
-        border-width: 1px;
-        border-radius: 5px;
-    }
-    
+        border-width: 2px;
+    } */
+  div .question {
+    margin-bottom: 20px;
+  }
+  .header > * {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+  }
+  .nav-links li {
+    display: inline-block;
+    margin: 0 15px;
+  }
+  .question > label {
+    padding-right: 15px;
+  }
+  div > input {
+    border: solid;
+    border-color: black;
+    border-width: 1px;
+    border-radius: 5px;
+  }
 }
