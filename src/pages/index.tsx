@@ -5,8 +5,8 @@ import { useState } from "react";
 
 import { api } from "~/utils/api";
 import { MainForm } from "./mainForm";
-import { MilestonesForm } from "./majorMilestonesForm";
-import { Header } from "./components/header";
+import { MilestonesForm } from "./components/majorMilestonesForm";
+import Header from "./components/header";
 import { Description } from "./components/text";
 
 export default function Home() {

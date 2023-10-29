@@ -34,6 +34,26 @@
     display: inline-block;
     margin: 0 15px;
   }
+  .nav-links li a {
+    text-decoration: none;
+    color: black;
+    padding: 5px 0;
+    position: relative;
+  }
+  .nav-links li a::after {
+    content: "";
+    background: black;
+    width: 0%;
+    height: 2px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    transition: width 0.5s;
+  }
+  .nav-links li a:hover::after {
+    width: 100%;
+  }
+
   .question > label {
     padding-right: 15px;
   }

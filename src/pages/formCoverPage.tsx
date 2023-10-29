@@ -1,5 +1,5 @@
 import Header from "./components/header";
-
+import FormCover from "./components/formCover";
 import MilestonesForm from "./components/majorMilestonesForm";
 
 export const Form = () => {
@@ -7,7 +7,7 @@ export const Form = () => {
     <>
       <div>
         <Header />
-        <MilestonesForm />
+        <FormCover />
       </div>
     </>
   );

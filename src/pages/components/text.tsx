@@ -48,12 +48,39 @@ const Contact = () => {
         <h2>Contact Us</h2>
         <p>
           {`
-          If you have any questions, feedback, or just want to chat, please reach out! Feel free to use the form below, email us, or reach out to us on Instagram. We are university students and will get back to you when we can, so please expect a few days delay for a response. 
-          `}
+            If you have any questions, feedback, or just want to chat, please reach out! Feel free to use the form below, email us, or reach out to us on Instagram. We are university students and will get back to you when we can, so please expect a few days delay for a response.
+          `}<br /><br />
+        </p>
+        <p>
+          [contact form]
+          <br /><br />
+          Email: hrtimelines@gmail.com <br />
+          Instagram: @hrtimelines
         </p>
       </div>
     </>
   );
 };
 
-export { Description, Creators, Contact };
+const FormCoverText = () => {
+  return (
+    <>
+      <div className="mt-24 p-5">
+        <p>
+          What follows is a short form that will ask a few basic questions about
+          when you realized you were trans, when you came out, etc. It is
+          expected to take about 5 minutes. You must be 18 years or older to
+          complete this survey. We understand that some of these questions may
+          be difficult to answer. You are not expected to have an exact date,
+          just a best guess. If you have not yet done one of the things in this
+          form (for example, you have not yet started HRT), please leave that
+          answer blank. If you have any questions or are interested in helping
+          out with the project you can email us at hrtimelines@gmail.com or on
+          instagram @hrtimelines
+        </p>
+      </div>
+    </>
+  );
+};
+
+export { Description, Creators, Contact, FormCoverText };
