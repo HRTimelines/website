@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { FormCoverText } from "./text";
 import React from "react";
+import { toast } from "react-hot-toast";
 
 const FormCover = () => {
   const [ageCheck, setAgeCheck] = useState(false);
@@ -8,12 +9,11 @@ const FormCover = () => {
   //   const navigate = useNavigate();
   const goTo = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault()
-    console.log(ageCheck, consentCheck);
     if (ageCheck && consentCheck) {
         window.location.href = "/form"
     }
     else {
-        console.log("you must agree to these to continue")
+        toast.error("you must agree to both of these conditions to continue")
     }
   };
 
@@ -44,7 +44,7 @@ const FormCover = () => {
           <label htmlFor="consent">I have read the above information and agree to participate in the survey</label>
           <br />
 
-          <button onClick={(e) => goTo}>Go to form</button>
+          <button onClick={(e) => goTo(e)}>Go to form</button>
         </form>
       </div>
     </>
