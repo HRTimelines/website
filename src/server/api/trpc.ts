@@ -47,8 +47,8 @@ const createInnerTRPCContext = (_opts: CreateContextOptions) => {
  */
 export const createTRPCContext = (opts: CreateNextContextOptions) => {
   return {
-    db
-  }
+    db,
+  };
 };
 
 /**

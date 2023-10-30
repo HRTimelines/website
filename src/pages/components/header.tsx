@@ -1,5 +1,5 @@
 import Image from "next/image";
-import logo from "../../../public/Logo - transparent.png";
+import logo from "../../../public/Logo.png";
 import Link from "next/link";
 
 const Header = () => {

@@ -17,7 +17,7 @@ const FormCover = () => {
     }
   };
 
-  const checkboxChange = (checkbox, setCheckbox) => {
+  const checkboxChange = (checkbox: boolean, setCheckbox) => {
     setCheckbox(!checkbox)
   }
 
