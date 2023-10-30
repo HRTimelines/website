@@ -6,7 +6,7 @@ const FormCover = () => {
   const [ageCheck, setAgeCheck] = useState(false);
   const [consentCheck, setConsentCheck] = useState(false);
   //   const navigate = useNavigate();
-  const goTo = (e) => {
+  const goTo = (e: any) => {
     e.preventDefault()
     console.log(ageCheck, consentCheck);
     if (ageCheck && consentCheck) {
@@ -17,7 +17,7 @@ const FormCover = () => {
     }
   };
 
-  const checkboxChange = (checkbox: boolean, setCheckbox) => {
+  const checkboxChange = (checkbox: boolean, setCheckbox: any) => {
     setCheckbox(!checkbox)
   }
 
