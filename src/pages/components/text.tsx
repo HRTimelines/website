@@ -1,3 +1,10 @@
+import { toast } from "react-hot-toast";
+
+function copy(text: string) {
+  navigator.clipboard.writeText(text);
+  toast.success("copied to clipboard");
+}
+
 const Description = () => {
   return (
     <>
@@ -13,12 +20,23 @@ const Description = () => {
             application method, dosage, type, and other potential variables like age
             and race. Currently we are in our second version of the survey and are
             working on creating our case study project which will collect
-            longitudinal data. If you are on HRT and interested in participating in
-            our project please fill out our survey [link]! You can also sign up to
-            be a part of our case study when we launch by filling out this form
-            [link form]. If you have any other questions for us feel free to reach
-            out via email at hrtimelines@gmail.com or Instagram @hrtimelines. 
-          `}
+            longitudinal data.`}{" "}
+          If you are on HRT and interested in participating in our project
+          please follow us on{" "}
+          <a href="https://instagram.com/hrtimelines?igshid=MzMyNGUyNmU2YQ%3D%3D&utm_source=qr">
+            <u>Instagram</u>
+          </a>
+          . You will also soon be able to sign up to be a part of our case
+          study, which is still under construction. If you have any other
+          questions for us feel free to reach out via email at {" "}
+          <button onClick={() => copy("hrtimelines@gmail.com")}>
+            <u>hrtimelines@gmail.com</u>
+          </button>{" "}
+          or on Instagram{" "}
+          <a href="https://instagram.com/hrtimelines?igshid=MzMyNGUyNmU2YQ%3D%3D&utm_source=qr">
+            <u>@hrtimelines</u>
+          </a>
+          .
         </p>
       </div>
     </>
@@ -30,9 +48,9 @@ const Creators = () => {
     <>
       <div className="mt-24 p-5">
         <h2>About Us</h2>
-        <p>
-          {`[Picture of us??]
 
+        <p className="inline">
+          {`
         Hi! We’re Lucas (he/they) and Tessa (any pronouns), the founders of HRTimelines. As two trans university students we saw a gap in trans healthcare data and went looking for a solution. The solution happened to be starting HRTimelines, which is our trans healthcare research project! We are two motivated engineering students working to make a difference in a field we only know about from experience. We are not medical professionals, but we are motivated to fill this gap in order to help other trans people and medical professionals looking to start HRT or work with trans patients. 
           `}
         </p>
@@ -49,13 +67,20 @@ const Contact = () => {
         <p>
           {`
             If you have any questions, feedback, or just want to chat, please reach out! Feel free to use the form below, email us, or reach out to us on Instagram. We are university students and will get back to you when we can, so please expect a few days delay for a response.
-          `}<br /><br />
+          `}
+          <br />
+          <br />
         </p>
         <p>
-          [contact form]
-          <br /><br />
-          Email: hrtimelines@gmail.com <br />
-          Instagram: @hrtimelines
+          Email:{" "}
+          <button onClick={() => copy("hrtimelines@gmail.com")}>
+            <u>hrtimelines@gmail.com</u>
+          </button>
+          <br />
+          Instagram:{" "}
+          <a href="https://instagram.com/hrtimelines?igshid=MzMyNGUyNmU2YQ%3D%3D&utm_source=qr">
+            <u>@hrtimelines</u>
+          </a>
         </p>
       </div>
     </>
@@ -75,8 +100,14 @@ const FormCoverText = () => {
           just a best guess. If you have not yet done one of the things in this
           form (for example, you have not yet started HRT), please leave that
           answer blank. If you have any questions or are interested in helping
-          out with the project you can email us at hrtimelines@gmail.com or on
-          instagram @hrtimelines
+          out with the project you can email us at{" "}
+          <button onClick={() => copy("hrtimelines@gmail.com")}>
+            <u>hrtimelines@gmail.com</u>
+          </button>{" "}
+          or on instagram{" "}
+          <a href="https://instagram.com/hrtimelines?igshid=MzMyNGUyNmU2YQ%3D%3D&utm_source=qr">
+            <u>@hrtimelines</u>
+          </a>
         </p>
       </div>
     </>
@@ -86,6 +117,6 @@ const FormCoverText = () => {
 export { Description, Creators, Contact, FormCoverText };
 
 const Empty = () => {
-  return (<></>)
-}
-export default Empty
+  return <></>;
+};
+export default Empty;

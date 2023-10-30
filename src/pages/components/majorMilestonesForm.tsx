@@ -84,7 +84,7 @@ export const MilestonesForm = () => {
       <form>
         <div className="m-10 mt-24 w-[95%] pt-5">
           <div className="question">
-            <label htmlFor="dateOfBirth">What is your date of birth?</label>
+            <label htmlFor="dateOfBirth">1. What is your date of birth?</label>
             <br />
             <input
               type="date"
@@ -99,7 +99,7 @@ export const MilestonesForm = () => {
           {/* XXX dropdown? */}
           <div className="question">
             <label htmlFor="country">
-              In which country do you currently reside?
+              2. In which country do you currently reside?
             </label>
             <br />
             <input
@@ -108,13 +108,14 @@ export const MilestonesForm = () => {
               defaultValue={country}
               onChange={(e) => setCountry(e.target.value)}
               className=""
+              maxLength={200}
             />
           </div>
 
           <div className="question">
             <span>
               {`
-              When did you realize you were trans? If this is a range, please
+              3. When did you realize you were trans? If this is a range, please
               input approximate start and end dates. If you have an exact date,
               just input the same date twice. This question may be quite
               challenging, a rough guess is completely fine.`}
@@ -146,7 +147,7 @@ export const MilestonesForm = () => {
           <div className="question">
             <span>
               {`
-              When did socially transitioning? If this is a range, please input
+              4. When did socially transitioning? If this is a range, please input
               approximate start and end dates. If you have an exact date, just
               input the same date twice. If you have not yet started socially
               transitioning, please leave this question blank. Similarly, if you
@@ -179,7 +180,7 @@ export const MilestonesForm = () => {
           <div className="question">
             <label htmlFor="hrtStart">
               {`
-              On which day did you start HRT? Note that this refers to starting
+              5. On which day did you start HRT? Note that this refers to starting
               HRT in any capacity. If you started then stopped for any reason,
               please answer with the initial start date and include the
               circumstances under which you stopped in the "notes or additional
@@ -198,8 +199,9 @@ export const MilestonesForm = () => {
 
           {/* notes */}
           <div className="question">
-            <label htmlFor="notes">{`
-              Do you have any notes or additional information you would like to
+            <label htmlFor="notes">
+              {`
+              6. Do you have any notes or additional information you would like to
               provide about any of these responses?`}
             </label>
             <br />
@@ -207,7 +209,7 @@ export const MilestonesForm = () => {
               id="notes"
               defaultValue={notes}
               onChange={(e) => setNotes(e.target.value)}
-              className="rounded-sm border border-black"
+              className="rounded-md border border-black"
               rows={5}
               cols={40}
               maxLength={maxLength}
@@ -217,7 +219,7 @@ export const MilestonesForm = () => {
           {/* feedback */}
           <div className="question">
             <label htmlFor="feedback">
-              Do you have any feedback about this form that you would like us to
+              7. Do you have any feedback about this form that you would like us to
               know about?
             </label>
             <br />
@@ -225,7 +227,7 @@ export const MilestonesForm = () => {
               id="feedback"
               defaultValue={feedback}
               onChange={(e) => setFeedback(e.target.value)}
-              className="rounded-sm border border-black"
+              className="rounded-md border border-black"
               rows={5}
               cols={40}
               maxLength={maxLength}
@@ -236,7 +238,7 @@ export const MilestonesForm = () => {
           <div className="question">
             <label htmlFor="future">
               {`
-                What kinds of information would you like to see in the future?  Is there some question about trans health care that you've always been curious about?  Maybe a particular piece of data you're interested in?
+                8. What kinds of information would you like to see in the future?  Is there some question about trans health care that you've always been curious about?  Maybe a particular piece of data you're interested in?
             `}
             </label>
             <br />
@@ -244,7 +246,7 @@ export const MilestonesForm = () => {
               id="future"
               defaultValue={future}
               onChange={(e) => setFuture(e.target.value)}
-              className="rounded-sm border border-black"
+              className="rounded-md border border-black"
               rows={5}
               cols={40}
               maxLength={maxLength}
@@ -270,7 +272,7 @@ export const MilestonesForm = () => {
                 )
               }
             >
-              Submit
+              Submit Form
             </button>
           </div>
         </div>
