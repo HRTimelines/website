@@ -84,3 +84,6 @@ const FormCoverText = () => {
 };
 
 export { Description, Creators, Contact, FormCoverText };
+
+const Empty = ""
+export default Empty
