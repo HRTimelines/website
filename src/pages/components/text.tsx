@@ -1,9 +1,8 @@
 import { toast } from "react-hot-toast";
 
 function copy(text: string) {
-  navigator.clipboard.writeText(text);
+  void navigator.clipboard.writeText(text);
   toast.success("copied to clipboard");
-  return "copied"
 }
 
 const Description = () => {
