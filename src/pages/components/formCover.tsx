@@ -6,7 +6,7 @@ const FormCover = () => {
   const [ageCheck, setAgeCheck] = useState(false);
   const [consentCheck, setConsentCheck] = useState(false);
   //   const navigate = useNavigate();
-  const goTo = (e: any) => {
+  const goTo = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault()
     console.log(ageCheck, consentCheck);
     if (ageCheck && consentCheck) {
@@ -17,7 +17,7 @@ const FormCover = () => {
     }
   };
 
-  const checkboxChange = (checkbox: boolean, setCheckbox: any) => {
+  const checkboxChange = (checkbox: boolean, setCheckbox: React.Dispatch<React.SetStateAction<boolean>>) => {
     setCheckbox(!checkbox)
   }
 
@@ -44,7 +44,7 @@ const FormCover = () => {
           <label htmlFor="consent">I have read the above information and agree to participate in the survey</label>
           <br />
 
-          <button onClick={goTo}>Go to form</button>
+          <button onClick={(e) => goTo}>Go to form</button>
         </form>
       </div>
     </>
