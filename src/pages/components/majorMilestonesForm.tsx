@@ -14,7 +14,6 @@ function getDate() {
 const maxLength = 2000;
 
 export const MilestonesForm = () => {
-
   const [dateOfBirth, setDateOfBirth] = useState("");
   const [country, setCountry] = useState("");
   const [transStart, setTransStart] = useState("");
@@ -54,12 +53,12 @@ export const MilestonesForm = () => {
     future: string,
   ) => {
     console.log("entered");
-    console.log(dateOfBirth)
-    let flag = true
+    console.log(dateOfBirth);
+    let flag = true;
 
     if (dateOfBirth == "") {
       toast.error("Date of Birth is mandatory");
-      flag = false
+      flag = false;
     }
     if (flag) {
       mutate({
@@ -74,10 +73,10 @@ export const MilestonesForm = () => {
         feedback,
         future,
       });
-      window.location.href = "/submitted"
+      window.location.href = "/submitted";
     }
 
-    console.log("left")
+    console.log("left");
   };
 
   return (
@@ -114,10 +113,11 @@ export const MilestonesForm = () => {
 
           <div className="question">
             <span>
+              {`
               When did you realize you were trans? If this is a range, please
               input approximate start and end dates. If you have an exact date,
               just input the same date twice. This question may be quite
-              challenging, a rough guess is completely fine.
+              challenging, a rough guess is completely fine.`}
             </span>
             <br />
 
@@ -145,12 +145,13 @@ export const MilestonesForm = () => {
 
           <div className="question">
             <span>
+              {`
               When did socially transitioning? If this is a range, please input
               approximate start and end dates. If you have an exact date, just
               input the same date twice. If you have not yet started socially
               transitioning, please leave this question blank. Similarly, if you
               are still in the process of socially transitioning, please leave
-              the end date blank.
+              the end date blank.`}
             </span>
             <br />
             <label htmlFor="comingOutStart">Start:</label>
@@ -177,11 +178,12 @@ export const MilestonesForm = () => {
 
           <div className="question">
             <label htmlFor="hrtStart">
+              {`
               On which day did you start HRT? Note that this refers to starting
               HRT in any capacity. If you started then stopped for any reason,
               please answer with the initial start date and include the
               circumstances under which you stopped in the "notes or additional
-              information" question
+              information" question`}
             </label>
             <br />
             <input
@@ -196,9 +198,9 @@ export const MilestonesForm = () => {
 
           {/* notes */}
           <div className="question">
-            <label htmlFor="notes">
+            <label htmlFor="notes">{`
               Do you have any notes or additional information you would like to
-              provide about any of these responses?
+              provide about any of these responses?`}
             </label>
             <br />
             <textarea
