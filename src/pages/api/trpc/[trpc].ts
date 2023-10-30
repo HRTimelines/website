@@ -16,4 +16,8 @@ export default createNextApiHandler({
           );
         }
       : undefined,
+
+  batching: {
+    enabled: false
+  }
 });

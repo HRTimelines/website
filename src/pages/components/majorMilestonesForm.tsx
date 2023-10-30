@@ -147,7 +147,7 @@ export const MilestonesForm = () => {
           <div className="question">
             <span>
               {`
-              4. When did socially transitioning? If this is a range, please input
+              4. When did you start socially transitioning? If this is a range, please input
               approximate start and end dates. If you have an exact date, just
               input the same date twice. If you have not yet started socially
               transitioning, please leave this question blank. Similarly, if you

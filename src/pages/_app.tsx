@@ -1,4 +1,6 @@
-import { type AppType } from "next/app";
+import { AppType } from "next/app";
+import { httpLink } from "@trpc/client";
+import { withTRPC } from "@trpc/next";
 
 import { api } from "~/utils/api";
 
