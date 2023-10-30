@@ -3,7 +3,7 @@ import { toast } from "react-hot-toast";
 function copy(text: string) {
   navigator.clipboard.writeText(text);
   toast.success("copied to clipboard");
-  return null
+  return "copied"
 }
 
 const Description = () => {
