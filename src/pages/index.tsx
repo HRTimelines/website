@@ -28,12 +28,13 @@ export default function Home() {
     <>
       <main className="block flex flex-col justify-center">
         <Header />
-        <Description />
-
-        <Creators />
-        <Timelines />
-        <Plans />
-        <Contact />
+        <div className="w-5/6 mx-auto">
+          <Description />
+          <Creators />
+          <Timelines />
+          <Plans />
+          <Contact />
+        </div>
       </main>
     </>
   );

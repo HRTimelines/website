@@ -7,11 +7,11 @@ const Header = () => {
     <>
       <header className="z-999 display-block mb-30 fixed top-0 h-24 w-screen justify-center bg-gradient-to-tr from-[#5BCEFA] via-purple-200 to-[#F5A9B8]">
         <div className="header flex flex h-full items-center justify-center">
-          <div className="logo inline h-24 h-4/5 w-auto justify-center text-center ">
+          <div className="inline h-24 h-4/5 w-auto justify-center text-center ">
             <Image
               src={logo}
               alt="logo"
-              className="max-h-full w-auto rounded-full"
+              className="logo max-h-full w-auto rounded-full"
             />
           </div>
           <div className="title inline">

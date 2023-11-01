@@ -8,8 +8,12 @@
         border-color: black;
         border-style: dotted;
     } */
-  html {
+  #__next {
+    width: 100%;
+  }
+  html, body {
     scroll-behavior: smooth;
+    @apply h-full
   }
   h1 {
     font-weight: bold;
@@ -20,6 +24,11 @@
     font-size: x-large;
     text-decoration: underline #5bcefa 2px;
     text-underline-offset: 4px;
+  }
+  .logo {
+    border: 1px;
+    border-color: black;
+    border-style: solid;
   }
   div {
     display: block;

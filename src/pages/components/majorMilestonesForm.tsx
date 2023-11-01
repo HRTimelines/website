@@ -3,12 +3,7 @@ import { api } from "~/utils/api";
 import { toast } from "react-hot-toast";
 
 function getDate() {
-  const today = new Date();
-  const month = today.getMonth() + 1;
-  const year = today.getFullYear();
-  const date = today.getDate();
-  const day = `${year}-${month}-${date}`;
-  return day;
+  return new Date().toISOString().split("T")[0]
 }
 
 const maxLength = 2000;
@@ -37,7 +32,17 @@ export const MilestonesForm = () => {
       setFeedback("");
       setFuture("");
       setNotes("");
+      window.location.href = "/submitted"
     },
+    onError: (e) => {
+      const errorMessage = e.data?.zodError?.fieldErrors.content
+      if (errorMessage && errorMessage[0]) {
+        toast.error(errorMessage[0])
+      }
+      else {
+        toast.error("Submission failed.  Please ensure your connection is not hampered by any firewalls.  If the issue persists, email hrtimelines@gmail.com")
+      }
+    }
   });
 
   const submit = (
@@ -52,8 +57,6 @@ export const MilestonesForm = () => {
     feedback: string,
     future: string,
   ) => {
-    console.log("entered");
-    console.log(dateOfBirth);
     let flag = true;
 
     if (dateOfBirth == "") {
@@ -73,16 +76,14 @@ export const MilestonesForm = () => {
         feedback,
         future,
       });
-      window.location.href = "/submitted";
+      ;
     }
-
-    console.log("left");
   };
 
   return (
     <>
       <form>
-        <div className="m-10 mt-24 w-[95%] pt-5">
+        <div className="mt-24 w-5/6 pt-5 justify-center mx-auto">
           <div className="question">
             <label htmlFor="dateOfBirth">1. What is your date of birth?</label>
             <br />
@@ -273,7 +274,7 @@ export const MilestonesForm = () => {
               }
             >
               Submit Form
-            </button>
+            </button><br /> (please wait a few seconds for the form submissison to go through)
           </div>
         </div>
       </form>

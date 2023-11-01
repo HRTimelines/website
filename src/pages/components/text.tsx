@@ -29,8 +29,8 @@ const Description = () => {
           <br />
           <br />
           {`Currently we are in our second version of the survey and are
-            working on creating our case study project which will collect
-            longitudinal data.`}{" "}
+            working on developing our case study project.  This will collect
+            longitudinal data, gaining a better understanding of how HRT affects people over time.`}{" "}
           If you are on HRT and interested in participating in our project
           please follow us on{" "}
           <a href="https://instagram.com/hrtimelines?igshid=MzMyNGUyNmU2YQ%3D%3D&utm_source=qr">

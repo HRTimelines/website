@@ -13,7 +13,7 @@ const MyApp: AppType = ({ Component, pageProps }) => {
     <>
       <Head>
         <title>HRTimelines</title>
-        <meta name="description" content="HRT research form" />
+        <meta name="description" content="width=device-width, initial-scale=1.0" />
         <link rel="icon" href="/Logo.png" />
       </Head>
       <Toaster />

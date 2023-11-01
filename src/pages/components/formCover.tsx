@@ -25,7 +25,7 @@ const FormCover = () => {
 
   return (
     <>
-      <div>
+      <div className="mx-auto w-5/6">
         <FormCoverText />
         <form className="px-5">
           <input
