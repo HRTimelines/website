@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { toast } from "react-hot-toast";
 import Schedule from "../../../public/HRTimelines Schedule.png";
+import Link from "next/link";
 
 function copy(text: string) {
   void navigator.clipboard.writeText(text);
@@ -175,7 +176,7 @@ const Plans = () => {
           considering a podcast discussing the effects and impacts of HRT. We
           are both looking forward to see where this project is going, and are
           always looking for feedback and good ideas. If you would like to get
-          in touch, you can find us `} <a href="/#contact"><u>here</u></a>
+          in touch, you can find us `} <Link href="/#contact"><u>here</u></Link>
         </p>
       </div>
     </>

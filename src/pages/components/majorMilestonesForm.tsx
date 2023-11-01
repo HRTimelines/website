@@ -34,14 +34,9 @@ export const MilestonesForm = () => {
       setNotes("");
       window.location.href = "/submitted"
     },
-    onError: (e) => {
-      const errorMessage = e.data?.zodError?.fieldErrors.content
-      if (errorMessage && errorMessage[0]) {
-        toast.error(errorMessage[0])
-      }
-      else {
-        toast.error("Submission failed.  Please ensure your connection is not hampered by any firewalls.  If the issue persists, email hrtimelines@gmail.com")
-      }
+    onError: () => {
+      toast.error("Submission failed.  Please ensure your connection is not hampered by any firewalls.  If the issue persists, email hrtimelines@gmail.com")
+
     }
   });
 

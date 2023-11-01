@@ -13,7 +13,6 @@
   }
   html, body {
     scroll-behavior: smooth;
-    @apply h-full
   }
   h1 {
     font-weight: bold;
