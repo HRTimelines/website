@@ -7,7 +7,13 @@ import { api } from "~/utils/api";
 import { MainForm } from "./mainForm";
 import { MilestonesForm } from "./components/majorMilestonesForm";
 import Header from "./components/header";
-import { Description } from "./components/text";
+import {
+  Contact,
+  Creators,
+  Description,
+  Plans,
+  Timelines,
+} from "./components/text";
 
 export default function Home() {
   // const [dateOfBirth, setDateOfBirth] = useState("")
@@ -20,14 +26,14 @@ export default function Home() {
 
   return (
     <>
-      <Head>
-        <title>Form</title>
-        <meta name="description" content="HRT research form" />
-        {/* <link rel="icon" href="/favicon.ico" /> */}
-      </Head>
-      <main className="flex justify-center">
+      <main className="block flex flex-col justify-center">
         <Header />
         <Description />
+
+        <Creators />
+        <Timelines />
+        <Plans />
+        <Contact />
       </main>
     </>
   );

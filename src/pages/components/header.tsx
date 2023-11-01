@@ -16,22 +16,22 @@ const Header = () => {
           </div>
           <div className="title inline">
             <h1>
-              <Link href="/">HRTimelines</Link>
+              <Link href="/#description">HRTimelines</Link>
             </h1>
           </div>
           <div className="inline">
             <ul className="nav-links">
               <li>
-                <Link href="/">Home</Link>
+                <Link href="/#description">Home</Link>
               </li>
               <li>
-                <Link href="/aboutUs">About Us</Link>
+                <Link href="/#creators">About Us</Link>
+              </li>
+              <li>
+                <Link href="/#contact">Contact</Link>
               </li>
               <li>
                 <Link href="/formCoverPage">Form</Link>
-              </li>
-              <li>
-                <Link href="/contact">Contact</Link>
               </li>
             </ul>
           </div>

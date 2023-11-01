@@ -8,6 +8,9 @@
         border-color: black;
         border-style: dotted;
     } */
+  html {
+    scroll-behavior: smooth;
+  }
   h1 {
     font-weight: bold;
     font-size: xx-large;
@@ -15,6 +18,14 @@
   h2 {
     font-weight: bold;
     font-size: x-large;
+    text-decoration: underline #5bcefa 2px;
+    text-underline-offset: 4px;
+  }
+  div {
+    display: block;
+  }
+  .anchor {
+    scroll-margin-top: 150px;
   }
   /* div {
         border-style: dashed;
@@ -62,5 +73,12 @@
     border-color: black;
     border-width: 1px;
     border-radius: 5px;
+  }
+
+  @media screen and (max-width: 920px) {
+    .nav-links li {
+      display: block;
+      font-size: 14px;
+    }
   }
 }
