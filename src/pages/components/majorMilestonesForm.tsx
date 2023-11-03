@@ -11,6 +11,7 @@ const maxLength = 2000;
 export const MilestonesForm = () => {
   const [dateOfBirth, setDateOfBirth] = useState("");
   const [country, setCountry] = useState("");
+  const [mascOrFem, setMascOrFem] = useState("");
   const [transStart, setTransStart] = useState("");
   const [transEnd, setTransEnd] = useState("");
   const [comingOutStart, setComingOutStart] = useState("");
@@ -24,6 +25,7 @@ export const MilestonesForm = () => {
     onSuccess: () => {
       setDateOfBirth("");
       setCountry("");
+      setMascOrFem("");
       setTransStart("");
       setTransEnd("");
       setComingOutStart("");
@@ -44,6 +46,7 @@ export const MilestonesForm = () => {
   const submit = (
     dateOfBirth: string,
     country: string,
+    mascOrFem: string,
     transStart: string,
     transEnd: string,
     comingOutStart: string,
@@ -71,6 +74,7 @@ export const MilestonesForm = () => {
       mutate({
         dateOfBirth,
         country,
+        mascOrFem,
         transStart,
         transEnd,
         comingOutStart,
@@ -100,7 +104,6 @@ export const MilestonesForm = () => {
             />
           </div>
 
-          {/* XXX dropdown? */}
           <div className="question">
             <label htmlFor="country">
               2. In which country do you currently reside?
@@ -117,9 +120,23 @@ export const MilestonesForm = () => {
           </div>
 
           <div className="question">
+            <label htmlFor="mascOrFem">
+              3.  How would you describe your transition? (ex. FtM, transfeminine, etc.)
+            </label>
+            <br />
+            <input
+              type="text"
+              id="mascOrFem"
+              defaultValue={mascOrFem}
+              onChange={(e) => setMascOrFem(e.target.value)}
+              className=""
+              maxLength={200}
+            />
+          </div>
+          <div className="question">
             <span>
               {`
-              3. When did you realize you were trans? If this is a range, please
+              4. When did you realize you were trans? If this is a range, please
               input approximate start and end dates. If you have an exact date,
               just input the same date twice. This question may be quite
               challenging, a rough guess is completely fine.`}
@@ -151,7 +168,7 @@ export const MilestonesForm = () => {
           <div className="question">
             <span>
               {`
-              4. When did you start socially transitioning? If this is a range, please input
+              5. When did you start socially transitioning? If this is a range, please input
               approximate start and end dates. If you have an exact date, just
               input the same date twice. If you have not yet started socially
               transitioning, please leave this question blank. Similarly, if you
@@ -184,7 +201,7 @@ export const MilestonesForm = () => {
           <div className="question">
             <label htmlFor="hrtStart">
               {`
-              5. On which day did you start HRT? Note that this refers to starting
+              6. On which day did you start HRT? Note that this refers to starting
               HRT in any capacity. If you started then stopped for any reason,
               please answer with the initial start date and include the
               circumstances under which you stopped in the "notes or additional
@@ -205,7 +222,7 @@ export const MilestonesForm = () => {
           <div className="question">
             <label htmlFor="notes">
               {`
-              6. Do you have any notes or additional information you would like to
+              7. Do you have any notes or additional information you would like to
               provide about any of these responses?`}
             </label>
             <br />
@@ -223,7 +240,7 @@ export const MilestonesForm = () => {
           {/* feedback */}
           <div className="question">
             <label htmlFor="feedback">
-              7. Do you have any feedback about this form that you would like us
+              8. Do you have any feedback about this form that you would like us
               to know about?
             </label>
             <br />
@@ -242,7 +259,7 @@ export const MilestonesForm = () => {
           <div className="question">
             <label htmlFor="future">
               {`
-                8. What kinds of information would you like to see in the future?  Is there some question about trans health care that you've always been curious about?  Maybe a particular piece of data you're interested in?
+                9. What kinds of information would you like to see in the future?  Is there some question about trans health care that you've always been curious about?  Maybe a particular piece of data you're interested in?
             `}
             </label>
             <br />
@@ -265,6 +282,7 @@ export const MilestonesForm = () => {
                 submit(
                   dateOfBirth,
                   country,
+                  mascOrFem,
                   transStart,
                   transEnd,
                   comingOutStart,
@@ -287,6 +305,5 @@ export const MilestonesForm = () => {
   );
 };
 
-// XXX INPUT SANITIZATION
 
 export default MilestonesForm;

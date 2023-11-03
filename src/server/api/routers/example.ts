@@ -26,6 +26,7 @@ export const formRouter = createTRPCRouter({
       z.object({
         dateOfBirth: z.string(),
         country: z.string(),
+        mascOrFem: z.string(),
         transStart: z.string(),
         transEnd: z.string(),
         comingOutStart: z.string(),
@@ -39,6 +40,7 @@ export const formRouter = createTRPCRouter({
     .mutation(({ input }) => {
       const dateOfBirth = input.dateOfBirth;
       const country = input.country;
+      const mascOrFem = input.mascOrFem;
       const transStart = input.transStart;
       const transEnd = input.transEnd;
       const comingOutStart = input.comingOutStart;
@@ -52,6 +54,7 @@ export const formRouter = createTRPCRouter({
         data: {
           dateOfBirth,
           country,
+          mascOrFem,
           transStart,
           transEnd,
           comingOutStart,

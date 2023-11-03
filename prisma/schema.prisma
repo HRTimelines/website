@@ -31,6 +31,7 @@ model FormData {
   submittedAt    DateTime @default(now())
   dateOfBirth    String
   country        String
+  mascOrFem      String
   transStart     String
   transEnd       String
   comingOutStart String
