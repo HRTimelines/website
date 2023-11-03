@@ -232,7 +232,7 @@ export const MilestonesForm = () => {
               onChange={(e) => setNotes(e.target.value)}
               className="rounded-md border border-black p-1"
               rows={5}
-              cols={40}
+              cols={35}
               maxLength={maxLength}
             />
           </div>
@@ -250,7 +250,7 @@ export const MilestonesForm = () => {
               onChange={(e) => setFeedback(e.target.value)}
               className="rounded-md border border-black p-1"
               rows={5}
-              cols={40}
+              cols={35}
               maxLength={maxLength}
             />
           </div>
@@ -269,7 +269,7 @@ export const MilestonesForm = () => {
               onChange={(e) => setFuture(e.target.value)}
               className="rounded-md border border-black p-1"
               rows={5}
-              cols={40}
+              cols={35}
               maxLength={maxLength}
             />
           </div>
