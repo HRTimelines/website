@@ -274,7 +274,7 @@ export const MilestonesForm = () => {
             />
           </div>
 
-          <div>
+          <div className="mb-24">
             <button
               type="button"
               className="rounded-xl border-2 border-solid border-black p-1"
@@ -296,8 +296,8 @@ export const MilestonesForm = () => {
             >
               Submit Form
             </button>
-            <br /> (please wait a few seconds for the form submissison to go
-            through)
+            <br /> <span className="">(please wait a few seconds for the form submissison to go
+            through)</span>
           </div>
         </div>
       </form>
