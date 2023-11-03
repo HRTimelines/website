@@ -3,7 +3,7 @@ import { api } from "~/utils/api";
 import { toast } from "react-hot-toast";
 
 function getDate() {
-  return new Date().toISOString().split("T")[0]
+  return new Date().toISOString().split("T")[0];
 }
 
 const maxLength = 2000;
@@ -32,12 +32,13 @@ export const MilestonesForm = () => {
       setFeedback("");
       setFuture("");
       setNotes("");
-      window.location.href = "/submitted"
+      window.location.href = "/submitted";
     },
     onError: () => {
-      toast.error("Submission failed.  Please ensure your connection is not hampered by any firewalls.  If the issue persists, email hrtimelines@gmail.com")
-
-    }
+      toast.error(
+        "Submission failed.  Please ensure your connection is not hampered by any firewalls.  If the issue persists, email hrtimelines@gmail.com",
+      );
+    },
   });
 
   const submit = (
@@ -58,6 +59,14 @@ export const MilestonesForm = () => {
       toast.error("Date of Birth is mandatory");
       flag = false;
     }
+    if (transEnd < transStart) {
+      toast.error("The end date cannot be earlier than the start date (Q3)");
+      flag = false;
+    }
+    if (comingOutEnd < comingOutStart) {
+      toast.error("The end date cannot be earlier than the start date (Q4)");
+      flag = false;
+    }
     if (flag) {
       mutate({
         dateOfBirth,
@@ -71,14 +80,13 @@ export const MilestonesForm = () => {
         feedback,
         future,
       });
-      ;
     }
   };
 
   return (
     <>
       <form>
-        <div className="mt-24 w-5/6 pt-5 justify-center mx-auto">
+        <div className="mx-auto mt-24 w-5/6 justify-center pt-5">
           <div className="question">
             <label htmlFor="dateOfBirth">1. What is your date of birth?</label>
             <br />
@@ -205,7 +213,7 @@ export const MilestonesForm = () => {
               id="notes"
               defaultValue={notes}
               onChange={(e) => setNotes(e.target.value)}
-              className="rounded-md border border-black"
+              className="rounded-md border border-black p-1"
               rows={5}
               cols={40}
               maxLength={maxLength}
@@ -215,15 +223,15 @@ export const MilestonesForm = () => {
           {/* feedback */}
           <div className="question">
             <label htmlFor="feedback">
-              7. Do you have any feedback about this form that you would like us to
-              know about?
+              7. Do you have any feedback about this form that you would like us
+              to know about?
             </label>
             <br />
             <textarea
               id="feedback"
               defaultValue={feedback}
               onChange={(e) => setFeedback(e.target.value)}
-              className="rounded-md border border-black"
+              className="rounded-md border border-black p-1"
               rows={5}
               cols={40}
               maxLength={maxLength}
@@ -242,7 +250,7 @@ export const MilestonesForm = () => {
               id="future"
               defaultValue={future}
               onChange={(e) => setFuture(e.target.value)}
-              className="rounded-md border border-black"
+              className="rounded-md border border-black p-1"
               rows={5}
               cols={40}
               maxLength={maxLength}
@@ -269,7 +277,9 @@ export const MilestonesForm = () => {
               }
             >
               Submit Form
-            </button><br /> (please wait a few seconds for the form submissison to go through)
+            </button>
+            <br /> (please wait a few seconds for the form submissison to go
+            through)
           </div>
         </div>
       </form>

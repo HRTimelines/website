@@ -35,7 +35,7 @@ const FormCover = () => {
             onChange={(e) => checkboxChange(ageCheck, setAgeCheck)}
             className="p-5"
           />
-          <label htmlFor="age" className="p-2">I am 18 years of age or older</label>
+          <label htmlFor="age" className="p-2">I am 18 years of age or older and transgender</label>
           <br />
 
           <input

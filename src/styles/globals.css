@@ -11,7 +11,8 @@
   #__next {
     width: 100%;
   }
-  html, body {
+  html,
+  body {
     scroll-behavior: smooth;
   }
   h1 {
@@ -82,11 +83,22 @@
     border-width: 1px;
     border-radius: 5px;
   }
+  .mobile {
+    display: none;
+  }
 
   @media screen and (max-width: 920px) {
     .nav-links li {
       display: block;
       font-size: 14px;
+    }
+  }
+  @media screen and (max-width: 720px) {
+    .desktop {
+      display: none;
+    }
+    .mobile {
+      display: block;
     }
   }
 }

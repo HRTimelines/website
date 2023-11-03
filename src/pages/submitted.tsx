@@ -4,6 +4,8 @@ import toast from "react-hot-toast";
 
 import { api } from "~/utils/api";
 import Header from "./components/header";
+import Image from "next/image";
+import cat from "../../public/cat.jpg"
 
 function copy(text: string) {
   void navigator.clipboard.writeText(text);
@@ -15,6 +17,14 @@ export default function Home() {
     <>
       <main className="flex min-h-screen flex-col items-center justify-center">
         <Header />
+
+        <Image
+        src={cat}
+        alt="an image of a cat"
+        width={200}
+        className=""
+        />
+
         <div className="p-5 text-center">
           Thank you for submitting! If you would like to get in contact, please
           reach out via email{" "}

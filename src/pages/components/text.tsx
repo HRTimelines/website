@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { toast } from "react-hot-toast";
-import Schedule from "../../../public/HRTimelines Schedule.png";
+import Schedule_desktop from "../../../public/HRTimelines Schedule.jpg";
+import Schedule_mobile from "../../../public/HRTimelines timeline sketch - Mobile.jpg"
 import Link from "next/link";
 
 function copy(text: string) {
@@ -91,7 +92,9 @@ const Contact = () => {
           Instagram:{" "}
           <a href="https://instagram.com/hrtimelines?igshid=MzMyNGUyNmU2YQ%3D%3D&utm_source=qr">
             <u>@hrtimelines</u>
-          </a>
+          </a><br />
+          <a href="https://forms.gle/eZRGF7BgagHJ668H7"><u>Feedback Form</u></a><br />
+          <a href="https://forms.gle/dgiUmjaUQG8mNyJP7"><u>Join our email list</u></a>
         </p>
       </div>
     </>
@@ -102,6 +105,7 @@ const FormCoverText = () => {
   return (
     <>
       <div className="mt-24 p-5">
+        <h2>Form Consent</h2>
         <p>
           What follows is a short form that will ask a few basic questions about
           when you realized you were trans, when you came out, etc. It is
@@ -117,7 +121,7 @@ const FormCoverText = () => {
           </button>{" "}
           or on instagram{" "}
           <a href="https://instagram.com/hrtimelines?igshid=MzMyNGUyNmU2YQ%3D%3D&utm_source=qr">
-            <u>@hrtimelines</u>
+            <u>@hrtimelines</u>.
           </a>
         </p>
       </div>
@@ -131,9 +135,14 @@ const Timelines = () => {
       <div className="h-auto w-full p-5">
         <h2>Planned Timelines</h2>
         <Image
-          src={Schedule}
+          src={Schedule_desktop}
           alt="A description of our timeline expectations"
-          className="mt-5"
+          className="desktop mt-5"
+        />
+        <Image
+          src={Schedule_mobile}
+          alt="A description of our timeline expectations"
+          className="mobile mt-5 w-48"
         />
       </div>
     </>
@@ -176,7 +185,7 @@ const Plans = () => {
           considering a podcast discussing the effects and impacts of HRT. We
           are both looking forward to see where this project is going, and are
           always looking for feedback and good ideas. If you would like to get
-          in touch, you can find us `} <Link href="/#contact"><u>here</u></Link>
+          in touch, you can find contact us in the section below `}
         </p>
       </div>
     </>
