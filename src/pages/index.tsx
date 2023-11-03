@@ -11,6 +11,7 @@ import {
   Contact,
   Creators,
   Description,
+  GoToForm,
   Plans,
   Timelines,
 } from "./components/text";
@@ -30,6 +31,7 @@ export default function Home() {
         <Header />
         <div className="w-5/6 mx-auto">
           <Description />
+          <GoToForm />
           <Creators />
           <Timelines />
           <Plans />

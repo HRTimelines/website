@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { toast } from "react-hot-toast";
 import Schedule_desktop from "../../../public/HRTimelines Schedule.jpg";
-import Schedule_mobile from "../../../public/HRTimelines timeline sketch - Mobile.jpg"
+import Schedule_mobile from "../../../public/HRTimelines timeline sketch - Mobile.jpg";
 import Link from "next/link";
 
 function copy(text: string) {
@@ -9,10 +9,14 @@ function copy(text: string) {
   toast.success("copied to clipboard");
 }
 
+function goToForm() {
+  window.location.href = "/formCoverPage";
+}
+
 const Description = () => {
   return (
     <>
-      <div className="mt-24 w-full p-5 anchor" id="description">
+      <div className="anchor mt-24 w-full p-5" id="description">
         <h2>What is HRTimelines?</h2>
         <p>
           {`
@@ -30,9 +34,7 @@ const Description = () => {
             `}
           <br />
           <br />
-          {`Currently we are in our second version of the survey and are
-            working on developing our case study project.  This will collect
-            longitudinal data, gaining a better understanding of how HRT affects people over time.`}{" "}
+          {`Currently we are in our second version of the survey and are working on developing our case study project.  This will collect longitudinal data, gaining a better understanding of how HRT affects people over time.`}{" "}
           If you are on HRT and interested in participating in our project
           please follow us on{" "}
           <a href="https://instagram.com/hrtimelines?igshid=MzMyNGUyNmU2YQ%3D%3D&utm_source=qr">
@@ -46,10 +48,30 @@ const Description = () => {
           </button>{" "}
           or on Instagram{" "}
           <a href="https://instagram.com/hrtimelines?igshid=MzMyNGUyNmU2YQ%3D%3D&utm_source=qr">
-            <u>@hrtimelines</u>
+            <u>@hrtimelines</u>.
           </a>
-          .
+          <br />
+          <br />
+          We are currently collecting data on some common trans milestones, such
+          as when trans people start socially transitioning or when they
+          start HRT. If you are interested in filling it out, please click the
+          button below.
         </p>
+      </div>
+    </>
+  );
+};
+
+const GoToForm = () => {
+  return (
+    <>
+      <div className="flex items-center justify-center p-5">
+        <button
+          onClick={() => goToForm()}
+          className="rounded-full border-4 border-solid border-[#F5A9B8] p-2"
+        >
+          <span className="text-xl font-bold">Go to form</span>
+        </button>
       </div>
     </>
   );
@@ -58,7 +80,7 @@ const Description = () => {
 const Creators = () => {
   return (
     <>
-      <div className="p-5 anchor" id="creators">
+      <div className="anchor p-5" id="creators">
         <h2>About Us</h2>
 
         <p className="">
@@ -74,7 +96,7 @@ const Creators = () => {
 const Contact = () => {
   return (
     <>
-      <div className="p-5 anchor" id="contact">
+      <div className="anchor p-5" id="contact">
         <h2>Contact Us</h2>
         <p>
           {`
@@ -92,9 +114,15 @@ const Contact = () => {
           Instagram:{" "}
           <a href="https://instagram.com/hrtimelines?igshid=MzMyNGUyNmU2YQ%3D%3D&utm_source=qr">
             <u>@hrtimelines</u>
-          </a><br />
-          <a href="https://forms.gle/eZRGF7BgagHJ668H7"><u>Feedback Form</u></a><br />
-          <a href="https://forms.gle/dgiUmjaUQG8mNyJP7"><u>Join our email list</u></a>
+          </a>
+          <br />
+          <a href="https://forms.gle/eZRGF7BgagHJ668H7">
+            <u>Feedback Form</u>
+          </a>
+          <br />
+          <a href="https://forms.gle/dgiUmjaUQG8mNyJP7">
+            <u>Join our email list</u>
+          </a>
         </p>
       </div>
     </>
@@ -154,7 +182,6 @@ const Plans = () => {
     <>
       <div className="p-5">
         <h2>Future Plans</h2>
-
         <p>
           Future Plans: Our primary goal is to provide trans people with
           evidence based expectations for their medical transition. The current
@@ -163,23 +190,25 @@ const Plans = () => {
           like to be able to inform trans health decision making, answering with
           evidence key questions about (for example) the effectiveness of
           progesterone or different injection processes.
-          <br />
-          <br />
-          Our Short term goals include:
-          <ul className="list-disc ml-8">
-            <li>Live data visualization</li>
-            <li>
-              Increased longitudinal research to gain higher resolution of
-              changes over time
-            </li>
-            <li>Collecting more information on specific parts of transition</li>
-            <li>
-              Gaining a broader reach into trans communities we do not have much
-              contact with
-            </li>
-            <li>Build a community of volunteers to support the work</li>
-          </ul>
-          <br />
+        </p>
+        <br />
+        <br />
+        Our Short term goals include:
+        <ul className="ml-8 list-disc">
+          <li>Live data visualization</li>
+          <li>
+            Increased longitudinal research to gain higher resolution of changes
+            over time
+          </li>
+          <li>Collecting more information on specific parts of transition</li>
+          <li>
+            Gaining a broader reach into trans communities we do not have much
+            contact with
+          </li>
+          <li>Build a community of volunteers to support the work</li>
+        </ul>
+        <br />
+        <p>
           {`In the future, we are interested in creating better documentation of
           our findings, including reports and detailed reviews. We are also
           considering a podcast discussing the effects and impacts of HRT. We
@@ -192,7 +221,15 @@ const Plans = () => {
   );
 };
 
-export { Description, Creators, Contact, FormCoverText, Timelines, Plans };
+export {
+  Description,
+  Creators,
+  Contact,
+  FormCoverText,
+  Timelines,
+  Plans,
+  GoToForm,
+};
 
 const Empty = () => {
   return <></>;
