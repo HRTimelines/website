@@ -62,12 +62,12 @@ export const MilestonesForm = () => {
       toast.error("Date of Birth is mandatory");
       flag = false;
     }
-    if (transEnd < transStart) {
-      toast.error("The end date cannot be earlier than the start date (Q3)");
+    if (transEnd < transStart && transEnd != "" && transStart != "") {
+      toast.error("The end date cannot be earlier than the start date (Q4)");
       flag = false;
     }
-    if (comingOutEnd < comingOutStart) {
-      toast.error("The end date cannot be earlier than the start date (Q4)");
+    if (comingOutEnd < comingOutStart && comingOutEnd != "" && comingOutStart != "") {
+      toast.error("The end date cannot be earlier than the start date (Q5)");
       flag = false;
     }
     if (flag) {
@@ -173,7 +173,7 @@ export const MilestonesForm = () => {
               input the same date twice. If you have not yet started socially
               transitioning, please leave this question blank. Similarly, if you
               are still in the process of socially transitioning, please leave
-              the end date blank.`}
+              the end blank.`}
             </span>
             <br />
             <label htmlFor="comingOutStart">Start:</label>
