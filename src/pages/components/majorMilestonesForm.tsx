@@ -58,6 +58,8 @@ export const MilestonesForm = () => {
   ) => {
     let flag = true;
 
+    console.log(feedback.length)
+
     if (dateOfBirth == "") {
       toast.error("Date of Birth is mandatory");
       flag = false;
@@ -115,7 +117,6 @@ export const MilestonesForm = () => {
               defaultValue={country}
               onChange={(e) => setCountry(e.target.value)}
               className=""
-              maxLength={200}
             />
           </div>
 
@@ -130,7 +131,6 @@ export const MilestonesForm = () => {
               defaultValue={mascOrFem}
               onChange={(e) => setMascOrFem(e.target.value)}
               className=""
-              maxLength={200}
             />
           </div>
           <div className="question">
@@ -233,7 +233,6 @@ export const MilestonesForm = () => {
               className="rounded-md border border-black p-1"
               rows={5}
               cols={35}
-              maxLength={maxLength}
             />
           </div>
 
@@ -251,7 +250,6 @@ export const MilestonesForm = () => {
               className="rounded-md border border-black p-1"
               rows={5}
               cols={35}
-              maxLength={maxLength}
             />
           </div>
 
@@ -270,7 +268,6 @@ export const MilestonesForm = () => {
               className="rounded-md border border-black p-1"
               rows={5}
               cols={35}
-              maxLength={maxLength}
             />
           </div>
 
