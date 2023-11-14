@@ -53,9 +53,9 @@ const Description = () => {
           <br />
           <br />
           We are currently collecting data on some common trans milestones, such
-          as when trans people start socially transitioning or when they
-          start HRT. If you are interested in filling it out, please click the
-          button below.
+          as when trans people start socially transitioning or when they start
+          HRT. If you are interested in filling it out, please click the button
+          below.
         </p>
       </div>
     </>
@@ -221,6 +221,22 @@ const Plans = () => {
   );
 };
 
+const NoForm = () => {
+  return (
+    <>
+      <div className="m-40 items-center text-center">
+        <p>
+          There is no open form at this time. Follow us on Instagram{" "}
+          <a href="https://instagram.com/hrtimelines?igshid=MzMyNGUyNmU2YQ%3D%3D&utm_source=qr">
+            <u>@hrtimelines</u>
+          </a>{" "}
+          for updates!
+        </p>
+      </div>
+    </>
+  );
+};
+
 export {
   Description,
   Creators,
@@ -229,6 +245,7 @@ export {
   Timelines,
   Plans,
   GoToForm,
+  NoForm,
 };
 
 const Empty = () => {
