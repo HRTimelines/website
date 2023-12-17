@@ -1,4 +1,4 @@
-import { formRouter, submitRouter } from "~/server/api/routers/example";
+import { formRouter, submitRouter, mainRouter } from "~/server/api/routers/example";
 import { createTRPCRouter } from "~/server/api/trpc";
 
 /**
@@ -8,7 +8,8 @@ import { createTRPCRouter } from "~/server/api/trpc";
  */
 export const appRouter = createTRPCRouter({
   submit: submitRouter,
-  form: formRouter
+  form: formRouter,
+  main: mainRouter,
 });
 
 // export type definition of API

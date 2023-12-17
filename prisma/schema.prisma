@@ -41,3 +41,9 @@ model FormData {
   feedback       String
   future         String
 }
+
+model MainForm {
+  id          Int      @id @default(autoincrement())
+  submittedAt DateTime @default(now())
+  dateOfBirth String
+}

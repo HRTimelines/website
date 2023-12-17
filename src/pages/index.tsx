@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useState } from "react";
 
 import { api } from "~/utils/api";
-import { MainForm } from "./mainForm";
+import { MainForm } from "./components/mainForm";
 import { MilestonesForm } from "./components/majorMilestonesForm";
 import Header from "./components/header";
 import {
