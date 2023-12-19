@@ -112,9 +112,13 @@ export const MainForm = () => {
   const [raceOther, setRaceOther] = useState("");
 
   const [hrtType, setHrtType] = useState("");
-
+  
   const [mascEffectsState, setMascEffectsState] = useState(mascEffects);
   const mascEffectsList = Object.keys(mascEffects);
+  
+  const [mascEffectsOther, setMascEffectsOther] = useState("");
+
+  const [mascEffectsSexComfortable, setMascEffectsSexComfortable] = useState("");
 
   const { mutate } = api.main.create.useMutation({
     onSuccess: () => {
@@ -270,7 +274,40 @@ export const MainForm = () => {
               </div>
             ))}
           </div>
-          TEST: <br />
+
+          <div className="question">
+            Are there any other effects (not related to genitalia or sex) you
+            have experienced? Additionally, if there is any extra information
+            about any of the above effects (ex. how your emotions changed),
+            please leave it here. <br />
+            <textarea
+              id="mascEffectsOther"
+              value={mascEffectsOther}
+              onChange={(e) => setMascEffectsOther(e.target.value)}
+            />
+          </div>
+
+          <div className="question">
+            The next section contains questions related to genetalia and sex.  Are you comfortable answering these questions?<br />
+            <input
+              type="radio"
+              id="mascEffectsSexComfortableTrue"
+              name="mascEffectsSexComfortable"
+              value="true"
+              onChange={(e) => setMascEffectsSexComfortable(e.target.value)}
+            />
+            Yes, I am comfortable answering these questions <br />
+            <input
+              type="radio"
+              id="mascEffectsSexComfortableFalse"
+              name="mascEffectsSexComfortable"
+              value="false"
+              onChange={(e) => setMascEffectsSexComfortable(e.target.value)}
+            />
+            No, I would prefer to skip to the next section <br />
+          </div>
+
+          TEST: {mascEffectsSexComfortable}
           {/* {mascEffectsList.map((option) => (
             <>
               <div>
