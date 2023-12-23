@@ -46,4 +46,7 @@ model MainForm {
   id          Int      @id @default(autoincrement())
   submittedAt DateTime @default(now())
   dateOfBirth String
+  genderEntry String
+  raceEntry   String
+  hrtType     String
 }

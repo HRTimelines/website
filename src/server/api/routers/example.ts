@@ -73,14 +73,24 @@ export const mainRouter = createTRPCRouter({
     .input(
       z.object({
         dateOfBirth: z.string(),
+        genderEntry: z.string(),
+        raceEntry: z.string(),
+        hrtType: z.string(),
       }),
     )
     .mutation(({ input }) => {
       const dateOfBirth = input.dateOfBirth;
+      // const genderEntry = input.genderEntry;
+      const genderEntry = input.genderEntry;
+      const raceEntry = input.raceEntry;
+      const hrtType = input.hrtType;
 
       return db.mainForm.create({
         data: {
           dateOfBirth,
+          genderEntry,
+          raceEntry,
+          hrtType,
         },
       });
     }),
