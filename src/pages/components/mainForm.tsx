@@ -15,8 +15,6 @@ function listToString(list: Record<string, boolean>) {
   return s.slice(0, -2);
 }
 
-// TODO: let above function handle "other"
-
 const gender: Record<string, boolean> = {
   Male: false,
   Female: false,
@@ -104,7 +102,7 @@ const femEffects: Record<string, boolean> = {
   "Changes in taste": false,
 };
 
-const femCyclicEffects: Record<string, boolean> = {
+const femEffectsCyclic: Record<string, boolean> = {
   "Cramping in intestine or abdomen": false,
   "Bloating or increased water retention": false,
   "Gas or other intestinal issues": false,
@@ -160,8 +158,11 @@ export const MainForm = () => {
 
   const [femEffectsState, setFemEffectsState] = useState(femEffects);
   const femEffectsList = Object.keys(femEffects);
-
   const [femEffectsOther, setFemEffectsOther] = useState("");
+
+  const [femEffectsCyclicState, setFemEffectsCyclicState] = useState(femEffectsCyclic);
+  const femEffectsCyclicList = Object.keys(femEffectsCyclic);
+  const [femEffectsCyclicOther, setFemEffectsCyclicOther] = useState("");
 
   const [femEffectsSexComfortable, setFemEffectsSexComfortable] = useState("");
 
@@ -179,9 +180,29 @@ export const MainForm = () => {
   const { mutate } = api.main.create.useMutation({
     onSuccess: () => {
       setDateOfBirth("");
-      setGenderState(gender)
-      setRaceState(race)
-      setHrtType("")
+      setCountry("");
+      setGenderState(gender);
+      setGenderOther("")
+      setRaceState(race);
+      setRaceOther("")
+      setHrtType("");
+      setMascEffectsState(mascEffects);
+      setMascEffectsOther("");
+      setMascEffectsSexComfortable("");
+      setMascEffectsSexState(mascEffectsSex);
+      setMascEffectsSexOther("");
+      setFemEffectsState(femEffects);
+      setFemEffectsOther("");
+      setFemEffectsCyclicState(femEffectsCyclic);
+      setFemEffectsCyclicOther("");
+      setFemEffectsSexComfortable("");
+      setFemEffectsSexState(femEffectsSex);
+      setFemEffectsSexOther("");
+      setOtherMedications("");
+      setOtherConditions("");
+      setAdditions("");
+      setExperience("");
+      setFeedback("");
     },
   });
 
@@ -451,6 +472,36 @@ export const MainForm = () => {
             />
           </div>
           <div className="question">
+            Please check any cyclic or period-like effects you experienced while on HRT
+            {/* TODO: better description */}
+            <br />
+            {femEffectsCyclicList.map((option) => (
+              <div key={option}>
+                <input
+                  type="checkbox"
+                  id={option}
+                  value={option}
+                  checked={femEffectsCyclicState[option]}
+                  onChange={(event) => {
+                    setFemEffectsCyclicState({
+                      ...femEffectsCyclicState,
+                      [option]: event.target.checked,
+                    });
+                  }}
+                />
+                <label htmlFor={option}>{option}</label>
+              </div>
+            ))}
+          </div>
+          <div className="question">
+            Are there any other cyclic effects you experienced while on HRT, or anything else you want us to know about these cyclic effects? <br />
+            <textarea
+              id="femEffectsCyclicOther"
+              value={femEffectsCyclicOther}
+              onChange={(e) => setFemEffectsCyclicOther(e.target.value)}
+            />
+          </div>
+          <div className="question">
             The next section contains questions related to genetalia and sex.
             Are you comfortable answering these questions?
             <br />
@@ -580,7 +631,36 @@ export const MainForm = () => {
         <button
           type="button"
           className="border-2 border-solid border-black p-1"
-          onClick={() => mutate({ dateOfBirth: dateOfBirth, genderEntry: listToString(genderState), raceEntry: listToString(raceState), hrtType: hrtType })}
+          onClick={() =>
+            mutate({
+              dateOfBirth: dateOfBirth,
+              country: country,
+              genderEntry: listToString(genderState),
+              genderOther: genderOther,
+              raceEntry: listToString(raceState),
+              raceOther: raceOther,
+              hrtType: hrtType,
+              // masc medication data
+              mascEffectsEntry: listToString(mascEffectsState),
+              mascEffectsOther: mascEffectsOther,
+              mascEffectsSexComfortable: mascEffectsSexComfortable,
+              mascEffectsSexEntry: listToString(mascEffectsSexState),
+              mascEffectsSexOther: mascEffectsSexOther,
+              // fem medication data
+              femEffectsEntry: listToString(femEffectsState),
+              femEffectsOther: femEffectsOther,
+              femEffectsCyclicEntry: listToString(femEffectsCyclicState),
+              femEffectsCyclicOther: femEffectsCyclicOther,
+              femEffectsSexComfortable: femEffectsSexComfortable,
+              femEffectsSexEntry: listToString(femEffectsSexState),
+              femEffectsSexOther: femEffectsSexOther,
+              otherMedications: otherMedications,
+              otherConditions: otherConditions,
+              additions: additions,
+              experience: experience,
+              feedback: feedback,
+            })
+          }
         >
           Submit
         </button>
