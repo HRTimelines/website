@@ -331,7 +331,10 @@ export const MainForm = () => {
               may have taken, start and end dates, and effects you experienced.
             </p>
           </div>
-          {/* <div className="question">TODO: MEDICATION QUESTION</div> */}
+          <div className="question">
+              Please input your medication history according to the table below:
+
+          </div>
           <div className="question">
             Please check any effects you have experienced while on HRT (these
             are not related to genitalia or sex)
