@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { api } from "~/utils/api";
+import MedicationTable from "./medications";
 
 function getDate() {
   return new Date().toISOString().split("T")[0];
@@ -41,6 +42,20 @@ const race: Record<string, boolean> = {
   "White / European Descent": false,
   Another: false,
 };
+
+const medicationData = [
+  {
+    id: "001",
+    method: "",
+    medication: "",
+    amount: "",
+    frequency: "",
+    start: "",
+    end: "",
+    ongoing: "",
+    termination: "",
+  },
+];
 
 const mascEffects: Record<string, boolean> = {
   "Deeper Voice": false,
@@ -142,6 +157,8 @@ export const MainForm = () => {
 
   const [hrtType, setHrtType] = useState("");
 
+  const [mascMedicationData, setMascMedicationData] = useState(medicationData);
+
   const [mascEffectsState, setMascEffectsState] = useState(mascEffects);
   const mascEffectsList = Object.keys(mascEffects);
 
@@ -156,11 +173,18 @@ export const MainForm = () => {
 
   const [mascEffectsSexOther, setMascEffectsSexOther] = useState("");
 
+  const [femEstrogenData, setFemEstrogenData] = useState(medicationData);
+  const [femAntiandrogenData, setFemAntiandrogenData] =
+    useState(medicationData);
+  const [femProgesteroneData, setFemProgesteroneData] =
+    useState(medicationData);
+
   const [femEffectsState, setFemEffectsState] = useState(femEffects);
   const femEffectsList = Object.keys(femEffects);
   const [femEffectsOther, setFemEffectsOther] = useState("");
 
-  const [femEffectsCyclicState, setFemEffectsCyclicState] = useState(femEffectsCyclic);
+  const [femEffectsCyclicState, setFemEffectsCyclicState] =
+    useState(femEffectsCyclic);
   const femEffectsCyclicList = Object.keys(femEffectsCyclic);
   const [femEffectsCyclicOther, setFemEffectsCyclicOther] = useState("");
 
@@ -182,9 +206,9 @@ export const MainForm = () => {
       setDateOfBirth("");
       setCountry("");
       setGenderState(gender);
-      setGenderOther("")
+      setGenderOther("");
       setRaceState(race);
-      setRaceOther("")
+      setRaceOther("");
       setHrtType("");
       setMascEffectsState(mascEffects);
       setMascEffectsOther("");
@@ -332,8 +356,11 @@ export const MainForm = () => {
             </p>
           </div>
           <div className="question">
-              Please input your medication history according to the table below:
-
+            Please input your medication history according to the table below:
+            <MedicationTable
+              data={mascMedicationData}
+              setData={setMascMedicationData}
+            />
           </div>
           <div className="question">
             Please check any effects you have experienced while on HRT (these
@@ -440,7 +467,34 @@ export const MainForm = () => {
               start and end dates, and effects you experienced.
             </p>
           </div>
-          {/* <div className="question">TODO: MEDICATION QUESTION</div> */}
+          <div className="question">
+            Please input your medication history with estrogen according to the
+            table below:
+            <MedicationTable
+              data={femEstrogenData}
+              setData={setFemEstrogenData}
+            />
+          </div>
+          <div className="question">
+            Please input your medication history with anti-androgens according
+            to the table below:
+            <MedicationTable
+              data={femAntiandrogenData}
+              setData={setFemAntiandrogenData}
+            />
+          </div>
+          <div className="question">
+            Please input your medication history with progesterone according to
+            the table below:
+            <MedicationTable
+              data={femProgesteroneData}
+              setData={setFemProgesteroneData}
+            />
+          </div>
+          MASC TEST: {mascMedicationData[0]?.method} <br />
+          EST TEST: {femEstrogenData[0]?.medication} <br />
+          ANTI-A TEST: {femAntiandrogenData[0]?.amount} <br />
+          PROG TEST: {femProgesteroneData[0]?.start} <br />
           <div className="question">
             Please check any effects you have experienced while on HRT (these
             are not related to genitalia or sex)
@@ -475,7 +529,8 @@ export const MainForm = () => {
             />
           </div>
           <div className="question">
-            Please check any cyclic or period-like effects you experienced while on HRT
+            Please check any cyclic or period-like effects you experienced while
+            on HRT
             {/* TODO: better description */}
             <br />
             {femEffectsCyclicList.map((option) => (
@@ -497,7 +552,8 @@ export const MainForm = () => {
             ))}
           </div>
           <div className="question">
-            Are there any other cyclic effects you experienced while on HRT, or anything else you want us to know about these cyclic effects? <br />
+            Are there any other cyclic effects you experienced while on HRT, or
+            anything else you want us to know about these cyclic effects? <br />
             <textarea
               id="femEffectsCyclicOther"
               value={femEffectsCyclicOther}

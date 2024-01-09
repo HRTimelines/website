@@ -1,5 +1,6 @@
-import { useState } from "react";
+//HAS BEEN MOVED INTO MAINFORM.TSX
 
+import { useState } from "react";
 const data = [
   {
     id: "001",
@@ -13,29 +14,29 @@ const data = [
     termination: "",
   },
 ];
-// TODO: add seperate volume and concentrtion
 
-export const MedicationTable = () => {
-  const [medicationData, setMedicationData] = useState(data);
+const MedicationTable = ({data, setData}: any) => {
+  // TODO: add seperate volume and concentrtion
+  // const [medicationData, setMedicationData] = useState(data);
   const [rows, setRows] = useState(2);
 
   const addRow = (rows: number) => {
-      const newRowIndex = ("000" + rows).slice(-3);
-      const newRow = {
-          id: newRowIndex,
-          method: "",
-          medication: "",
-          amount: "",
-          frequency: "",
-          start: "",
-          end: "",
-          ongoing: "",
-          termination: "",
-        };
-        const newData = medicationData.concat(newRow);
-        setMedicationData(newData);
-        setRows(rows + 1);
+    const newRowIndex = ("000" + rows).slice(-3);
+    const newRow = {
+      id: newRowIndex,
+      method: "",
+      medication: "",
+      amount: "",
+      frequency: "",
+      start: "",
+      end: "",
+      ongoing: "",
+      termination: "",
     };
+    const newData = data.concat(newRow);
+    setData(newData);
+    setRows(rows + 1);
+  };
 
   const onChangeInput = (e: any, id: string) => {
     const { name, value } = e.target;
@@ -43,11 +44,11 @@ export const MedicationTable = () => {
     console.log("value", value);
     console.log("id", id);
 
-    const editData = medicationData.map((item) =>
+    const editData = data.map((item) =>
       item.id === id && name ? { ...item, [name]: value } : item,
     );
 
-    setMedicationData(editData);
+    setData(editData);
   };
 
   return (
@@ -68,7 +69,7 @@ export const MedicationTable = () => {
             </tr>
           </thead>
           <tbody>
-            {medicationData.map(
+            {data.map(
               ({
                 id,
                 method,
@@ -156,14 +157,16 @@ export const MedicationTable = () => {
             )}
           </tbody>
         </table>
-
         <button
+          type="button"
           onClick={() => {
             addRow(rows);
           }}
         >
           Add new row
         </button>
+        <br />
+        <br />
       </div>
     </>
   );
