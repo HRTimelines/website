@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { api } from "~/utils/api";
 import MedicationTable from "./medications";
+import { submitMedicationData } from "./submitMedicationData";
 
 function getDate() {
   return new Date().toISOString().split("T")[0];
@@ -43,7 +44,19 @@ const race: Record<string, boolean> = {
   Another: false,
 };
 
-const medicationData = [
+export type medicationDataType = {
+  id: string;
+  method: string;
+  medication: string;
+  amount: string;
+  frequency: string;
+  start: string;
+  end: string;
+  ongoing: string;
+  termination: string;
+};
+
+const medicationData: medicationDataType[] = [
   {
     id: "001",
     method: "",
@@ -201,10 +214,10 @@ export const MainForm = () => {
   const [experience, setExperience] = useState("");
   const [feedback, setFeedback] = useState("");
 
-  const { mutate } = api.main.create.useMutation({
+  const mainMutation = api.main.create.useMutation({
     onSuccess: () => {
       setDateOfBirth("");
-      setCountry("");
+      // setCountry("");
       setGenderState(gender);
       setGenderOther("");
       setRaceState(race);
@@ -229,6 +242,105 @@ export const MainForm = () => {
       setFeedback("");
     },
   });
+
+  const medicalMutation = api.medication.create.useMutation({
+    onSuccess: () => {
+      // TODO: add the setstate for all the medication data
+      console.log("success");
+    },
+  });
+
+  const submit = (
+    dateOfBirth: string,
+    country: string,
+    genderEntry: string,
+    genderOther: string,
+    raceEntry: string,
+    raceOther: string,
+    hrtType: string,
+    // masc medication data
+    mascMedicationData: medicationDataType[],
+    mascEffectsEntry: string,
+    mascEffectsOther: string,
+    mascEffectsSexComfortable: string,
+    mascEffectsSexEntry: string,
+    mascEffectsSexOther: string,
+    // fem medication data
+    femEffectsEntry: string,
+    femEffectsOther: string,
+    femEffectsCyclicEntry: string,
+    femEffectsCyclicOther: string,
+    femEffectsSexComfortable: string,
+    femEffectsSexEntry: string,
+    femEffectsSexOther: string,
+    //other
+    otherMedications: string,
+    otherConditions: string,
+    additions: string,
+    experience: string,
+    feedback: string,
+  ) => {
+    console.log("passed");
+
+    mainMutation.mutate({
+      dateOfBirth,
+      country,
+      genderEntry,
+      genderOther,
+      raceEntry,
+      raceOther,
+      hrtType,
+      // masc medication data
+      mascEffectsEntry,
+      mascEffectsOther,
+      mascEffectsSexComfortable,
+      mascEffectsSexEntry,
+      mascEffectsSexOther,
+      // fem medication data
+      femEffectsEntry,
+      femEffectsOther,
+      femEffectsCyclicEntry,
+      femEffectsCyclicOther,
+      femEffectsSexComfortable,
+      femEffectsSexEntry,
+      femEffectsSexOther,
+      //other
+      otherMedications,
+      otherConditions,
+      additions,
+      experience,
+      feedback,
+    });
+
+    mascMedicationData.map(
+      ({
+        id,
+        method,
+        medication,
+        amount,
+        frequency,
+        start,
+        end,
+        ongoing,
+        termination,
+      }) =>
+        medicalMutation.mutate({
+          submitterId: 5,
+          row: parseInt(id),
+          method,
+          medication,
+          amount,
+          frequency,
+          start,
+          end,
+          ongoing,
+          termination,
+        }),
+    );
+
+    console.log("entering");
+    console.log("exiting");
+  };
 
   return (
     <>
@@ -335,7 +447,8 @@ export const MainForm = () => {
               value="masculinizing"
               onChange={(e) => setHrtType(e.target.value)}
             />
-            Masculinizing <br />
+            <label htmlFor="masculinizing">Masculinizing</label>
+            <br />
             <input
               type="radio"
               id="feminizing"
@@ -343,7 +456,7 @@ export const MainForm = () => {
               value="feminizing"
               onChange={(e) => setHrtType(e.target.value)}
             />
-            Feminizing <br />
+            <label htmlFor="feminizing">Feminizing</label> <br />
           </div>
         </div>
         <div className="Section2">
@@ -468,33 +581,29 @@ export const MainForm = () => {
             </p>
           </div>
           <div className="question">
-            Please input your medication history with estrogen according to the
-            table below:
+            Please input your medication history with <b> estrogen </b>{" "}
+            according to the table below:
             <MedicationTable
               data={femEstrogenData}
               setData={setFemEstrogenData}
             />
           </div>
           <div className="question">
-            Please input your medication history with anti-androgens according
-            to the table below:
+            Please input your medication history with <b>anti-androgens</b>{" "}
+            according to the table below:
             <MedicationTable
               data={femAntiandrogenData}
               setData={setFemAntiandrogenData}
             />
           </div>
           <div className="question">
-            Please input your medication history with progesterone according to
-            the table below:
+            Please input your medication history with <b>progesterone</b>{" "}
+            according to the table below:
             <MedicationTable
               data={femProgesteroneData}
               setData={setFemProgesteroneData}
             />
           </div>
-          MASC TEST: {mascMedicationData[0]?.method} <br />
-          EST TEST: {femEstrogenData[0]?.medication} <br />
-          ANTI-A TEST: {femAntiandrogenData[0]?.amount} <br />
-          PROG TEST: {femProgesteroneData[0]?.start} <br />
           <div className="question">
             Please check any effects you have experienced while on HRT (these
             are not related to genitalia or sex)
@@ -689,36 +798,38 @@ export const MainForm = () => {
         <br />
         <button
           type="button"
-          className="border-2 border-solid border-black p-1"
+          className="rounded-xl border-2 border-solid border-black p-1"
           onClick={() =>
-            mutate({
-              dateOfBirth: dateOfBirth,
-              country: country,
-              genderEntry: listToString(genderState),
-              genderOther: genderOther,
-              raceEntry: listToString(raceState),
-              raceOther: raceOther,
-              hrtType: hrtType,
+            submit(
+              dateOfBirth,
+              country,
+              listToString(genderState),
+              genderOther,
+              listToString(raceState),
+              raceOther,
+              hrtType,
               // masc medication data
-              mascEffectsEntry: listToString(mascEffectsState),
-              mascEffectsOther: mascEffectsOther,
-              mascEffectsSexComfortable: mascEffectsSexComfortable,
-              mascEffectsSexEntry: listToString(mascEffectsSexState),
-              mascEffectsSexOther: mascEffectsSexOther,
+              mascMedicationData,
+              listToString(mascEffectsState),
+              mascEffectsOther,
+              mascEffectsSexComfortable,
+              listToString(mascEffectsSexState),
+              mascEffectsSexOther,
               // fem medication data
-              femEffectsEntry: listToString(femEffectsState),
-              femEffectsOther: femEffectsOther,
-              femEffectsCyclicEntry: listToString(femEffectsCyclicState),
-              femEffectsCyclicOther: femEffectsCyclicOther,
-              femEffectsSexComfortable: femEffectsSexComfortable,
-              femEffectsSexEntry: listToString(femEffectsSexState),
-              femEffectsSexOther: femEffectsSexOther,
-              otherMedications: otherMedications,
-              otherConditions: otherConditions,
-              additions: additions,
-              experience: experience,
-              feedback: feedback,
-            })
+              listToString(femEffectsState),
+              femEffectsOther,
+              listToString(femEffectsCyclicState),
+              femEffectsCyclicOther,
+              femEffectsSexComfortable,
+              listToString(femEffectsSexState),
+              femEffectsSexOther,
+              //other
+              otherMedications,
+              otherConditions,
+              additions,
+              experience,
+              feedback,
+            )
           }
         >
           Submit

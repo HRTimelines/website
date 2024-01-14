@@ -1,4 +1,5 @@
-import { formRouter, submitRouter, mainRouter } from "~/server/api/routers/example";
+import { mainRouter } from "~/server/api/routers/mainSubmission";
+import { medicationRouter } from "./routers/medicationSubmission";
 import { createTRPCRouter } from "~/server/api/trpc";
 
 /**
@@ -7,9 +8,8 @@ import { createTRPCRouter } from "~/server/api/trpc";
  * All routers added in /api/routers should be manually added here.
  */
 export const appRouter = createTRPCRouter({
-  submit: submitRouter,
-  form: formRouter,
   main: mainRouter,
+  medication: medicationRouter,
 });
 
 // export type definition of API

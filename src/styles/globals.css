@@ -29,6 +29,10 @@
     border-color: black;
     border-style: solid;
     border-width: 1px;
+    border-radius: 6px;
+    padding: 1px;
+    width: 25em;
+    height: 5em;
   }
   .logo {
     border-width: 1px;
@@ -41,11 +45,7 @@
   .anchor {
     scroll-margin-top: 150px;
   }
-  /* div {
-        border-style: dashed;
-        border-color: blue;
-        border-width: 2px;
-    } */
+
   div .question {
     margin-bottom: 20px;
   }

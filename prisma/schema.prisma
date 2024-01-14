@@ -46,7 +46,7 @@ model MainForm {
   id                        Int      @id @default(autoincrement())
   submittedAt               DateTime @default(now())
   dateOfBirth               String
-  country                   String
+  country                   String   @db.Text
   genderEntry               String   @db.Text
   genderOther               String   @db.Text
   raceEntry                 String   @db.Text
@@ -67,9 +67,26 @@ model MainForm {
   femEffectsSexEntry       String @db.Text
   femEffectsSexOther       String @db.Text
 
-  otherMedications String @db.Text
-  otherConditions  String @db.Text
-  additions        String @db.Text
-  experience       String @db.Text
-  feedback         String @db.Text
+  otherMedications String       @db.Text
+  otherConditions  String       @db.Text
+  additions        String       @db.Text
+  experience       String       @db.Text
+  feedback         String       @db.Text
+  Medication       MedicationData[]
+}
+
+model MedicationData {
+  id          Int      @id @default(autoincrement())
+  submitter   MainForm @relation(fields: [submitterId], references: [id])
+  submittedAt DateTime @default(now())
+  submitterId Int
+  row         Int
+  method      String
+  medication  String
+  amount      String
+  frequency   String
+  start       String
+  end         String
+  ongoing     String
+  termination String   @db.Text
 }

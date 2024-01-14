@@ -58,7 +58,7 @@ export const MilestonesForm = () => {
   ) => {
     let flag = true;
 
-    console.log(feedback.length)
+    console.log(feedback.length);
 
     if (dateOfBirth == "") {
       toast.error("Date of Birth is mandatory");
@@ -68,7 +68,11 @@ export const MilestonesForm = () => {
       toast.error("The end date cannot be earlier than the start date (Q4)");
       flag = false;
     }
-    if (comingOutEnd < comingOutStart && comingOutEnd != "" && comingOutStart != "") {
+    if (
+      comingOutEnd < comingOutStart &&
+      comingOutEnd != "" &&
+      comingOutStart != ""
+    ) {
       toast.error("The end date cannot be earlier than the start date (Q5)");
       flag = false;
     }
@@ -122,7 +126,8 @@ export const MilestonesForm = () => {
 
           <div className="question">
             <label htmlFor="mascOrFem">
-              3.  How would you describe your transition? (ex. FtM, transfeminine, etc.)
+              3. How would you describe your transition? (ex. FtM,
+              transfeminine, etc.)
             </label>
             <br />
             <input
@@ -293,14 +298,15 @@ export const MilestonesForm = () => {
             >
               Submit Form
             </button>
-            <br /> <span className="">(please wait a few seconds for the form submissison to go
-            through)</span>
+            <br />{" "}
+            <span className="">
+              (please wait a few seconds for the form submissison to go through)
+            </span>
           </div>
         </div>
       </form>
     </>
   );
 };
-
 
 export default MilestonesForm;

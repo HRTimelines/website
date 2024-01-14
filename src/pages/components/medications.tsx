@@ -1,21 +1,14 @@
-//HAS BEEN MOVED INTO MAINFORM.TSX
-
 import { useState } from "react";
-const data = [
-  {
-    id: "001",
-    method: "",
-    medication: "",
-    amount: "",
-    frequency: "",
-    start: "",
-    end: "",
-    ongoing: "",
-    termination: "",
-  },
-];
+import { medicationDataType } from "./mainForm";
+import { SetStateAction } from "react";
+import { Dispatch } from "react";
 
-const MedicationTable = ({data, setData}: any) => {
+interface TableProps {
+  data: medicationDataType[]
+  setData: Dispatch<SetStateAction<medicationDataType[]>>
+}
+
+const MedicationTable = ({data, setData}: TableProps) => {
   // TODO: add seperate volume and concentrtion
   // const [medicationData, setMedicationData] = useState(data);
   const [rows, setRows] = useState(2);
@@ -40,9 +33,6 @@ const MedicationTable = ({data, setData}: any) => {
 
   const onChangeInput = (e: any, id: string) => {
     const { name, value } = e.target;
-    console.log("name", name);
-    console.log("value", value);
-    console.log("id", id);
 
     const editData = data.map((item) =>
       item.id === id && name ? { ...item, [name]: value } : item,
@@ -57,7 +47,7 @@ const MedicationTable = ({data, setData}: any) => {
         <table>
           <thead>
             <tr>
-              <th>Row</th>
+              <th></th>
               <th>Method</th>
               <th>Medication</th>
               <th>Amount (in mg/ug)</th>
