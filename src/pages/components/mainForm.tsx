@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { api } from "~/utils/api";
 import MedicationTable from "./medications";
-import { submitMedicationData } from "./submitMedicationData";
 
 function getDate() {
   return new Date().toISOString().split("T")[0];
@@ -217,7 +216,7 @@ export const MainForm = () => {
   const mainMutation = api.main.create.useMutation({
     onSuccess: () => {
       setDateOfBirth("");
-      // setCountry("");
+      setCountry("");
       setGenderState(gender);
       setGenderOther("");
       setRaceState(race);
@@ -245,12 +244,42 @@ export const MainForm = () => {
 
   const medicalMutation = api.medication.create.useMutation({
     onSuccess: () => {
-      // TODO: add the setstate for all the medication data
-      console.log("success");
+      setMascMedicationData(medicationData);
+      setFemEstrogenData(medicationData);
+      setFemAntiandrogenData(medicationData);
+      setFemProgesteroneData(medicationData);
     },
   });
 
-  const submit = (
+  function submitMedicationData(medicationData: medicationDataType[], submitter : number ) {
+    medicationData.map(
+      ({
+        id,
+        method,
+        medication,
+        amount,
+        frequency,
+        start,
+        end,
+        ongoing,
+        termination,
+      }) =>
+        medicalMutation.mutateAsync({
+          row: parseInt(id),
+          method,
+          medication,
+          amount,
+          frequency,
+          start,
+          end,
+          ongoing,
+          termination,
+          submitterId: submitter,
+        }), // I'm not sure why this works, I would expect it to reset the values when the OnSuccess triggers -- worth investigating
+    );
+  }
+
+  const submit = async (
     dateOfBirth: string,
     country: string,
     genderEntry: string,
@@ -266,6 +295,9 @@ export const MainForm = () => {
     mascEffectsSexEntry: string,
     mascEffectsSexOther: string,
     // fem medication data
+    femEstrogenData: medicationDataType[],
+    femAntiandrogenData: medicationDataType[],
+    femProgesteroneData: medicationDataType[],
     femEffectsEntry: string,
     femEffectsOther: string,
     femEffectsCyclicEntry: string,
@@ -280,9 +312,7 @@ export const MainForm = () => {
     experience: string,
     feedback: string,
   ) => {
-    console.log("passed");
-
-    mainMutation.mutate({
+    await mainMutation.mutateAsync({
       dateOfBirth,
       country,
       genderEntry,
@@ -312,34 +342,24 @@ export const MainForm = () => {
       feedback,
     });
 
-    mascMedicationData.map(
-      ({
-        id,
-        method,
-        medication,
-        amount,
-        frequency,
-        start,
-        end,
-        ongoing,
-        termination,
-      }) =>
-        medicalMutation.mutate({
-          submitterId: 5,
-          row: parseInt(id),
-          method,
-          medication,
-          amount,
-          frequency,
-          start,
-          end,
-          ongoing,
-          termination,
-        }),
-    );
+    console.log("hoping second")
 
-    console.log("entering");
-    console.log("exiting");
+    console.log("main: ", mainMutation);
+    console.log("main @ id: ", mainMutation.data?.id);
+
+    var submissionId = 1
+    if (typeof mainMutation.data?.id === "number") {
+      console.log("entered")
+      submissionId = mainMutation.data?.id
+      console.log("ID: ", submissionId)
+    }
+
+      submitMedicationData(mascMedicationData, submissionId)
+      submitMedicationData(femEstrogenData, submissionId)
+      submitMedicationData(femAntiandrogenData, submissionId)
+      submitMedicationData(femProgesteroneData, submissionId)
+
+      //TODO: test this submission, confirm the data links properly
   };
 
   return (
@@ -816,6 +836,9 @@ export const MainForm = () => {
               listToString(mascEffectsSexState),
               mascEffectsSexOther,
               // fem medication data
+              femEstrogenData,
+              femAntiandrogenData,
+              femProgesteroneData,
               listToString(femEffectsState),
               femEffectsOther,
               listToString(femEffectsCyclicState),
