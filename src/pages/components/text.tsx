@@ -34,7 +34,7 @@ const Description = () => {
             `}
           <br />
           <br />
-          {`Currently we are in our second version of the survey and are working on developing our case study project.  This will collect longitudinal data, gaining a better understanding of how HRT affects people over time.`}{" "}
+          {`Currently we are in our second version of the survey and are working on developing our longitudonal study project.  This will collect more data on individuals, gaining a better understanding of how HRT affects people over time.`}{" "}
           If you are on HRT and interested in participating in our project
           please follow us on{" "}
           <a href="https://instagram.com/hrtimelines?igshid=MzMyNGUyNmU2YQ%3D%3D&utm_source=qr">
@@ -85,7 +85,7 @@ const Creators = () => {
 
         <p className="">
           {`
-        Hi! We’re Lucas (he/they) and Tessa (any pronouns), the founders of HRTimelines. As two trans university students we saw a gap in trans healthcare data and went looking for a solution. The solution happened to be starting HRTimelines, which is our trans healthcare research project! We are two motivated engineering students working to make a difference in a field we only know about from experience. We are not medical professionals, but we are motivated to fill this gap in order to help other trans people and medical professionals looking to start HRT or work with trans patients. 
+        Hi! We’re Lucas (he/they) and Tessa (any pronouns), the founders of HRTimelines. As two trans university students we saw a gap in trans healthcare data and went looking for a solution. The solution happened to be starting HRTimelines, which is our trans healthcare research project! We are two motivated engineering students working to make a difference in a field we know about from experience. We are not medical professionals, but we are motivated to fill this gap in order to help other trans people and medical professionals looking to start HRT or work with trans patients. 
           `}
         </p>
       </div>
@@ -183,7 +183,7 @@ const Plans = () => {
       <div className="p-5">
         <h2>Future Plans</h2>
         <p>
-          Future Plans: Our primary goal is to provide trans people with
+          Our primary goal is to provide trans people with
           evidence based expectations for their medical transition. The current
           form this takes is through surveys asking health care questions, and
           the presentation of that data. However, in the future we would also
@@ -195,7 +195,7 @@ const Plans = () => {
         <br />
         Our Short term goals include:
         <ul className="ml-8 list-disc">
-          <li>Live data visualization</li>
+          <li>Data visualization on our website</li>
           <li>
             Increased longitudinal research to gain higher resolution of changes
             over time
@@ -212,7 +212,7 @@ const Plans = () => {
           {`In the future, we are interested in creating better documentation of
           our findings, including reports and detailed reviews. We are also
           considering a podcast discussing the effects and impacts of HRT. We
-          are both looking forward to see where this project is going, and are
+          are both looking forward to seeing where this project is going, and are
           always looking for feedback and good ideas. If you would like to get
           in touch, you can find contact us in the section below `}
         </p>

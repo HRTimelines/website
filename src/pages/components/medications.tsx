@@ -2,13 +2,14 @@ import { useState } from "react";
 import { medicationDataType } from "./mainForm";
 import { SetStateAction } from "react";
 import { Dispatch } from "react";
+import Dropdown from "./dropdown";
 
 interface TableProps {
-  data: medicationDataType[]
-  setData: Dispatch<SetStateAction<medicationDataType[]>>
+  data: medicationDataType[];
+  setData: Dispatch<SetStateAction<medicationDataType[]>>;
 }
 
-const MedicationTable = ({data, setData}: TableProps) => {
+const MedicationTable = ({ data, setData }: TableProps) => {
   // TODO: add seperate volume and concentrtion
   // const [medicationData, setMedicationData] = useState(data);
   const [rows, setRows] = useState(2);
@@ -50,7 +51,7 @@ const MedicationTable = ({data, setData}: TableProps) => {
               <th></th>
               <th>Method</th>
               <th>Medication</th>
-              <th>Amount (in mg/ug)</th>
+              <th>Amount (in mg or ug)</th>
               <th>Frequency</th>
               <th>Start Date</th>
               <th>End Date</th>
@@ -148,6 +149,7 @@ const MedicationTable = ({data, setData}: TableProps) => {
           </tbody>
         </table>
         <button
+          className="rounded-xl border-2 border-solid border-black p-1"
           type="button"
           onClick={() => {
             addRow(rows);

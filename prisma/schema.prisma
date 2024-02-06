@@ -43,27 +43,27 @@ model FormData {
 }
 
 model MainForm {
-  id                        Int      @id @default(autoincrement())
-  submittedAt               DateTime @default(now())
-  dateOfBirth               String
-  country                   String   @db.Text
-  genderEntry               String   @db.Text
-  genderOther               String   @db.Text
-  raceEntry                 String   @db.Text
-  raceOther                 String   @db.Text
-  hrtType                   String
-  // medication question hhhh idk how to do that
-  mascEffectsEntry          String   @db.Text
-  mascEffectsOther          String   @db.Text
-  mascEffectsSexComfortable String //this might be a bool
-  mascEffectsSexEntry       String   @db.Text
-  mascEffectsSexOther       String   @db.Text
+  id          Int      @id @default(autoincrement())
+  submittedAt DateTime @default(now())
+  dateOfBirth String
+  country     String   @db.Text
+  genderEntry String   @db.Text
+  genderOther String   @db.Text
+  raceEntry   String   @db.Text
+  raceOther   String   @db.Text
+  hrtType     String
+
+  mascEffectsEntry          String @db.Text
+  mascEffectsOther          String @db.Text
+  mascEffectsSexComfortable String
+  mascEffectsSexEntry       String @db.Text
+  mascEffectsSexOther       String @db.Text
 
   femEffectsEntry          String @db.Text
   femEffectsOther          String @db.Text
   femEffectsCyclicEntry    String @db.Text
   femEffectsCyclicOther    String @db.Text
-  femEffectsSexComfortable String //this also might be a bool
+  femEffectsSexComfortable String
   femEffectsSexEntry       String @db.Text
   femEffectsSexOther       String @db.Text
 
@@ -82,7 +82,7 @@ model MedicationData {
   row         Int
   method      String
   medication  String
-  amount      String
+  amount      String   @db.Text
   frequency   String
   start       String
   end         String

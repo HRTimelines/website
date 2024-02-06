@@ -154,7 +154,7 @@ export const mainRouter = createTRPCRouter({
           feedback,
         },
       });
-      console.log("hoping first")
+      
       return record
     }),
 });

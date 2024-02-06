@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { api } from "~/utils/api";
 import MedicationTable from "./medications";
+import { NextSectionButton, SkipSectionButton } from "./nextSectionButton";
+import { toast } from "react-hot-toast";
 
 function getDate() {
   return new Date().toISOString().split("T")[0];
@@ -55,7 +57,7 @@ export type medicationDataType = {
   termination: string;
 };
 
-const medicationData: medicationDataType[] = [
+export const medicationData: medicationDataType[] = [
   {
     id: "001",
     method: "",
@@ -213,6 +215,7 @@ export const MainForm = () => {
   const [experience, setExperience] = useState("");
   const [feedback, setFeedback] = useState("");
 
+
   const mainMutation = api.main.create.useMutation({
     onSuccess: () => {
       setDateOfBirth("");
@@ -240,6 +243,12 @@ export const MainForm = () => {
       setExperience("");
       setFeedback("");
     },
+    onError: (e) => {
+      const errorMessage = e.data?.zodError?.fieldErrors.content
+      if (errorMessage && errorMessage[0]) {
+        toast.error(errorMessage[0])
+      }
+    }
   });
 
   const medicalMutation = api.medication.create.useMutation({
@@ -251,7 +260,10 @@ export const MainForm = () => {
     },
   });
 
-  function submitMedicationData(medicationData: medicationDataType[], submitter : number ) {
+  function submitMedicationData(
+    medicationData: medicationDataType[],
+    submitter: number,
+  ) {
     medicationData.map(
       ({
         id,
@@ -342,24 +354,17 @@ export const MainForm = () => {
       feedback,
     });
 
-    console.log("hoping second")
-
-    console.log("main: ", mainMutation);
-    console.log("main @ id: ", mainMutation.data?.id);
-
-    var submissionId = 1
+    var submissionId = 1;
     if (typeof mainMutation.data?.id === "number") {
-      console.log("entered")
-      submissionId = mainMutation.data?.id
-      console.log("ID: ", submissionId)
+      submissionId = mainMutation.data?.id;
     }
 
-      submitMedicationData(mascMedicationData, submissionId)
-      submitMedicationData(femEstrogenData, submissionId)
-      submitMedicationData(femAntiandrogenData, submissionId)
-      submitMedicationData(femProgesteroneData, submissionId)
+    submitMedicationData(mascMedicationData, submissionId);
+    submitMedicationData(femEstrogenData, submissionId);
+    submitMedicationData(femAntiandrogenData, submissionId);
+    submitMedicationData(femProgesteroneData, submissionId);
 
-      //TODO: test this submission, confirm the data links properly
+    //TODO: test this submission, confirm the data links properly
   };
 
   return (
@@ -367,9 +372,10 @@ export const MainForm = () => {
       <form className="mx-auto mt-32 w-5/6 justify-center">
         <h1>Main form</h1> {/*TODO: better name*/}
         <br />
-        <div className="Section1">
+        {/*TODO: turn all sections into objects with passed props*/}
+        <div className="section" id="section1">
           <div>
-            <h2>Demographic Information</h2>
+            <h2 id="demographicsHeader">Demographic Information</h2>
             <p>
               This section will ask you about some basic demographic information
               such as birthdate and country of residency
@@ -476,345 +482,323 @@ export const MainForm = () => {
               value="feminizing"
               onChange={(e) => setHrtType(e.target.value)}
             />
-            <label htmlFor="feminizing">Feminizing</label> <br />
+            <label htmlFor="feminizing">Feminizing</label> <br /><br />
+            <NextSectionButton elementId={"hormonesHeader"} />
           </div>
         </div>
-        <div className="Section2">
-          <div>
-            <h2>Masculinizing HRT</h2>
-            <p>
-              What follows are some questions about your experience on
-              masculinizing HRT, including questions about the medications you
-              may have taken, start and end dates, and effects you experienced.
-            </p>
+        {hrtType === "masculinizing" && (
+          <div className="section" id="section2">
+            <div>
+              <h2 id="hormonesHeader">Masculinizing HRT</h2>
+              <p>
+                What follows are some questions about your experience on
+                masculinizing HRT, including questions about the medications you
+                may have taken, start and end dates, and effects you
+                experienced.
+              </p><br />
+            </div>
+            <div className="question">
+              Please input your medication history according to the table below.  If you are on <b>injections</b>, please input your volume and concentration (if you know it)
+              <MedicationTable
+                data={mascMedicationData}
+                setData={setMascMedicationData}
+              />
+            </div>
+            <div className="question">
+              Please check any effects you have experienced while on HRT (these
+              are not related to genitalia or sex)
+              <br />
+              {mascEffectsList.map((option) => (
+                <div key={option}>
+                  <input
+                    type="checkbox"
+                    id={option}
+                    value={option}
+                    checked={mascEffectsState[option]}
+                    onChange={(event) => {
+                      setMascEffectsState({
+                        ...mascEffectsState,
+                        [option]: event.target.checked,
+                      });
+                    }}
+                  />
+                  <label htmlFor={option}>{option}</label>
+                </div>
+              ))}
+            </div>
+            <div className="question">
+              Are there any other effects (not related to genitalia or sex) you
+              have experienced? Additionally, if there is any extra information
+              about any of the above effects (ex. how your emotions changed),
+              please leave it here. <br />
+              <textarea
+                id="mascEffectsOther"
+                value={mascEffectsOther}
+                onChange={(e) => setMascEffectsOther(e.target.value)}
+              />
+            </div>
           </div>
-          <div className="question">
-            Please input your medication history according to the table below:
-            <MedicationTable
-              data={mascMedicationData}
-              setData={setMascMedicationData}
-            />
-          </div>
-          <div className="question">
-            Please check any effects you have experienced while on HRT (these
-            are not related to genitalia or sex)
-            <br />
-            {mascEffectsList.map((option) => (
-              <div key={option}>
-                <input
-                  type="checkbox"
-                  id={option}
-                  value={option}
-                  checked={mascEffectsState[option]}
-                  onChange={(event) => {
-                    setMascEffectsState({
-                      ...mascEffectsState,
-                      [option]: event.target.checked,
-                    });
-                  }}
-                />
-                <label htmlFor={option}>{option}</label>
+        )}
+        {hrtType === "masculinizing" && (
+            <div className="section" id="section3">
+              <h2 id="hormonesSexHeader">
+                Masculinizing HRT - Sex and Genitalia related questions
+              </h2>
+              <p>
+                This section contains questions that will pertain to symptoms
+                related to genitalia and sexuality. If you are not comfortable
+                answering these questions, please click the button below:
+              </p>
+              <SkipSectionButton elementId={"otherHeader"} />
+              <div className="question">
+                Please check any effects you have experienced while on HRT
+                <br />
+                {mascEffectsSexList.map((option) => (
+                  <div key={option}>
+                    <input
+                      type="checkbox"
+                      id={option}
+                      value={option}
+                      checked={mascEffectsSexState[option]}
+                      onChange={(event) => {
+                        setMascEffectsSexState({
+                          ...mascEffectsSexState,
+                          [option]: event.target.checked,
+                        });
+                      }}
+                    />
+                    <label htmlFor={option}>{option}</label>
+                  </div>
+                ))}
               </div>
-            ))}
-          </div>
-          <div className="question">
-            Are there any other effects (not related to genitalia or sex) you
-            have experienced? Additionally, if there is any extra information
-            about any of the above effects (ex. how your emotions changed),
-            please leave it here. <br />
-            <textarea
-              id="mascEffectsOther"
-              value={mascEffectsOther}
-              onChange={(e) => setMascEffectsOther(e.target.value)}
-            />
-          </div>
-          <div className="question">
-            The next section contains questions related to genetalia and sex.
-            Are you comfortable answering these questions?
-            <br />
-            <input
-              type="radio"
-              id="mascEffectsSexComfortableTrue"
-              name="mascEffectsSexComfortable"
-              value="true"
-              onChange={(e) => setMascEffectsSexComfortable(e.target.value)}
-            />
-            Yes, I am comfortable answering these questions <br />
-            <input
-              type="radio"
-              id="mascEffectsSexComfortableFalse"
-              name="mascEffectsSexComfortable"
-              value="false"
-              onChange={(e) => setMascEffectsSexComfortable(e.target.value)}
-            />
-            No, I would prefer to skip to the next section <br />
-          </div>
-        </div>
-        <div className="Section3">
-          <h2>Masculinizing HRT - Sex and Genitalia related questions</h2>
-          <p>
-            This section contains questions that will pertain to symptoms
-            related to genitalia and sexuality. If you are not comfortable
-            answering these questions, please return to the previous section and
-            choose 'No'.
-          </p>
-          <div className="question">
-            Please check any effects you have experienced while on HRT
-            <br />
-            {mascEffectsSexList.map((option) => (
-              <div key={option}>
-                <input
-                  type="checkbox"
-                  id={option}
-                  value={option}
-                  checked={mascEffectsSexState[option]}
-                  onChange={(event) => {
-                    setMascEffectsSexState({
-                      ...mascEffectsSexState,
-                      [option]: event.target.checked,
-                    });
-                  }}
-                />
-                <label htmlFor={option}>{option}</label>
-              </div>
-            ))}
-          </div>
 
-          <div className="question">
-            Are there any other effects (related to genitalia or sex) you have
-            experienced? Additionally, if there is any extra information about
-            any of the above effects. please leave it here. <br />
-            <textarea
-              id="mascEffectsSexOther"
-              value={mascEffectsSexOther}
-              onChange={(e) => setMascEffectsSexOther(e.target.value)}
-            />
+              <div className="question">
+                Are there any other effects (related to genitalia or sex) you
+                have experienced? Additionally, if there is any extra
+                information about any of the above effects. please leave it
+                here. <br />
+                <textarea
+                  id="mascEffectsSexOther"
+                  value={mascEffectsSexOther}
+                  onChange={(e) => setMascEffectsSexOther(e.target.value)}
+                />
+              </div>
+            </div>
+          )}
+        {hrtType === "feminizing" && (
+          <div className="section" id="section4">
+            <div>
+              <h2 id="hormonesHeader">Feminizing HRT</h2>
+              <p>
+                What follows are some questions about your experience on
+                feminizng HRT, including questions about the medications you may
+                have taken, start and end dates, and effects you experienced.
+              </p><br />
+            </div>
+            <div className="question">
+              Please input your medication history with <b> estrogen </b>{" "}
+              according to the table below.  If you are on <b>injections</b>, please input your volume and concentration (if you know it)
+              <MedicationTable
+                data={femEstrogenData}
+                setData={setFemEstrogenData}
+              />
+            </div>
+            <div className="question">
+              Please input your medication history with <b>anti-androgens</b>{" "}
+              according to the table below.
+              <MedicationTable
+                data={femAntiandrogenData}
+                setData={setFemAntiandrogenData}
+              />
+            </div>
+            <div className="question">
+              Please input your medication history with <b>progesterone</b>{" "}
+              according to the table below.
+              <MedicationTable
+                data={femProgesteroneData}
+                setData={setFemProgesteroneData}
+              />
+            </div>
+            <div className="question">
+              Please check any effects you have experienced while on HRT (these
+              are not related to genitalia or sex)
+              <br />
+              {femEffectsList.map((option) => (
+                <div key={option}>
+                  <input
+                    type="checkbox"
+                    id={option}
+                    value={option}
+                    checked={femEffectsState[option]}
+                    onChange={(event) => {
+                      setFemEffectsState({
+                        ...femEffectsState,
+                        [option]: event.target.checked,
+                      });
+                    }}
+                  />
+                  <label htmlFor={option}>{option}</label>
+                </div>
+              ))}
+            </div>
+            <div className="question">
+              Are there any other effects (not related to genitalia or sex) you
+              have experienced? Additionally, if there is any extra information
+              about any of the above effects (ex. how your emotions changed),
+              please leave it here. <br />
+              <textarea
+                id="femEffectsOther"
+                value={femEffectsOther}
+                onChange={(e) => setFemEffectsOther(e.target.value)}
+              />
+            </div>
+            <div className="question">
+              Please check any cyclic or period-like effects you experienced
+              while on HRT
+              {/* TODO: better description */}
+              <br />
+              {femEffectsCyclicList.map((option) => (
+                <div key={option}>
+                  <input
+                    type="checkbox"
+                    id={option}
+                    value={option}
+                    checked={femEffectsCyclicState[option]}
+                    onChange={(event) => {
+                      setFemEffectsCyclicState({
+                        ...femEffectsCyclicState,
+                        [option]: event.target.checked,
+                      });
+                    }}
+                  />
+                  <label htmlFor={option}>{option}</label>
+                </div>
+              ))}
+            </div>
+            <div className="question">
+              Are there any other cyclic effects you experienced while on HRT,
+              or anything else you want us to know about these cyclic effects?{" "}
+              <br />
+              <textarea
+                id="femEffectsCyclicOther"
+                value={femEffectsCyclicOther}
+                onChange={(e) => setFemEffectsCyclicOther(e.target.value)}
+              />
+            </div>
           </div>
-        </div>
-        <div className="Section4">
-          <div>
-            <h2>Feminizing HRT</h2>
+        )}
+        {hrtType === "feminizing" && (
+          <div className="section" id="section5">
+            <h2 id="hormonesSexHeader">
+              Feminizng HRT - Sex and Genitalia related questions
+            </h2>
             <p>
-              What follows are some questions about your experience on feminizng
-              HRT, including questions about the medications you may have taken,
-              start and end dates, and effects you experienced.
+              This section contains questions that will pertain to symptoms
+              related to genitalia and sexuality. If you are not comfortable
+              answering these questions, please click the button below
             </p>
-          </div>
-          <div className="question">
-            Please input your medication history with <b> estrogen </b>{" "}
-            according to the table below:
-            <MedicationTable
-              data={femEstrogenData}
-              setData={setFemEstrogenData}
-            />
-          </div>
-          <div className="question">
-            Please input your medication history with <b>anti-androgens</b>{" "}
-            according to the table below:
-            <MedicationTable
-              data={femAntiandrogenData}
-              setData={setFemAntiandrogenData}
-            />
-          </div>
-          <div className="question">
-            Please input your medication history with <b>progesterone</b>{" "}
-            according to the table below:
-            <MedicationTable
-              data={femProgesteroneData}
-              setData={setFemProgesteroneData}
-            />
-          </div>
-          <div className="question">
-            Please check any effects you have experienced while on HRT (these
-            are not related to genitalia or sex)
-            <br />
-            {femEffectsList.map((option) => (
-              <div key={option}>
-                <input
-                  type="checkbox"
-                  id={option}
-                  value={option}
-                  checked={femEffectsState[option]}
-                  onChange={(event) => {
-                    setFemEffectsState({
-                      ...femEffectsState,
-                      [option]: event.target.checked,
-                    });
-                  }}
-                />
-                <label htmlFor={option}>{option}</label>
-              </div>
-            ))}
-          </div>
-          <div className="question">
-            Are there any other effects (not related to genitalia or sex) you
-            have experienced? Additionally, if there is any extra information
-            about any of the above effects (ex. how your emotions changed),
-            please leave it here. <br />
-            <textarea
-              id="femEffectsOther"
-              value={femEffectsOther}
-              onChange={(e) => setFemEffectsOther(e.target.value)}
-            />
-          </div>
-          <div className="question">
-            Please check any cyclic or period-like effects you experienced while
-            on HRT
-            {/* TODO: better description */}
-            <br />
-            {femEffectsCyclicList.map((option) => (
-              <div key={option}>
-                <input
-                  type="checkbox"
-                  id={option}
-                  value={option}
-                  checked={femEffectsCyclicState[option]}
-                  onChange={(event) => {
-                    setFemEffectsCyclicState({
-                      ...femEffectsCyclicState,
-                      [option]: event.target.checked,
-                    });
-                  }}
-                />
-                <label htmlFor={option}>{option}</label>
-              </div>
-            ))}
-          </div>
-          <div className="question">
-            Are there any other cyclic effects you experienced while on HRT, or
-            anything else you want us to know about these cyclic effects? <br />
-            <textarea
-              id="femEffectsCyclicOther"
-              value={femEffectsCyclicOther}
-              onChange={(e) => setFemEffectsCyclicOther(e.target.value)}
-            />
-          </div>
-          <div className="question">
-            The next section contains questions related to genetalia and sex.
-            Are you comfortable answering these questions?
-            <br />
-            <input
-              type="radio"
-              id="femEffectsSexComfortableTrue"
-              name="femEffectsSexComfortable"
-              value="true"
-              onChange={(e) => setFemEffectsSexComfortable(e.target.value)}
-            />
-            Yes, I am comfortable answering these questions <br />
-            <input
-              type="radio"
-              id="femEffectsSexComfortableFalse"
-              name="femEffectsSexComfortable"
-              value="false"
-              onChange={(e) => setFemEffectsSexComfortable(e.target.value)}
-            />
-            No, I would prefer to skip to the next section <br />
-          </div>
-        </div>
-        <div className="Section5">
-          <h2>Feminizng HRT - Sex and Genitalia related questions</h2>
-          <p>
-            This section contains questions that will pertain to symptoms
-            related to genitalia and sexuality. If you are not comfortable
-            answering these questions, please return to the previous section and
-            choose 'No'.
-          </p>
-          <div className="question">
-            Please check any effects you have experienced while on HRT
-            <br />
-            {femEffectsSexList.map((option) => (
-              <div key={option}>
-                <input
-                  type="checkbox"
-                  id={option}
-                  value={option}
-                  checked={femEffectsSexState[option]}
-                  onChange={(event) => {
-                    setFemEffectsSexState({
-                      ...femEffectsSexState,
-                      [option]: event.target.checked,
-                    });
-                  }}
-                />
-                <label htmlFor={option}>{option}</label>
-              </div>
-            ))}
-          </div>
+            <SkipSectionButton elementId={"otherHeader"} />
+            <div className="question">
+              Please check any effects you have experienced while on HRT
+              <br />
+              {femEffectsSexList.map((option) => (
+                <div key={option}>
+                  <input
+                    type="checkbox"
+                    id={option}
+                    value={option}
+                    checked={femEffectsSexState[option]}
+                    onChange={(event) => {
+                      setFemEffectsSexState({
+                        ...femEffectsSexState,
+                        [option]: event.target.checked,
+                      });
+                    }}
+                  />
+                  <label htmlFor={option}>{option}</label>
+                </div>
+              ))}
+            </div>
 
-          <div className="question">
-            Are there any other effects (related to genitalia or sex) you have
-            experienced? Additionally, if there is any extra information about
-            any of the above effects. please leave it here. <br />
-            <textarea
-              id="femEffectsSexOther"
-              value={femEffectsSexOther}
-              onChange={(e) => setFemEffectsSexOther(e.target.value)}
-            />
+            <div className="question">
+              Are there any other effects (related to genitalia or sex) you have
+              experienced? Additionally, if there is any extra information about
+              any of the above effects. please leave it here. <br />
+              <textarea
+                id="femEffectsSexOther"
+                value={femEffectsSexOther}
+                onChange={(e) => setFemEffectsSexOther(e.target.value)}
+              />
+            </div>
           </div>
-        </div>
-        <div className="Section6">
-          <h2>Other General Questions</h2>
-          <p>
-            This section will go over general questions for both masculinizing
-            and feminizng HRT
-          </p>
-          <div className="question">
-            Are you taking any (non-HRT) medications that may affect or
-            interfere with any of the symptoms previously listed?
-            <br />
-            <textarea
-              id="otherMedications"
-              value={otherMedications}
-              onChange={(e) => setOtherMedications(e.target.value)}
-            />
+        )}
+        {hrtType !== "" && (
+          <div className="section" id="section6">
+            <h2 id="otherHeader">Other General Questions</h2>
+            <p>
+              This section will go over general questions for both masculinizing
+              and feminizng HRT
+            </p>
+            <div className="question">
+              Are you taking any (non-HRT) medications that may affect or
+              interfere with any of the symptoms previously listed?
+              <br />
+              <textarea
+                id="otherMedications"
+                value={otherMedications}
+                onChange={(e) => setOtherMedications(e.target.value)}
+              />
+            </div>
+            <div className="question">
+              Do you have any medical conditions that may affect or interfere
+              with any of the symptoms or effects previously discussed?
+              <br />
+              <textarea
+                id="otherConditions"
+                value={otherConditions}
+                onChange={(e) => setOtherConditions(e.target.value)}
+              />
+            </div>
           </div>
-          <div className="question">
-            Do you have any medical conditions that may affect or interfere with
-            any of the symptoms or effects previously discussed?
-            <br />
-            <textarea
-              id="otherConditions"
-              value={otherConditions}
-              onChange={(e) => setOtherConditions(e.target.value)}
-            />
+        )}
+        {hrtType !== "" && (
+          <div className="section" id="section7">
+            <h2 id="feedbackHeader">Final Thoughts and Comments</h2>
+            <p>
+              This section will collect a little more information and feedback
+              about the survey
+              {/* TODO: add more info here  */}
+            </p>
+            <div className="question">
+              Is there anything you think should be added to this survey?
+              <br />
+              <textarea
+                id="additions"
+                value={additions}
+                onChange={(e) => setAdditions(e.target.value)}
+              />
+            </div>
+            <div className="question">
+              Is there anything related to your experience with HRT that you
+              want us to know?
+              <br />
+              <textarea
+                id="experience"
+                value={experience}
+                onChange={(e) => setExperience(e.target.value)}
+              />
+            </div>
+            <div className="question">
+              Do you have any other feedback for HRTimelines?
+              <br />
+              <textarea
+                id="feedback"
+                value={feedback}
+                onChange={(e) => setFeedback(e.target.value)}
+              />
+            </div>
           </div>
-        </div>
-        <div className="Section7">
-          <h2>Final Thoughts and Comments</h2>
-          <p>
-            This section will collect a little more information and feedback
-            about the survey
-            {/* TODO: add more info here  */}
-          </p>
-          <div className="question">
-            Is there anything you think should be added to this survey?
-            <br />
-            <textarea
-              id="additions"
-              value={additions}
-              onChange={(e) => setAdditions(e.target.value)}
-            />
-          </div>
-          <div className="question">
-            Is there anything related to your experience with HRT that you want
-            us to know?
-            <br />
-            <textarea
-              id="experience"
-              value={experience}
-              onChange={(e) => setExperience(e.target.value)}
-            />
-          </div>
-          <div className="question">
-            Do you have any other feedback for HRTimelines?
-            <br />
-            <textarea
-              id="feedback"
-              value={feedback}
-              onChange={(e) => setFeedback(e.target.value)}
-            />
-          </div>
-        </div>
+        )}
         <br />
         <button
           type="button"
