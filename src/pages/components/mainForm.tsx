@@ -375,7 +375,7 @@ export const MainForm = () => {
       feedback,
     });
 
-    var submissionId = 1;
+    let submissionId = 1;
     if (typeof mainMutation.data?.id === "number") {
       submissionId = mainMutation.data?.id;
     }
