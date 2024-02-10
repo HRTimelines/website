@@ -57,3 +57,9 @@ export const SkipSectionButton = ({elementId}: any) => {
     </>
   );
 };
+
+const Empty = () => {
+  return <></>
+}
+
+export default Empty
