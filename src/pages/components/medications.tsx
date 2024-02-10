@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { medicationDataType } from "./mainForm";
+import { getDate, medicationDataType } from "./mainForm";
 import { SetStateAction } from "react";
 import { Dispatch } from "react";
 import Dropdown from "./dropdown";
@@ -116,6 +116,7 @@ const MedicationTable = ({ data, setData }: TableProps) => {
                       value={start}
                       type="date"
                       onChange={(e) => onChangeInput(e, id)}
+                      max={getDate()}
                     />
                   </td>
                   <td>
@@ -124,6 +125,8 @@ const MedicationTable = ({ data, setData }: TableProps) => {
                       value={end}
                       type="date"
                       onChange={(e) => onChangeInput(e, id)}
+                      max={(getDate())}
+                      min={start}
                     />
                   </td>
                   <td>
@@ -155,7 +158,7 @@ const MedicationTable = ({ data, setData }: TableProps) => {
             addRow(rows);
           }}
         >
-          Add new row
+          Add new entry
         </button>
         <br />
         <br />

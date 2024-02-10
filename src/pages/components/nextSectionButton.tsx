@@ -47,7 +47,8 @@ export const SkipSectionButton = ({ elementId }: any) => {
       <div>
         <button
           type="button"
-          className="rounded-xl border-2 border-solid border-black p-1"
+          // className="rounded-xl border-2 border-solid border-black p-1 my-5"
+          className="rounded-xl underline-offset-2 underline p-1 my-5"
           onClick={scrollToComponent}
         >
           Skip Section
