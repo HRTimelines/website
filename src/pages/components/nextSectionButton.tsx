@@ -1,6 +1,6 @@
 import React from "react";
 
-export const NextSectionButton = ({ elementId }: any) => {
+export const NextSectionButton = ({elementId}: any) => {
   const scrollToComponent = () => {
     const targetElement = document.getElementById(elementId);
 
@@ -29,7 +29,7 @@ export const NextSectionButton = ({ elementId }: any) => {
 };
 
 
-export const SkipSectionButton = ({ elementId }: any) => {
+export const SkipSectionButton = ({elementId}: any) => {
   const scrollToComponent = () => {
     const targetElement = document.getElementById(elementId);
 

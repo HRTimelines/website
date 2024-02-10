@@ -394,11 +394,11 @@ export const MainForm = () => {
         <h1>General Survey</h1>
         {/*TODO: check with lucas on title*/}
         <p>
-          This survey is intended to gather some basic information on your
+          {`This survey is intended to gather some basic information on your
           history and experience with Hormone Replacement Therapy (HRT). No
           questions are mandatory. Please answer all questions as accurately as
           possible, though guesses where you don't remember is acceptable.
-          Thanks!{" "}
+          Thanks! `}
         </p>
         <br />
         {/*TODO: turn all sections into objects with passed props*/}
@@ -535,9 +535,9 @@ export const MainForm = () => {
               <br />
             </div>
             <div className="question">
-              Please input your medication history according to the table below.
+              {`Please input your medication history according to the table below.
               If you are on <b>injections</b>, please input your volume and
-              concentration (if you know it) in the "amount" column.  Please also specify if you do intramuscular or subcutaneous injections.
+              concentration (if you know it) in the "amount" column.  Please also specify if you do intramuscular or subcutaneous injections.`}
               <MedicationTable
                 data={mascMedicationData}
                 setData={setMascMedicationData}
@@ -646,10 +646,10 @@ export const MainForm = () => {
               />
             </div>
             <div className="question">
-              Please input your medication history with <b> estrogen </b>{" "}
+              {`Please input your medication history with <b> estrogen </b>{" "}
               according to the table below. If you are on <b>injections</b>,
               please input your volume and concentration (if you know it) in the
-              "amount" column.  Please also specify if you do intramuscular or subcutaneous injections.
+              "amount" column.  Please also specify if you do intramuscular or subcutaneous injections.`}
               <MedicationTable
                 data={femEstrogenData}
                 setData={setFemEstrogenData}

@@ -32,7 +32,7 @@ const MedicationTable = ({ data, setData }: TableProps) => {
     setRows(rows + 1);
   };
 
-  const onChangeInput = (e: any, id: string) => {
+  const onChangeInput = (e: React.ChangeEvent<HTMLInputElement>, id: string) => {
     const { name, value } = e.target;
 
     const editData = data.map((item) =>
