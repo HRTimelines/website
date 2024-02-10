@@ -19,6 +19,7 @@ const config = {
     "@typescript-eslint/no-unsafe-argument": "off",
     "@typescript-eslint/prefer-optional-chain": "off",
     "@typescript-eslint/no-misused-promises": "off",
+    "@typescript-eslint/no-unsafe-member-access": "off",
 
     "@typescript-eslint/consistent-type-imports": [
       "warn",

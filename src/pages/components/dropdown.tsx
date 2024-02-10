@@ -74,6 +74,7 @@ const Dropdown = ({optionList, value, setValue}: dropdownProps) => {
                 {optionList.map((option) => (<div
                   style={{ padding: "8px", cursor: "pointer" }}
                   onClick={() => handleOptionSelect(option)}
+                  key={option}
                 >
                   {option}
                 </div>))}
