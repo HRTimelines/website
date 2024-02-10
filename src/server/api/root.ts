@@ -1,4 +1,4 @@
-import { mainRouter } from "~/server/api/routers/mainSubmission";
+import { formRouter, mainRouter } from "~/server/api/routers/mainSubmission";
 import { medicationRouter } from "./routers/medicationSubmission";
 import { createTRPCRouter } from "~/server/api/trpc";
 
@@ -10,6 +10,7 @@ import { createTRPCRouter } from "~/server/api/trpc";
 export const appRouter = createTRPCRouter({
   main: mainRouter,
   medication: medicationRouter,
+  form: formRouter,
 });
 
 // export type definition of API
