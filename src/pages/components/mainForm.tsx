@@ -283,7 +283,7 @@ export const MainForm = () => {
     medicationData: medicationDataType[],
     submitter: number,
   ) {
-    medicationData.map(
+    medicationData?.map(
       ({
         id,
         method,
@@ -436,7 +436,7 @@ export const MainForm = () => {
           <div className="question">
             How would you describe your gender? Select all that apply.
             <br />
-            {genderList.map((option) => (
+            {genderList?.map((option) => (
               <div key={option}>
                 <input
                   type="checkbox"
@@ -467,7 +467,7 @@ export const MainForm = () => {
           <div className="question">
             How would you describe your ethnicity? Select all that apply.
             <br />
-            {raceList.map((option) => (
+            {raceList?.map((option) => (
               <div key={option}>
                 <input
                   type="checkbox"
@@ -547,7 +547,7 @@ export const MainForm = () => {
               Please check any effects you have experienced while on HRT (these
               are not related to genitalia or sex)
               <br />
-              {mascEffectsList.map((option) => (
+              {mascEffectsList?.map((option) => (
                 <div key={option}>
                   <input
                     type="checkbox"
@@ -593,7 +593,7 @@ export const MainForm = () => {
             <div className="question">
               Please check any effects you have experienced while on HRT
               <br />
-              {mascEffectsSexList.map((option) => (
+              {mascEffectsSexList?.map((option) => (
                 <div key={option}>
                   <input
                     type="checkbox"
@@ -667,7 +667,7 @@ export const MainForm = () => {
               Please check any effects you have experienced while on HRT (these
               are not related to genitalia or sex)
               <br />
-              {femEffectsList.map((option) => (
+              {femEffectsList?.map((option) => (
                 <div key={option}>
                   <input
                     type="checkbox"
@@ -702,7 +702,7 @@ export const MainForm = () => {
               while on HRT
               {/* TODO: better description */}
               <br />
-              {femEffectsCyclicList.map((option) => (
+              {femEffectsCyclicList?.map((option) => (
                 <div key={option}>
                   <input
                     type="checkbox"
@@ -747,7 +747,7 @@ export const MainForm = () => {
             <div className="question">
               Please check any effects you have experienced while on HRT
               <br />
-              {femEffectsSexList.map((option) => (
+              {femEffectsSexList?.map((option) => (
                 <div key={option}>
                   <input
                     type="checkbox"

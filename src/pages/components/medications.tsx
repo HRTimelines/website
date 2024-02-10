@@ -11,7 +11,6 @@ interface TableProps {
 
 const MedicationTable = ({ data, setData }: TableProps) => {
   // TODO: add seperate volume and concentrtion
-  // const [medicationData, setMedicationData] = useState(data);
   const [rows, setRows] = useState(2);
 
   const addRow = (rows: number) => {
@@ -60,7 +59,7 @@ const MedicationTable = ({ data, setData }: TableProps) => {
             </tr>
           </thead>
           <tbody>
-            {data.map(
+            {data?.map(
               ({
                 id,
                 method,
