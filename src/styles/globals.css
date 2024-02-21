@@ -121,6 +121,7 @@
     }
     table {
       position: relative; /* necessary to keep header visible for scroll */
+      width: 100vh
     }
     thead, tbody {
       vertical-align: top;
@@ -129,13 +130,13 @@
       display: table-cell;
     }
     thead {
-      width: 100vh;
+      width: 110px;
       /* border: 1px solid #999; */
     }
     tbody {
       /* necessary to keep header visible on left for scroll */
       position: absolute;
-      left: 110px; /*based on the width of the 'thead' for offset */
+      left: 110px; /*based on the width of the 'thead' for offset*/
       width: 100%; /* how much to show horizontally before scroll */
       /* border: 1px solid #e7e7e7; */
       overflow-x: scroll;
