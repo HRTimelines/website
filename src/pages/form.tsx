@@ -12,8 +12,8 @@ export const Form = () => {
   return (
     <>
       <div>
-        <Header />
         <MainForm />
+        <Header />
       </div>
     </>
   );

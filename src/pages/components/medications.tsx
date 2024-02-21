@@ -178,7 +178,7 @@ const MedicationTable = ({
   return (
     <>
       <div className="medication">
-        <table className="z-[-1]">
+        <table className="w-screen">
           <thead>
             <tr>
               <th></th>
