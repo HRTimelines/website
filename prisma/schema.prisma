@@ -70,6 +70,7 @@ model MainForm {
   otherMedications String @db.Text
   otherConditions  String @db.Text
   bloodTests       String
+  source           String @db.Text
   additions        String @db.Text
   experience       String @db.Text
   feedback         String @db.Text

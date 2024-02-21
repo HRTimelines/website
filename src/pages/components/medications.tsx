@@ -7,11 +7,135 @@ import Dropdown from "./dropdown";
 interface TableProps {
   data: medicationDataType[];
   setData: Dispatch<SetStateAction<medicationDataType[]>>;
+  exampleSource: String;
+  rows: number;
+  setRows: Dispatch<SetStateAction<number>>;
 }
 
-const MedicationTable = ({ data, setData }: TableProps) => {
+function fetchSource(exampleSource: String) {
+  const mascExample = [
+    {
+      id: "ex",
+      method: "topcial gel",
+      medication: "AndroGel",
+      amount: "60mg",
+      frequency: "daily",
+      start: "2023-07-01",
+      end: "2023-12-12",
+      ongoing: false,
+      termination: "Ineffective",
+    },
+    {
+      id: "ex",
+      method: "subcutaneous injections",
+      medication: "Testosterone Cypionate",
+      amount: "0.5mL at 100mg/mL",
+      frequency: "weekly",
+      start: "2023-12-12",
+      end: "",
+      ongoing: true,
+      termination: "",
+    },
+  ];
+
+  const estrogenExample = [
+    {
+      id: "ex",
+      method: "patches",
+      medication: "Estradot",
+      amount: "100ug",
+      frequency: "twice a week",
+      start: "2023-07-01",
+      end: "2023-12-12",
+      ongoing: false,
+      termination: "Ineffective",
+    },
+    {
+      id: "ex",
+      method: "intramuscular injections",
+      medication: "Estradiol Valerate",
+      amount: "0.5mL at 10mg/mL",
+      frequency: "weekly",
+      start: "2023-12-12",
+      end: "",
+      ongoing: true,
+      termination: "",
+    },
+  ];
+  const progesteroneExample = [
+    {
+      id: "ex",
+      method: "oral pill",
+      medication: "Progesterone",
+      amount: "100mg",
+      frequency: "daily",
+      start: "2023-07-01",
+      end: "2023-12-12",
+      ongoing: false,
+      termination: "Did not see desired results",
+    },
+    {
+      id: "ex",
+      method: "anal suppository",
+      medication: "Progesterone",
+      amount: "200mg",
+      frequency: "daily",
+      start: "2023-12-12",
+      end: "",
+      ongoing: true,
+      termination: "",
+    },
+  ];
+  const antiAndrogenExample = [
+    {
+      id: "ex",
+      method: "pills",
+      medication: "Spironolactone",
+      amount: "50mg",
+      frequency: "daily",
+      start: "2023-07-01",
+      end: "2023-12-12",
+      ongoing: false,
+      termination: "Caused headaches",
+    },
+    {
+      id: "ex",
+      method: "pills",
+      medication: "Cyproterone",
+      amount: "6mg",
+      frequency: "daily",
+      start: "2023-12-12",
+      end: "",
+      ongoing: true,
+      termination: "",
+    },
+  ];
+
+  if (exampleSource === "testosterone") {
+    return mascExample;
+  }
+  if (exampleSource === "anti-androgen") {
+    return antiAndrogenExample;
+  }
+  if (exampleSource === "estrogen") {
+    return estrogenExample;
+  }
+  if (exampleSource === "progesterone") {
+    return progesteroneExample;
+  }
+}
+
+const MedicationTable = ({
+  data,
+  setData,
+  exampleSource,
+  rows,
+  setRows,
+}: TableProps) => {
   // TODO: add seperate volume and concentrtion
-  const [rows, setRows] = useState(2);
+  // const [rows, setRows] = useState(2);
+
+  const exampleData = fetchSource(exampleSource);
 
   const addRow = (rows: number) => {
     const newRowIndex = ("000" + rows).slice(-3);
@@ -31,14 +155,24 @@ const MedicationTable = ({ data, setData }: TableProps) => {
     setRows(rows + 1);
   };
 
-  const onChangeInput = (e: React.ChangeEvent<HTMLInputElement>, id: string) => {
-    const { name, value } = e.target;
+  const onChangeInput = (
+    e: React.ChangeEvent<HTMLInputElement>,
+    id: string,
+  ) => {
+    const { name, value, type, checked } = e.target;
+    console.log(name, value, typeof(value));
 
-    const editData = data.map((item) =>
-      item.id === id && name ? { ...item, [name]: value } : item,
-    );
-
-    setData(editData);
+    if (type === "checkbox") {
+      const editData = data.map((item) =>
+        item.id === id ? { ...item, [name]: String(checked) } : item,
+      );
+      setData(editData);
+    } else {
+      const editData = data.map((item) =>
+        item.id === id && name ? { ...item, [name]: value } : item,
+      );
+      setData(editData);
+    } 
   };
 
   return (
@@ -59,6 +193,34 @@ const MedicationTable = ({ data, setData }: TableProps) => {
             </tr>
           </thead>
           <tbody>
+            {exampleData?.map(
+              ({
+                id,
+                method,
+                medication,
+                amount,
+                frequency,
+                start,
+                end,
+                ongoing,
+                termination,
+              }) => (
+                <tr>
+                  <td>{id}</td>
+                  <td>{method}</td>
+                  <td>{medication}</td>
+                  <td>{amount}</td>
+                  <td>{frequency}</td>
+                  <td>{start}</td>
+                  <td>{end}</td>
+                  <td>
+                    <input name="ongoing" checked={ongoing} type="checkbox" />
+                  </td>
+                  <td>{termination}</td>
+                </tr>
+              ),
+            )}
+            <br />
             {data?.map(
               ({
                 id,
@@ -97,7 +259,7 @@ const MedicationTable = ({ data, setData }: TableProps) => {
                       value={amount}
                       type="text"
                       onChange={(e) => onChangeInput(e, id)}
-                      placeholder="6mg"
+                      placeholder="ex. 6mg"
                     />
                   </td>
                   <td>
@@ -124,7 +286,7 @@ const MedicationTable = ({ data, setData }: TableProps) => {
                       value={end}
                       type="date"
                       onChange={(e) => onChangeInput(e, id)}
-                      max={(getDate())}
+                      max={getDate()}
                       min={start}
                     />
                   </td>
@@ -142,7 +304,7 @@ const MedicationTable = ({ data, setData }: TableProps) => {
                       value={termination}
                       type="text"
                       onChange={(e) => onChangeInput(e, id)}
-                      placeholder="headaches"
+                      placeholder="ex. headaches"
                     />
                   </td>
                 </tr>

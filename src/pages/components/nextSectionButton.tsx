@@ -1,15 +1,25 @@
 import React from "react";
 
-export const NextSectionButton = ({elementId}: any) => {
+export const NextSectionButton = ({ elementId, headerId }: any) => {
   const scrollToComponent = () => {
+    const getHeaderHeight = () => {
+      const header = document.getElementById(headerId);
+      return header ? header.clientHeight : 0;
+    };
+
+    const headerHeight = getHeaderHeight();
     const targetElement = document.getElementById(elementId);
 
     if (targetElement) {
+      const offset = targetElement.getBoundingClientRect().top - headerHeight;
+
       targetElement.scrollIntoView({
-        block: "center",
+        block: "start",
         behavior: "smooth",
-        inline: "center"
+        inline: "center",
       });
+
+      window.scrollBy(0, offset);
     }
   };
 
@@ -28,17 +38,26 @@ export const NextSectionButton = ({elementId}: any) => {
   );
 };
 
-
-export const SkipSectionButton = ({elementId}: any) => {
+export const SkipSectionButton = ({ elementId, headerId }: any) => {
   const scrollToComponent = () => {
+    const getHeaderHeight = () => {
+      const header = document.getElementById(headerId);
+      return header ? header.clientHeight : 0;
+    };
+
+    const headerHeight = getHeaderHeight();
     const targetElement = document.getElementById(elementId);
 
     if (targetElement) {
+      const offset = targetElement.getBoundingClientRect().top - headerHeight;
+
       targetElement.scrollIntoView({
         block: "start",
         behavior: "smooth",
-        inline: "center"
+        inline: "center",
       });
+
+      window.scrollBy(0, offset);
     }
   };
 
@@ -47,8 +66,7 @@ export const SkipSectionButton = ({elementId}: any) => {
       <div>
         <button
           type="button"
-          // className="rounded-xl border-2 border-solid border-black p-1 my-5"
-          className="rounded-xl underline-offset-2 underline p-1 my-5"
+          className="my-5 rounded-xl border-2 border-solid border-black p-1"
           onClick={scrollToComponent}
         >
           Skip Section
@@ -59,7 +77,7 @@ export const SkipSectionButton = ({elementId}: any) => {
 };
 
 const Empty = () => {
-  return <></>
-}
+  return <></>;
+};
 
-export default Empty
+export default Empty;

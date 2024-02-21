@@ -4,6 +4,8 @@ import Schedule_desktop from "../../../public/HRTimelines Schedule.jpg";
 import Schedule_mobile from "../../../public/HRTimelines timeline sketch - Mobile.jpg";
 import Link from "next/link";
 
+const isFormActive = true
+
 function copy(text: string) {
   void navigator.clipboard.writeText(text);
   toast.success("copied to clipboard");
@@ -14,6 +16,7 @@ function goToForm() {
 }
 
 const Description = () => {
+  
   return (
     <>
       <div className="anchor mt-24 w-full p-5" id="description">
@@ -52,10 +55,11 @@ const Description = () => {
           </a>
           <br />
           <br />
+          {isFormActive && <div>
           We are currently collecting data on some common trans milestones, such
           as when trans people start socially transitioning or when they start
           HRT. If you are interested in filling it out, please click the button
-          below.
+          below.</div>}
         </p>
       </div>
     </>
@@ -63,16 +67,16 @@ const Description = () => {
 };
 
 const GoToForm = () => {
-  return (
+    return (
     <>
-      <div className="flex items-center justify-center p-5">
+      {isFormActive && <div className="flex items-center justify-center p-5">
         <button
           onClick={() => goToForm()}
           className="rounded-full border-4 border-solid border-[#F5A9B8] p-2"
         >
           <span className="text-xl font-bold">Go to form</span>
         </button>
-      </div>
+      </div>}
     </>
   );
 };
@@ -134,10 +138,11 @@ const FormCoverText = () => {
     <>
       <div className="mt-24 p-5">
         <h2>Form Consent</h2>
+        {/* TODO: update this */}
         <p>
           What follows is a short form that will ask a few basic questions about
           when you realized you were trans, when you came out, etc. It is
-          expected to take about 5 minutes. You must be 18 years or older to
+          expected to take about 10 minutes. You must be 18 years or older to
           complete this survey. We understand that some of these questions may
           be difficult to answer. You are not expected to have an exact date,
           just a best guess. If you have not yet done one of the things in this

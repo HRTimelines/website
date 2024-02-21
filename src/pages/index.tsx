@@ -13,18 +13,9 @@ import {
   Description,
   GoToForm,
   Plans,
-  Timelines,
 } from "./components/text";
 
 export default function Home() {
-  // const [dateOfBirth, setDateOfBirth] = useState("")
-
-  // const { mutate } = api.form.create.useMutation({
-  //   onSuccess: () => {
-  //     setDateOfBirth("")
-  //   }
-  // })
-
   return (
     <>
       <main className="block flex flex-col justify-center">
@@ -33,7 +24,6 @@ export default function Home() {
           <Description />
           <GoToForm />
           <Creators />
-          <Timelines />
           <Plans />
           <Contact />
         </div>

@@ -96,6 +96,7 @@ export const mainRouter = createTRPCRouter({
         otherMedications: z.string(),
         otherConditions: z.string(),
         bloodTests: z.string(),
+        source: z.string(),
         additions: z.string(),
         experience: z.string(),
         feedback: z.string(),
@@ -124,6 +125,7 @@ export const mainRouter = createTRPCRouter({
       const otherMedications = input.otherMedications;
       const otherConditions = input.otherConditions;
       const bloodTests = input.bloodTests;
+      const source = input.source;
       const additions = input.additions;
       const experience = input.experience;
       const feedback = input.feedback;
@@ -152,6 +154,7 @@ export const mainRouter = createTRPCRouter({
           otherMedications,
           otherConditions,
           bloodTests,
+          source,
           additions,
           experience,
           feedback,

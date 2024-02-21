@@ -3,11 +3,6 @@
 @import "tailwindcss/utilities";
 
 @layer base {
-  /* * {
-        border: 1px;
-        border-color: black;
-        border-style: dotted;
-    } */
   #__next {
     width: 100%;
   }
@@ -33,11 +28,6 @@
     padding: 1px;
     width: 25em;
     height: 5em;
-  }
-  .logo {
-    border-width: 1px;
-    border-color: black;
-    border-style: solid;
   }
   div {
     display: block;
@@ -102,6 +92,9 @@
   }
   .medication tbody td input:hover {
     background-color: #eee;
+  }
+  .medication th {
+    text-align: left;
   }
 
   @media screen and (max-width: 920px) {

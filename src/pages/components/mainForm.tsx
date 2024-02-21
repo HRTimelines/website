@@ -3,6 +3,9 @@ import { api } from "~/utils/api";
 import MedicationTable from "./medications";
 import { NextSectionButton, SkipSectionButton } from "./nextSectionButton";
 import { toast } from "react-hot-toast";
+import Dropdown from "./dropdown";
+import { CountryList } from "./countryDropdown";
+import { LoadingSpinner } from "./loadingSpinner";
 
 export function getDate() {
   return new Date().toISOString().split("T")[0];
@@ -82,7 +85,6 @@ const mascEffects: Record<string, boolean> = {
   "Rise in choleserol": false,
   "High blood pressure": false,
   "Polycythemia (excess red blood cell production)": false,
-  "Pelvic Pain": false,
   "Changes in pelvic bone structure": false,
   "Cramps, potentially related to testosterone administration cycle": false,
   "Changes in body odour": false,
@@ -109,7 +111,8 @@ const mascEffects: Record<string, boolean> = {
 
 const mascEffectsSex: Record<string, boolean> = {
   "Bottom growth": false,
-  "Vaginal atrophy (vaginal dryness)": false,
+  "Vaginal atrophy": false,
+  "Vaginal dryness": false,
   "Changes in moisture and odour of genitalia": false,
   "Increased libido (higher sex drive)": false,
   "Decreased libido (lower sex drive)": false,
@@ -178,6 +181,7 @@ const femEffectsSex: Record<string, boolean> = {
 export const MainForm = () => {
   const [dateOfBirth, setDateOfBirth] = useState("");
   const [country, setCountry] = useState("");
+  const countryList = CountryList;
 
   const [genderState, setGenderState] = useState(gender);
   const genderList = Object.keys(gender);
@@ -190,6 +194,7 @@ export const MainForm = () => {
   const [hrtType, setHrtType] = useState("");
 
   const [mascMedicationData, setMascMedicationData] = useState(medicationData);
+  const [mascTableRows, setMascTableRows] = useState(2);
 
   const [mascEffectsState, setMascEffectsState] = useState(mascEffects);
   const mascEffectsList = Object.keys(mascEffects);
@@ -206,10 +211,13 @@ export const MainForm = () => {
   const [mascEffectsSexOther, setMascEffectsSexOther] = useState("");
 
   const [femEstrogenData, setFemEstrogenData] = useState(medicationData);
+  const [estrogenTableRows, setEstrogenTableRows] = useState(2);
   const [femAntiandrogenData, setFemAntiandrogenData] =
     useState(medicationData);
+  const [antiandrogenTableRows, setAntiandrogenTableRows] = useState(2);
   const [femProgesteroneData, setFemProgesteroneData] =
     useState(medicationData);
+  const [progesteroneTableRows, setProgesteroneTableRows] = useState(2);
 
   const [femEffectsState, setFemEffectsState] = useState(femEffects);
   const femEffectsList = Object.keys(femEffects);
@@ -230,9 +238,13 @@ export const MainForm = () => {
   const [otherMedications, setOtherMedications] = useState("");
   const [otherConditions, setOtherConditions] = useState("");
   const [bloodTests, setBloodTests] = useState("");
+
+  const [source, setSource] = useState("");
   const [additions, setAdditions] = useState("");
   const [experience, setExperience] = useState("");
   const [feedback, setFeedback] = useState("");
+
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const mainMutation = api.main.create.useMutation({
     onSuccess: () => {
@@ -258,15 +270,19 @@ export const MainForm = () => {
       setOtherMedications("");
       setOtherConditions("");
       setBloodTests("");
+      setSource("");
       setAdditions("");
       setExperience("");
       setFeedback("");
+      window.location.href = "/submitted";
+      setIsSubmitting(false);
     },
     onError: (e) => {
       const errorMessage = e.data?.zodError?.fieldErrors.content;
       if (errorMessage && errorMessage[0]) {
         toast.error(errorMessage[0]);
       }
+      setIsSubmitting(false);
     },
   });
 
@@ -276,6 +292,10 @@ export const MainForm = () => {
       setFemEstrogenData(medicationData);
       setFemAntiandrogenData(medicationData);
       setFemProgesteroneData(medicationData);
+      setIsSubmitting(false);
+    },
+    onError: () => {
+      setIsSubmitting(false);
     },
   });
 
@@ -294,7 +314,8 @@ export const MainForm = () => {
         end,
         ongoing,
         termination,
-      }) =>
+      }) => {
+        console.log(submitter)
         medicalMutation.mutateAsync({
           row: parseInt(id),
           method,
@@ -306,7 +327,8 @@ export const MainForm = () => {
           ongoing,
           termination,
           submitterId: submitter,
-        }), // I'm not sure why this works, I would expect it to reset the values when the OnSuccess triggers -- worth investigating
+        });
+      }, // I'm not sure why this works, I would expect it to reset the values when the OnSuccess triggers -- worth investigating
     );
   }
 
@@ -340,11 +362,14 @@ export const MainForm = () => {
     otherMedications: string,
     otherConditions: string,
     bloodTests: string,
+    //feedback
+    source: string,
     additions: string,
     experience: string,
     feedback: string,
   ) => {
-    await mainMutation.mutateAsync({
+    setIsSubmitting(true);
+    const result = await mainMutation.mutateAsync({
       dateOfBirth,
       country,
       genderEntry,
@@ -370,15 +395,14 @@ export const MainForm = () => {
       otherMedications,
       otherConditions,
       bloodTests,
+      source,
       additions,
       experience,
       feedback,
     });
 
-    let submissionId = 1;
-    if (typeof mainMutation.data?.id === "number") {
-      submissionId = mainMutation.data?.id;
-    }
+    console.log(result.id)
+    const submissionId = result.id;
 
     submitMedicationData(mascMedicationData, submissionId);
     submitMedicationData(femEstrogenData, submissionId);
@@ -407,8 +431,9 @@ export const MainForm = () => {
             <h2 id="demographicsHeader">Demographic Information</h2>
             <p>
               This section will ask you about some basic demographic information
-              such as birthdate and country of residency
-            </p><br />
+              such as birthdate and country of residency.
+            </p>
+            <br />
           </div>
           <div className="question">
             <label htmlFor="dateOfBirth">When is your birthday?</label>
@@ -425,13 +450,18 @@ export const MainForm = () => {
           </div>
           <div className="question">
             In which country do you live primarily? <br />
-            <input
-              type="text"
-              className="p-1"
+            <select
+              disabled={!countryList.length}
               value={country}
-              id="country"
               onChange={(e) => setCountry(e.target.value)}
-            />
+              className="border-2px rounded-md border border-black bg-white p-1"
+            >
+              <option value="" />
+              {countryList.map((option) => (
+                <option value={option}>{option}</option>
+              ))}
+            </select>
+            <br />
           </div>
           <div className="question">
             How would you describe your gender? Select all that apply.
@@ -519,7 +549,7 @@ export const MainForm = () => {
             />
             <label htmlFor="feminizing">Feminizing</label> <br />
             <br />
-            <NextSectionButton elementId={"hormonesHeader"} />
+            <NextSectionButton elementId={"hormonesHeader"} headerId={"header"} />
           </div>
         </div>
         {hrtType === "masculinizing" && (
@@ -536,16 +566,21 @@ export const MainForm = () => {
             </div>
             <div className="question">
               {`Please input your medication history according to the table below.
-              If you are on <b>injections</b>, please input your volume and
+              If you are on`}{" "}
+              <b>injections</b>,{" "}
+              {`please input your volume and
               concentration (if you know it) in the "amount" column.  Please also specify if you do intramuscular or subcutaneous injections.`}
               <MedicationTable
                 data={mascMedicationData}
                 setData={setMascMedicationData}
+                exampleSource={"testosterone"}
+                rows={mascTableRows}
+                setRows={setMascTableRows}
               />
             </div>
             <div className="question">
               Please check any effects you have experienced while on HRT (these
-              are not related to genitalia or sex)
+              are not related to genitalia or sex).
               <br />
               {mascEffectsList?.map((option) => (
                 <div key={option}>
@@ -587,11 +622,11 @@ export const MainForm = () => {
             <p>
               This section contains questions that will pertain to symptoms
               related to genitalia and sexuality. If you are not comfortable
-              answering these questions, please click the button below:
+              answering these questions, please click the button below.
             </p>
-            <SkipSectionButton elementId={"otherHeader"} />
+            <SkipSectionButton elementId={"otherHeader"} headerId={"header"} />
             <div className="question">
-              Please check any effects you have experienced while on HRT
+              Please check any effects you have experienced while on HRT.
               <br />
               {mascEffectsSexList?.map((option) => (
                 <div key={option}>
@@ -643,16 +678,23 @@ export const MainForm = () => {
               <MedicationTable
                 data={femAntiandrogenData}
                 setData={setFemAntiandrogenData}
+                exampleSource={"anti-androgen"}
+                rows={antiandrogenTableRows}
+                setRows={setAntiandrogenTableRows}
               />
             </div>
             <div className="question">
-              {`Please input your medication history with <b> estrogen </b>{" "}
-              according to the table below. If you are on <b>injections</b>,
+              {`Please input your medication history with`} <b> estrogen </b>{" "}
+              according to the table below. If you are on <b>injections</b>,{" "}
+              {`
               please input your volume and concentration (if you know it) in the
               "amount" column.  Please also specify if you do intramuscular or subcutaneous injections.`}
               <MedicationTable
                 data={femEstrogenData}
                 setData={setFemEstrogenData}
+                exampleSource={"estrogen"}
+                rows={estrogenTableRows}
+                setRows={setEstrogenTableRows}
               />
             </div>
             <div className="question">
@@ -661,11 +703,14 @@ export const MainForm = () => {
               <MedicationTable
                 data={femProgesteroneData}
                 setData={setFemProgesteroneData}
+                exampleSource={"progesterone"}
+                rows={progesteroneTableRows}
+                setRows={setProgesteroneTableRows}
               />
             </div>
             <div className="question">
               Please check any effects you have experienced while on HRT (these
-              are not related to genitalia or sex)
+              are not related to genitalia or sex).
               <br />
               {femEffectsList?.map((option) => (
                 <div key={option}>
@@ -699,7 +744,7 @@ export const MainForm = () => {
             </div>
             <div className="question">
               Please check any cyclic or period-like effects you experienced
-              while on HRT
+              while on HRT.
               {/* TODO: better description */}
               <br />
               {femEffectsCyclicList?.map((option) => (
@@ -741,11 +786,11 @@ export const MainForm = () => {
             <p>
               This section contains questions that will pertain to symptoms
               related to genitalia and sexuality. If you are not comfortable
-              answering these questions, please click the button below
+              answering these questions, please click the button below.
             </p>
-            <SkipSectionButton elementId={"otherHeader"} />
+            <SkipSectionButton elementId={"otherHeader"} headerId={"header"} />
             <div className="question">
-              Please check any effects you have experienced while on HRT
+              Please check any effects you have experienced while on HRT.
               <br />
               {femEffectsSexList?.map((option) => (
                 <div key={option}>
@@ -785,7 +830,8 @@ export const MainForm = () => {
             <p>
               This section will go over general questions for both masculinizing
               and feminizng HRT.
-            </p><br />
+            </p>
+            <br />
             <div className="question">
               Are you taking any (non-HRT) medications that may affect or
               interfere with any of the symptoms previously listed?
@@ -807,10 +853,7 @@ export const MainForm = () => {
               />
             </div>
             <div className="questions">
-              Have you recently gotten a blood test? Recently in this case being
-              within the last 6 months if you started HRT less than one year
-              ago, or within the last year if you started HRT more than one year
-              ago.
+              Have you gotten a blood test within the last year?
             </div>
             <input
               type="radio"
@@ -821,7 +864,7 @@ export const MainForm = () => {
               onChange={(e) => setBloodTests(e.target.value)}
             />
             <label htmlFor="bloodTestTrue">
-              Yes, I have recently gotten a blood test
+              Yes, I have gotten a blood test in the last year.
             </label>
             <br />
             <input
@@ -833,19 +876,30 @@ export const MainForm = () => {
               onChange={(e) => setBloodTests(e.target.value)}
             />
             <label htmlFor="bloodTestFalse">
-              No, I have not recently gotten a blood test
+              No, I have not gotten a blood test in the last year.
             </label>
-            <br /><br />
+            <br />
+            <br />
           </div>
         )}
         {hrtType !== "" && (
-          <div className="section" id="section7">
+          <div className="section mb-24" id="section7">
             <h2 id="feedbackHeader">Final Thoughts and Comments</h2>
             <p>
               This section will collect a little more information and feedback
               about the survey.
               {/* TODO: add more info here  */}
-            </p><br />
+            </p>
+            <br />
+            <div className="question">
+              How did you hear about us?
+              <br />
+              <textarea
+                id="source"
+                value={source}
+                onChange={(e) => setSource(e.target.value)}
+              />
+            </div>
             <div className="question">
               Is there anything you think should be added to this survey?
               <br />
@@ -876,7 +930,7 @@ export const MainForm = () => {
             </div>
             <button
               type="button"
-              className="rounded-xl border-2 border-solid border-black p-1 mb-24"
+              className="rounded-xl border-2 border-solid border-black p-1"
               onClick={() =>
                 submit(
                   dateOfBirth,
@@ -908,6 +962,7 @@ export const MainForm = () => {
                   otherMedications,
                   otherConditions,
                   bloodTests,
+                  source,
                   additions,
                   experience,
                   feedback,
@@ -916,6 +971,8 @@ export const MainForm = () => {
             >
               Submit
             </button>
+            <br />
+            {isSubmitting && <LoadingSpinner />}
           </div>
         )}
         <br />

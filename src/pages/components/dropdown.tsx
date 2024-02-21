@@ -55,8 +55,6 @@ const Dropdown = ({optionList, value, setValue}: dropdownProps) => {
               onClick={toggleDropdown}
               onBlur={handleBlur}
             />
-            {/* Add a dropdown icon or any UI element to indicate it's a dropdown */}
-            {/* The following is a sample dropdown (you may want to customize its appearance) */}
             {isDropdownOpen && (
               <div
                 className="bg-white"
