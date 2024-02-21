@@ -302,7 +302,7 @@ export const MainForm = () => {
   function submitMedicationData(
     medicationData: medicationDataType[],
     submitter: number,
-  ) {
+  ): any {
     medicationData?.map(
       ({
         id,
@@ -315,20 +315,22 @@ export const MainForm = () => {
         ongoing,
         termination,
       }) => {
-        console.log(submitter)
-        medicalMutation.mutateAsync({
-          row: parseInt(id),
-          method,
-          medication,
-          amount,
-          frequency,
-          start,
-          end,
-          ongoing,
-          termination,
-          submitterId: submitter,
-        });
-      }, // I'm not sure why this works, I would expect it to reset the values when the OnSuccess triggers -- worth investigating
+        console.log(submitter);
+        medicalMutation
+          .mutateAsync({
+            row: parseInt(id),
+            method,
+            medication,
+            amount,
+            frequency,
+            start,
+            end,
+            ongoing,
+            termination,
+            submitterId: submitter,
+          })
+          .catch((e) => console.log("mutation error"));
+      },
     );
   }
 
@@ -401,7 +403,7 @@ export const MainForm = () => {
       feedback,
     });
 
-    console.log(result.id)
+    console.log(result.id);
     const submissionId = result.id;
 
     submitMedicationData(mascMedicationData, submissionId);
@@ -458,7 +460,9 @@ export const MainForm = () => {
             >
               <option value="" />
               {countryList.map((option) => (
-                <option value={option}>{option}</option>
+                <option key={option} value={option}>
+                  {option}
+                </option>
               ))}
             </select>
             <br />
@@ -549,7 +553,10 @@ export const MainForm = () => {
             />
             <label htmlFor="feminizing">Feminizing</label> <br />
             <br />
-            <NextSectionButton elementId={"hormonesHeader"} headerId={"header"} />
+            <NextSectionButton
+              elementId={"hormonesHeader"}
+              headerId={"header"}
+            />
           </div>
         </div>
         {hrtType === "masculinizing" && (

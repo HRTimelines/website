@@ -7,12 +7,12 @@ import Dropdown from "./dropdown";
 interface TableProps {
   data: medicationDataType[];
   setData: Dispatch<SetStateAction<medicationDataType[]>>;
-  exampleSource: String;
+  exampleSource: string;
   rows: number;
   setRows: Dispatch<SetStateAction<number>>;
 }
 
-function fetchSource(exampleSource: String) {
+function fetchSource(exampleSource: string) {
   const mascExample = [
     {
       id: "ex",
@@ -205,7 +205,7 @@ const MedicationTable = ({
                 ongoing,
                 termination,
               }) => (
-                <tr>
+                <tr key={id}>
                   <td>{id}</td>
                   <td>{method}</td>
                   <td>{medication}</td>
