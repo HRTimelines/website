@@ -251,3 +251,6 @@ export const CountryList =
     "Zambia",
     "Zimbabwe",
   ];
+
+
+export default CountryList;
