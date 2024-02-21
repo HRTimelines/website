@@ -5,7 +5,7 @@ import Link from "next/link";
 const Header = () => {
   return (
     <>
-      <header className="z-999 display-block mb-30 fixed top-0 h-24 w-screen justify-center bg-gradient-to-tr from-[#5BCEFA] via-purple-200 to-[#F5A9B8]" id="header">
+      <header className="z-999 display-block mb-30 fixed top-0 h-24 justify-center bg-gradient-to-tr from-[#5BCEFA] via-purple-200 to-[#F5A9B8]" id="header">
         <div className="header flex flex h-full items-center justify-center">
           <div className="inline h-24 h-4/5 w-auto justify-center text-center ">
             <Image

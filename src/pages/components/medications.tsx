@@ -178,7 +178,7 @@ const MedicationTable = ({
   return (
     <>
       <div className="medication">
-        <table>
+        <table className="z-[-1]">
           <thead>
             <tr>
               <th></th>
