@@ -242,6 +242,7 @@ const MedicationTable = ({
                       type="text"
                       onChange={(e) => onChangeInput(e, id)}
                       placeholder="ex. pills"
+                      className="w-[100%]"
                     />
                   </td>
                   <td>
@@ -251,6 +252,7 @@ const MedicationTable = ({
                       type="text"
                       onChange={(e) => onChangeInput(e, id)}
                       placeholder="ex. cyproterone"
+                      className="w-[100%]"
                     />
                   </td>
                   <td>
@@ -260,6 +262,7 @@ const MedicationTable = ({
                       type="text"
                       onChange={(e) => onChangeInput(e, id)}
                       placeholder="ex. 6mg"
+                      className="w-[100%]"
                     />
                   </td>
                   <td>
@@ -269,6 +272,7 @@ const MedicationTable = ({
                       type="text"
                       onChange={(e) => onChangeInput(e, id)}
                       placeholder="ex. daily"
+                      className="w-[100%]"
                     />
                   </td>
                   <td>
@@ -278,6 +282,7 @@ const MedicationTable = ({
                       type="date"
                       onChange={(e) => onChangeInput(e, id)}
                       max={getDate()}
+                      className="w-[100%]"
                     />
                   </td>
                   <td>
@@ -288,6 +293,7 @@ const MedicationTable = ({
                       onChange={(e) => onChangeInput(e, id)}
                       max={getDate()}
                       min={start}
+                      className="w-[100%]"
                     />
                   </td>
                   <td>
@@ -305,6 +311,7 @@ const MedicationTable = ({
                       type="text"
                       onChange={(e) => onChangeInput(e, id)}
                       placeholder="ex. headaches"
+                      className="w-[100%]"
                     />
                   </td>
                 </tr>
