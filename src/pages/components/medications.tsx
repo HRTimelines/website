@@ -15,7 +15,7 @@ interface TableProps {
 function fetchSource(exampleSource: string) {
   const mascExample = [
     {
-      id: "ex",
+      id: "ex1",
       method: "topcial gel",
       medication: "AndroGel",
       amount: "60mg",
@@ -26,7 +26,7 @@ function fetchSource(exampleSource: string) {
       termination: "Ineffective",
     },
     {
-      id: "ex",
+      id: "ex2",
       method: "subcutaneous injections",
       medication: "Testosterone Cypionate",
       amount: "0.5mL at 100mg/mL",
@@ -40,7 +40,7 @@ function fetchSource(exampleSource: string) {
 
   const estrogenExample = [
     {
-      id: "ex",
+      id: "ex1",
       method: "patches",
       medication: "Estradot",
       amount: "100ug",
@@ -51,7 +51,7 @@ function fetchSource(exampleSource: string) {
       termination: "Ineffective",
     },
     {
-      id: "ex",
+      id: "ex2",
       method: "intramuscular injections",
       medication: "Estradiol Valerate",
       amount: "0.5mL at 10mg/mL",
@@ -64,7 +64,7 @@ function fetchSource(exampleSource: string) {
   ];
   const progesteroneExample = [
     {
-      id: "ex",
+      id: "ex1",
       method: "oral pill",
       medication: "Progesterone",
       amount: "100mg",
@@ -72,10 +72,10 @@ function fetchSource(exampleSource: string) {
       start: "2023-07-01",
       end: "2023-12-12",
       ongoing: false,
-      termination: "Did not see desired results",
+      termination: "Poor results",
     },
     {
-      id: "ex",
+      id: "ex2",
       method: "anal suppository",
       medication: "Progesterone",
       amount: "200mg",
@@ -88,7 +88,7 @@ function fetchSource(exampleSource: string) {
   ];
   const antiAndrogenExample = [
     {
-      id: "ex",
+      id: "ex1",
       method: "pills",
       medication: "Spironolactone",
       amount: "50mg",
@@ -96,10 +96,10 @@ function fetchSource(exampleSource: string) {
       start: "2023-07-01",
       end: "2023-12-12",
       ongoing: false,
-      termination: "Caused headaches",
+      termination: "Moodiness",
     },
     {
-      id: "ex",
+      id: "ex2",
       method: "pills",
       medication: "Cyproterone",
       amount: "6mg",
@@ -220,7 +220,7 @@ const MedicationTable = ({
                 </tr>
               ),
             )}
-            <br />
+            <br className="desktopOnly"/>
             {data?.map(
               ({
                 id,
@@ -250,7 +250,7 @@ const MedicationTable = ({
                       value={medication}
                       type="text"
                       onChange={(e) => onChangeInput(e, id)}
-                      placeholder="ex. cyproterone acetate"
+                      placeholder="ex. cyproterone"
                     />
                   </td>
                   <td>
@@ -311,7 +311,7 @@ const MedicationTable = ({
               ),
             )}
           </tbody>
-        </table>
+        </table><br />
         <button
           className="rounded-xl border-2 border-solid border-black p-1"
           type="button"

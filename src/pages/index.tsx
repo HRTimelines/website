@@ -20,7 +20,7 @@ export default function Home() {
     <>
       <main className="block flex flex-col justify-center">
         <Header />
-        <div className="w-5/6 mx-auto">
+        <div className="w-5/6 mx-auto main">
           <Description />
           <GoToForm />
           <Creators />

@@ -416,7 +416,7 @@ export const MainForm = () => {
 
   return (
     <>
-      <form className="mx-auto mt-32 w-5/6 justify-center">
+      <form className="mx-auto mt-32 w-5/6 justify-center form">
         <h1>General Survey</h1>
         {/*TODO: check with lucas on title*/}
         <p>
@@ -453,7 +453,7 @@ export const MainForm = () => {
           <div className="question">
             In which country do you live primarily? <br />
             <select
-              disabled={!countryList.length}
+              // disabled={!countryList.length}
               value={country}
               onChange={(e) => setCountry(e.target.value)}
               className="border-2px rounded-md border border-black bg-white p-1"

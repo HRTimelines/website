@@ -4,7 +4,7 @@ import Schedule_desktop from "../../../public/HRTimelines Schedule.jpg";
 import Schedule_mobile from "../../../public/HRTimelines timeline sketch - Mobile.jpg";
 import Link from "next/link";
 
-const isFormActive = true
+const isFormActive = true;
 
 function copy(text: string) {
   void navigator.clipboard.writeText(text);
@@ -16,7 +16,6 @@ function goToForm() {
 }
 
 const Description = () => {
-  
   return (
     <>
       <div className="anchor mt-24 w-full p-5" id="description">
@@ -55,28 +54,33 @@ const Description = () => {
           </a>
           <br />
           <br />
-          {isFormActive && <div>
-          We are currently collecting data on some common trans milestones, such
-          as when trans people start socially transitioning or when they start
-          HRT. If you are interested in filling it out, please click the button
-          below.</div>}
         </p>
+        {isFormActive && (
+          <div>
+            We are currently collecting data on some common trans milestones,
+            such as when trans people start socially transitioning or when they
+            start HRT. If you are interested in filling it out, please click the
+            button below.
+          </div>
+        )}
       </div>
     </>
   );
 };
 
 const GoToForm = () => {
-    return (
+  return (
     <>
-      {isFormActive && <div className="flex items-center justify-center p-5">
-        <button
-          onClick={() => goToForm()}
-          className="rounded-full border-4 border-solid border-[#F5A9B8] p-2"
-        >
-          <span className="text-xl font-bold">Go to form</span>
-        </button>
-      </div>}
+      {isFormActive && (
+        <div className="flex items-center justify-center p-5">
+          <button
+            onClick={() => goToForm()}
+            className="rounded-full border-4 border-solid border-[#F5A9B8] p-2"
+          >
+            <span className="text-xl font-bold">Go to form</span>
+          </button>
+        </div>
+      )}
     </>
   );
 };
@@ -188,13 +192,13 @@ const Plans = () => {
       <div className="p-5">
         <h2>Future Plans</h2>
         <p>
-          Our primary goal is to provide trans people with
-          evidence based expectations for their medical transition. The current
-          form this takes is through surveys asking health care questions, and
-          the presentation of that data. However, in the future we would also
-          like to be able to inform trans health decision making, answering with
-          evidence key questions about (for example) the effectiveness of
-          progesterone or different injection processes.
+          Our primary goal is to provide trans people with evidence based
+          expectations for their medical transition. The current form this takes
+          is through surveys asking health care questions, and the presentation
+          of that data. However, in the future we would also like to be able to
+          inform trans health decision making, answering with evidence key
+          questions about (for example) the effectiveness of progesterone or
+          different injection processes.
         </p>
         <br />
         <br />
