@@ -4,7 +4,7 @@ import MedicationTable from "./medications";
 import { NextSectionButton, SkipSectionButton } from "./nextSectionButton";
 import { toast } from "react-hot-toast";
 import Dropdown from "./dropdown";
-import CountryList from "./countryDropdown";
+import { CountryList } from "./countryDropdown";
 import LoadingSpinner from "./loadingSpinner";
 
 export function getDate() {

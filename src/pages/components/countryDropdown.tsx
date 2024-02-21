@@ -1,4 +1,4 @@
-export const CountryList = 
+export const CountryList =
   [
     "Afghanistan",
     "Åland Islands",
@@ -252,5 +252,8 @@ export const CountryList =
     "Zimbabwe",
   ];
 
+const Empty = () => {
+  return(<></>)
+}
 
-export default CountryList;
+export default Empty;
