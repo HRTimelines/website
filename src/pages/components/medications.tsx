@@ -15,7 +15,7 @@ interface TableProps {
 function fetchSource(exampleSource: string) {
   const mascExample = [
     {
-      id: "ex1",
+      id: "Example 1",
       method: "topcial gel",
       medication: "AndroGel",
       amount: "60mg",
@@ -26,7 +26,7 @@ function fetchSource(exampleSource: string) {
       termination: "Ineffective",
     },
     {
-      id: "ex2",
+      id: "Example 2",
       method: "subcutaneous injections",
       medication: "Testosterone Cypionate",
       amount: "0.5mL at 100mg/mL",
@@ -40,7 +40,7 @@ function fetchSource(exampleSource: string) {
 
   const estrogenExample = [
     {
-      id: "ex1",
+      id: "Example 1",
       method: "patches",
       medication: "Estradot",
       amount: "100ug",
@@ -51,7 +51,7 @@ function fetchSource(exampleSource: string) {
       termination: "Ineffective",
     },
     {
-      id: "ex2",
+      id: "Example 2",
       method: "intramuscular injections",
       medication: "Estradiol Valerate",
       amount: "0.5mL at 10mg/mL",
@@ -64,7 +64,7 @@ function fetchSource(exampleSource: string) {
   ];
   const progesteroneExample = [
     {
-      id: "ex1",
+      id: "Example 1",
       method: "oral pill",
       medication: "Progesterone",
       amount: "100mg",
@@ -75,7 +75,7 @@ function fetchSource(exampleSource: string) {
       termination: "Poor results",
     },
     {
-      id: "ex2",
+      id: "Example 2",
       method: "anal suppository",
       medication: "Progesterone",
       amount: "200mg",
@@ -88,7 +88,7 @@ function fetchSource(exampleSource: string) {
   ];
   const antiAndrogenExample = [
     {
-      id: "ex1",
+      id: "Example 1",
       method: "pills",
       medication: "Spironolactone",
       amount: "50mg",
@@ -99,7 +99,7 @@ function fetchSource(exampleSource: string) {
       termination: "Moodiness",
     },
     {
-      id: "ex2",
+      id: "Example 2",
       method: "pills",
       medication: "Cyproterone",
       amount: "6mg",
@@ -164,7 +164,7 @@ const MedicationTable = ({
 
     if (type === "checkbox") {
       const editData = data.map((item) =>
-        item.id === id ? { ...item, [name]: String(checked) } : item,
+        item.id === id ? { ...item, [name]: String(checked), end: "", termination: "" } : item,
       );
       setData(editData);
     } else {
@@ -178,7 +178,7 @@ const MedicationTable = ({
   return (
     <>
       <div className="medication">
-        <table className="w-screen">
+        <table className="w-[100%]">
           <thead>
             <tr>
               <th></th>
@@ -206,21 +206,32 @@ const MedicationTable = ({
                 termination,
               }) => (
                 <tr key={id}>
-                  <td>{id}</td>
-                  <td>{method}</td>
-                  <td>{medication}</td>
-                  <td>{amount}</td>
-                  <td>{frequency}</td>
-                  <td>{start}</td>
-                  <td>{end}</td>
+                  <td className="text-[#808080]">{id}</td>
+                  <td className="text-[#808080]">{method}</td>
+                  <td className="text-[#808080]">{medication}</td>
+                  <td className="text-[#808080]">{amount}</td>
+                  <td className="text-[#808080]">{frequency}</td>
+                  <td className="text-[#808080]">{start}</td>
+                  <td className="text-[#808080]">{end}</td>
                   <td>
                     <input name="ongoing" checked={ongoing} type="checkbox" />
                   </td>
-                  <td>{termination}</td>
+                  <td className="text-[#808080]">{termination}</td>
                 </tr>
               ),
             )}
             <br className="desktopOnly"/>
+            <tr className="desktopOnly">
+              <th></th>
+              <th>Method</th>
+              <th>Medication</th>
+              <th>Amount (in mg or ug)</th>
+              <th>Frequency</th>
+              <th>Start Date</th>
+              <th>End Date</th>
+              <th>Ongoing</th>
+              <th>Reason for termination</th>
+            </tr>
             {data?.map(
               ({
                 id,
@@ -242,7 +253,6 @@ const MedicationTable = ({
                       type="text"
                       onChange={(e) => onChangeInput(e, id)}
                       placeholder="ex. pills"
-                      className="w-[100%]"
                     />
                   </td>
                   <td>
@@ -252,7 +262,6 @@ const MedicationTable = ({
                       type="text"
                       onChange={(e) => onChangeInput(e, id)}
                       placeholder="ex. cyproterone"
-                      className="w-[100%]"
                     />
                   </td>
                   <td>
@@ -262,7 +271,6 @@ const MedicationTable = ({
                       type="text"
                       onChange={(e) => onChangeInput(e, id)}
                       placeholder="ex. 6mg"
-                      className="w-[100%]"
                     />
                   </td>
                   <td>
@@ -272,7 +280,6 @@ const MedicationTable = ({
                       type="text"
                       onChange={(e) => onChangeInput(e, id)}
                       placeholder="ex. daily"
-                      className="w-[100%]"
                     />
                   </td>
                   <td>
@@ -282,7 +289,6 @@ const MedicationTable = ({
                       type="date"
                       onChange={(e) => onChangeInput(e, id)}
                       max={getDate()}
-                      className="w-[100%]"
                     />
                   </td>
                   <td>
@@ -293,7 +299,7 @@ const MedicationTable = ({
                       onChange={(e) => onChangeInput(e, id)}
                       max={getDate()}
                       min={start}
-                      className="w-[100%]"
+                      disabled={ongoing == "true"}
                     />
                   </td>
                   <td>
@@ -311,7 +317,7 @@ const MedicationTable = ({
                       type="text"
                       onChange={(e) => onChangeInput(e, id)}
                       placeholder="ex. headaches"
-                      className="w-[100%]"
+                      disabled={ongoing == "true"}
                     />
                   </td>
                 </tr>

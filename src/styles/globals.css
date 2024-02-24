@@ -89,15 +89,26 @@
     margin: 0px;
     padding: 0px;
   }
-  .medication td, .medication th {
+  .medication table {
+    table-layout: auto;
+  }
+  .medication td,
+  .medication th {
     padding-left: 10px;
     padding-right: 10px;
+    /* width: 1px;
+    white-space: nowrap; */
+    /* border: solid;
+    border-width: 1px; */
   }
   .medication tbody td input:hover {
     background-color: #eee;
   }
   .medication th {
     text-align: left;
+  }
+  .medication input {
+    width: 100%;
   }
 
   @media screen and (max-width: 920px) {
@@ -115,18 +126,21 @@
     }
   }
 
-  @media (max-width:720px) {
+  @media (max-width: 720px) {
     .form *:not(h1, h2) {
       font-size: 14px;
     }
     table {
       position: relative; /* necessary to keep header visible for scroll */
-      width: 100vh
+      width: 100vh;
     }
-    thead, tbody {
+    thead,
+    tbody {
       vertical-align: top;
     }
-    thead, tbody, tr {
+    thead,
+    tbody,
+    tr {
       display: table-cell;
     }
     thead {
@@ -139,13 +153,25 @@
       width: 250px; /* how much to show horizontally before scroll */
       overflow-x: scroll;
     }
-    th, td {
+    th,
+    td {
       display: block;
-      width: 100px;
+      width: 120px;
       height: 50px;
       padding: 10px 0;
     }
     .desktopOnly {
+      display: none;
+    }
+  }
+
+  @media (min-width: 720px) {
+    .medication td,
+    .medication th {
+      width: 1px;
+      white-space: nowrap;
+    }
+    .mobileOnly {
       display: none;
     }
   }

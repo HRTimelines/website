@@ -124,7 +124,7 @@ const mascEffectsSex: Record<string, boolean> = {
 const femEffects: Record<string, boolean> = {
   "Skin softening": false,
   "Less oily skin": false,
-  "Increased Flexibility": false,
+  "Increased flexibility": false,
   "Slimmer hands and wrists": false,
   "Smaller feet": false,
   "Thinner or softer fingernails": false,
@@ -172,7 +172,7 @@ const femEffectsSex: Record<string, boolean> = {
   "Fewer erections": false,
   "Clear ejaculate": false,
   "Testicular atrophy": false,
-  "Increased arousing response to touch": false,
+  "Increased arousing response to genital touch": false,
   "Changes in orgasm": false,
   "Increased libido": false,
   "Reduced libido": false,
@@ -559,6 +559,9 @@ export const MainForm = () => {
             />
           </div>
         </div>
+        {hrtType === "" && (<div className="spacer m-24">
+
+        </div>)}
         {hrtType === "masculinizing" && (
           <div className="section" id="section2">
             <div>
