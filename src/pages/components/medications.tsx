@@ -160,11 +160,13 @@ const MedicationTable = ({
     id: string,
   ) => {
     const { name, value, type, checked } = e.target;
-    console.log(name, value, typeof(value));
+    console.log(name, value, typeof value);
 
     if (type === "checkbox") {
       const editData = data.map((item) =>
-        item.id === id ? { ...item, [name]: String(checked), end: "", termination: "" } : item,
+        item.id === id
+          ? { ...item, [name]: String(checked), end: "", termination: "" }
+          : item,
       );
       setData(editData);
     } else {
@@ -172,7 +174,7 @@ const MedicationTable = ({
         item.id === id && name ? { ...item, [name]: value } : item,
       );
       setData(editData);
-    } 
+    }
   };
 
   return (
@@ -220,7 +222,7 @@ const MedicationTable = ({
                 </tr>
               ),
             )}
-            <br className="desktopOnly"/>
+            <br className="desktopOnly" />
             <tr className="desktopOnly">
               <th></th>
               <th>Method</th>
@@ -324,7 +326,8 @@ const MedicationTable = ({
               ),
             )}
           </tbody>
-        </table><br />
+        </table>
+        <br />
         <button
           className="rounded-xl border-2 border-solid border-black p-1"
           type="button"

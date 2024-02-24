@@ -416,7 +416,7 @@ export const MainForm = () => {
 
   return (
     <>
-      <form className="mx-auto mt-32 w-5/6 justify-center form">
+      <form className="form mx-auto mt-32 w-5/6 justify-center">
         <h1>General Survey</h1>
         {/*TODO: check with lucas on title*/}
         <p>
@@ -559,9 +559,7 @@ export const MainForm = () => {
             />
           </div>
         </div>
-        {hrtType === "" && (<div className="spacer m-24">
-
-        </div>)}
+        {hrtType === "" && <div className="spacer m-24"></div>}
         {hrtType === "masculinizing" && (
           <div className="section" id="section2">
             <div>
@@ -979,7 +977,7 @@ export const MainForm = () => {
                 )
               }
             >
-              Submit
+              Submit  
             </button>
             <br />
             {isSubmitting && <LoadingSpinner />}
