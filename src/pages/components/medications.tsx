@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { getDate, medicationDataType } from "./mainForm";
 import { SetStateAction } from "react";
 import { Dispatch } from "react";
@@ -10,6 +10,7 @@ interface TableProps {
   exampleSource: string;
   rows: number;
   setRows: Dispatch<SetStateAction<number>>;
+  tableId: string;
 }
 
 function fetchSource(exampleSource: string) {
@@ -131,13 +132,12 @@ const MedicationTable = ({
   exampleSource,
   rows,
   setRows,
+  tableId,
 }: TableProps) => {
   // TODO: add seperate volume and concentrtion
-  // const [rows, setRows] = useState(2);
-
   const exampleData = fetchSource(exampleSource);
 
-  const addRow = (rows: number) => {
+  const addRow = (rows: number, elementId: string) => {
     const newRowIndex = ("000" + rows).slice(-3);
     const newRow = {
       id: newRowIndex,
@@ -154,6 +154,32 @@ const MedicationTable = ({
     setData(newData);
     setRows(rows + 1);
   };
+
+  useEffect(() => {
+    const table = document.getElementById(tableId);
+    if (table) {
+      const scrollEnd = table.scrollWidth;
+      const start = table.scrollLeft;
+      const duration = 500; // Adjust the duration as needed
+
+      const startTime = performance.now();
+
+      const animateScroll = (timestamp: number) => {
+        const progress = (timestamp - startTime) / duration;
+        const easeInOutCubic = progress < 0.5
+          ? 4 * progress ** 3
+          : 1 - Math.pow(-2 * progress + 2, 3) / 2;
+
+        table.scrollLeft = start + (scrollEnd - start) * easeInOutCubic;
+
+        if (progress < 1) {
+          requestAnimationFrame(animateScroll);
+        }
+      };
+
+      requestAnimationFrame(animateScroll);
+    }
+  }, [data, tableId])
 
   const onChangeInput = (
     e: React.ChangeEvent<HTMLInputElement>,
@@ -179,8 +205,8 @@ const MedicationTable = ({
 
   return (
     <>
-      <div className="medication">
-        <table className="w-[100%]">
+      <div className="">
+        <table className="medication w-[100%]">
           <thead>
             <tr>
               <th></th>
@@ -207,23 +233,28 @@ const MedicationTable = ({
                 ongoing,
                 termination,
               }) => (
-                <tr key={id}>
-                  <td className="text-[#808080]">{id}</td>
-                  <td className="text-[#808080]">{method}</td>
-                  <td className="text-[#808080]">{medication}</td>
-                  <td className="text-[#808080]">{amount}</td>
-                  <td className="text-[#808080]">{frequency}</td>
-                  <td className="text-[#808080]">{start}</td>
-                  <td className="text-[#808080]">{end}</td>
+                <tr key={id} className="">
+                  <td className="text-[#545454]">{id}</td>
+                  <td className="text-[#545454]">{method}</td>
+                  <td className="text-[#545454]">{medication}</td>
+                  <td className="text-[#545454]">{amount}</td>
+                  <td className="text-[#545454]">{frequency}</td>
+                  <td className="text-[#545454]">{start}</td>
+                  <td className="text-[#545454]">{end}</td>
                   <td>
                     <input name="ongoing" checked={ongoing} type="checkbox" />
                   </td>
-                  <td className="text-[#808080]">{termination}</td>
+                  <td className="text-[#545454]">{termination}</td>
                 </tr>
               ),
             )}
-            <br className="desktopOnly" />
-            <tr className="desktopOnly">
+          </tbody>
+        </table>
+        <br className="" />
+          <div>Please input your medication history below:</div>
+        <table className="medication w-[100%]">
+          <thead>
+            <tr className="">
               <th></th>
               <th>Method</th>
               <th>Medication</th>
@@ -234,6 +265,8 @@ const MedicationTable = ({
               <th>Ongoing</th>
               <th>Reason for termination</th>
             </tr>
+          </thead>
+          <tbody id={tableId}>
             {data?.map(
               ({
                 id,
@@ -332,7 +365,12 @@ const MedicationTable = ({
           className="rounded-xl border-2 border-solid border-black p-1"
           type="button"
           onClick={() => {
-            addRow(rows);
+            addRow(rows, tableId);
+            const targetElement = document.getElementById(tableId);
+            if (targetElement) {
+              // targetElement.scroll({left: (rows) * 120 + 20000, top: 0, behavior: "smooth"})
+              targetElement.scrollLeft = targetElement.scrollWidth;
+            }
           }}
         >
           Add new entry

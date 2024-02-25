@@ -74,15 +74,15 @@ export const medicationData: medicationDataType[] = [
 ];
 
 const mascEffects: Record<string, boolean> = {
-  "Deeper Voice": false,
-  "Cessation of Menstruation": false,
+  "Deeper voice": false,
+  "Cessation of menstruation": false,
   "Facial and/or body hair growth": false,
-  "Thicker Skin": false,
-  "Weight Gain": false,
+  "Thicker skin": false,
+  "Weight gain": false,
   "More acne or more oily skin": false,
   "Male-pattern baldness": false,
-  "Sleep Apnea": false,
-  "Rise in choleserol": false,
+  "Sleep apnea": false,
+  "Rise in cholesterol": false,
   "High blood pressure": false,
   "Polycythemia (excess red blood cell production)": false,
   "Changes in pelvic bone structure": false,
@@ -110,7 +110,7 @@ const mascEffects: Record<string, boolean> = {
 };
 
 const mascEffectsSex: Record<string, boolean> = {
-  "Bottom growth": false,
+  "Clitorial growth": false,
   "Vaginal atrophy": false,
   "Vaginal dryness": false,
   "Changes in moisture and odour of genitalia": false,
@@ -133,6 +133,7 @@ const femEffects: Record<string, boolean> = {
   "Feeling colder": false,
   "Increased perspiration": false,
   "Decreased perspiration": false,
+  "Changes in body odour": false,
   "Fat redistribution": false,
   "Breast growth": false,
   "Reduced muscle mass": false,
@@ -410,20 +411,17 @@ export const MainForm = () => {
     submitMedicationData(femEstrogenData, submissionId);
     submitMedicationData(femAntiandrogenData, submissionId);
     submitMedicationData(femProgesteroneData, submissionId);
-
-    //TODO: test this submission, confirm the data links properly
   };
 
   return (
     <>
       <form className="form mx-auto mt-32 w-5/6 justify-center">
-        <h1>General Survey</h1>
-        {/*TODO: check with lucas on title*/}
+        <h1>HRT Effects Survey</h1>
         <p>
           {`This survey is intended to gather some basic information on your
           history and experience with Hormone Replacement Therapy (HRT). No
           questions are mandatory. Please answer all questions as accurately as
-          possible, though guesses where you don't remember is acceptable.
+          possible, though guesses where you don't remember is acceptable.  Note that if you leave this website, your responses will not be saved, so we recommend it is filled out in one sitting.
           Thanks! `}
         </p>
         <br />
@@ -577,18 +575,18 @@ export const MainForm = () => {
               If you are on`}{" "}
               <b>injections</b>,{" "}
               {`please input your volume and
-              concentration (if you know it) in the "amount" column.  Please also specify if you do intramuscular or subcutaneous injections.`}
+              concentration (if you know it) in the "amount" column.  Please also specify if you do intramuscular or subcutaneous injections.`}  The following table is to be used as an example.
               <MedicationTable
                 data={mascMedicationData}
                 setData={setMascMedicationData}
                 exampleSource={"testosterone"}
                 rows={mascTableRows}
                 setRows={setMascTableRows}
+                tableId="testosteroneTable"
               />
             </div>
             <div className="question">
-              Please check any effects you have experienced while on HRT (these
-              are not related to genitalia or sex).
+              Please check any effects you have experienced while on HRT.
               <br />
               {mascEffectsList?.map((option) => (
                 <div key={option}>
@@ -675,20 +673,20 @@ export const MainForm = () => {
               <h2 id="hormonesHeader">Feminizing HRT</h2>
               <p>
                 What follows are some questions about your experience on
-                feminizng HRT, including questions about the medications you may
+                feminizing HRT, including questions about the medications you may
                 have taken, start and end dates, and effects you experienced.
               </p>
               <br />
             </div>
             <div className="question">
-              Please input your medication history with <b>anti-androgens</b>{" "}
-              according to the table below.
+              Please input your medication history with <b>anti-androgens</b>{" "}.  The following table is to be used as an example.
               <MedicationTable
                 data={femAntiandrogenData}
                 setData={setFemAntiandrogenData}
                 exampleSource={"anti-androgen"}
                 rows={antiandrogenTableRows}
                 setRows={setAntiandrogenTableRows}
+                tableId="antiAndrogenTable"
               />
             </div>
             <div className="question">
@@ -696,29 +694,30 @@ export const MainForm = () => {
               according to the table below. If you are on <b>injections</b>,{" "}
               {`
               please input your volume and concentration (if you know it) in the
-              "amount" column.  Please also specify if you do intramuscular or subcutaneous injections.`}
+              "amount" column.  Please also specify if you do intramuscular or subcutaneous injections.`}  The following table is to be used as an example.
               <MedicationTable
                 data={femEstrogenData}
                 setData={setFemEstrogenData}
                 exampleSource={"estrogen"}
                 rows={estrogenTableRows}
                 setRows={setEstrogenTableRows}
+                tableId="estrogenTable"
               />
             </div>
             <div className="question">
               Please input your medication history with <b>progesterone</b>{" "}
-              according to the table below.
+              according to the table below.  The following table is to be used as an example.
               <MedicationTable
                 data={femProgesteroneData}
                 setData={setFemProgesteroneData}
                 exampleSource={"progesterone"}
                 rows={progesteroneTableRows}
                 setRows={setProgesteroneTableRows}
+                tableId="progesteroneTable"
               />
             </div>
             <div className="question">
-              Please check any effects you have experienced while on HRT (these
-              are not related to genitalia or sex).
+              Please check any effects you have experienced while on HRT.
               <br />
               {femEffectsList?.map((option) => (
                 <div key={option}>
@@ -753,7 +752,6 @@ export const MainForm = () => {
             <div className="question">
               Please check any cyclic or period-like effects you experienced
               while on HRT.
-              {/* TODO: better description */}
               <br />
               {femEffectsCyclicList?.map((option) => (
                 <div key={option}>
@@ -842,7 +840,7 @@ export const MainForm = () => {
             <br />
             <div className="question">
               Are you taking any (non-HRT) medications that may affect or
-              interfere with any of the symptoms previously listed?
+              interfere with any of the symptoms previously listed?  Please list them if so.
               <br />
               <textarea
                 id="otherMedications"
@@ -852,7 +850,7 @@ export const MainForm = () => {
             </div>
             <div className="question">
               Do you have any medical conditions that may affect or interfere
-              with any of the symptoms or effects previously discussed?
+              with any of the symptoms or effects previously discussed?  Please list them if so.
               <br />
               <textarea
                 id="otherConditions"
@@ -895,8 +893,7 @@ export const MainForm = () => {
             <h2 id="feedbackHeader">Final Thoughts and Comments</h2>
             <p>
               This section will collect a little more information and feedback
-              about the survey.
-              {/* TODO: add more info here  */}
+              about the survey and your experience filling it out.
             </p>
             <br />
             <div className="question">

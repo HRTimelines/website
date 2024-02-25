@@ -142,17 +142,17 @@ const FormCoverText = () => {
     <>
       <div className="mt-24 p-5">
         <h2>Form Consent</h2>
-        {/* TODO: update this */}
         <p>
-          What follows is a short form that will ask a few basic questions about
-          when you realized you were trans, when you came out, etc. It is
-          expected to take about 10 minutes. You must be 18 years or older to
-          complete this survey. We understand that some of these questions may
-          be difficult to answer. You are not expected to have an exact date,
-          just a best guess. If you have not yet done one of the things in this
-          form (for example, you have not yet started HRT), please leave that
-          answer blank. If you have any questions or are interested in helping
-          out with the project you can email us at{" "}
+          What follows is a form about what kinds of Hormone Replacement Therapy (HRT) you are on and the
+          physical effects you have experienced. It will be used to draw
+          conclusions about the different physical effects of HRT, as well as if those
+          effects correlate with age, ethnicity, medication, dosage, or other medications
+          or medical conditions. It is expected to take around 10 minutes.
+          You must be 18 years or older to complete this survey. We understand
+          that some of these questions may be difficult to answer. You are not
+          expected to have an exact date, just a best guess. If you have any
+          questions or are interested in helping out with the project you can
+          email us at{" "}
           <button onClick={() => copy("hrtimelines@gmail.com")}>
             <u>hrtimelines@gmail.com</u>
           </button>{" "}
