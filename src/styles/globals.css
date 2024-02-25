@@ -3,12 +3,10 @@
 @import "tailwindcss/utilities";
 
 @layer base {
-  /* * {
-        border: 1px;
-        border-color: black;
-        border-style: dotted;
-    } */
   #__next {
+    width: 100%;
+  }
+  #header {
     width: 100%;
   }
   html,
@@ -25,10 +23,14 @@
     text-decoration: underline #5bcefa 2px;
     text-underline-offset: 4px;
   }
-  .logo {
-    border: 1px;
+  textarea {
     border-color: black;
     border-style: solid;
+    border-width: 1px;
+    border-radius: 6px;
+    padding: 1px;
+    width: 25em;
+    height: 5em;
   }
   div {
     display: block;
@@ -36,11 +38,7 @@
   .anchor {
     scroll-margin-top: 150px;
   }
-  /* div {
-        border-style: dashed;
-        border-color: blue;
-        border-width: 2px;
-    } */
+
   div .question {
     margin-bottom: 20px;
   }
@@ -86,6 +84,32 @@
   .mobile {
     display: none;
   }
+  .medication {
+    box-sizing: border-box;
+    margin: 0px;
+    padding: 0px;
+  }
+  .medication table {
+    table-layout: auto;
+  }
+  .medication td,
+  .medication th {
+    padding-left: 10px;
+    padding-right: 10px;
+    /* width: 1px;
+    white-space: nowrap; */
+    /* border: solid;
+    border-width: 1px; */
+  }
+  .medication tbody td input:hover {
+    background-color: #eee;
+  }
+  .medication th {
+    text-align: left;
+  }
+  .medication input {
+    width: 100%;
+  }
 
   @media screen and (max-width: 920px) {
     .nav-links li {
@@ -99,6 +123,56 @@
     }
     .mobile {
       display: block;
+    }
+  }
+
+  @media (max-width: 720px) {
+    .form *:not(h1, h2) {
+      font-size: 14px;
+    }
+    table {
+      position: relative; /* necessary to keep header visible for scroll */
+      width: 100vh;
+    }
+    thead,
+    tbody {
+      vertical-align: top;
+    }
+    thead,
+    tbody,
+    tr {
+      display: table-cell;
+    }
+    thead {
+      width: 110px;
+    }
+    tbody {
+      /* necessary to keep header visible on left for scroll */
+      position: absolute;
+      left: 110px; /*based on the width of the 'thead' for offset*/
+      width: 250px; /* how much to show horizontally before scroll */
+      overflow-x: scroll;
+    }
+    th,
+    td {
+      display: block;
+      width: 120px;
+      height: 50px;
+      padding: 10px 0;
+    }
+    .desktopOnly {
+      display: none;
+    }
+  }
+
+  @media (min-width: 720px) {
+    .medication td,
+    .medication th {
+      width: 1px;
+      white-space: nowrap;
+    }
+    .mobileOnly {
+      display: none;
     }
   }
 }

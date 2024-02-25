@@ -8,7 +8,7 @@ export const Form = () => {
     <>
       <div>
         <Header />
-        <NoForm />
+        <FormCover />
       </div>
     </>
   );

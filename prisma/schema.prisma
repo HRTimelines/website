@@ -41,3 +41,57 @@ model FormData {
   feedback       String
   future         String
 }
+
+model MainForm {
+  id          Int      @id @default(autoincrement())
+  submittedAt DateTime @default(now())
+  dateOfBirth String
+  country     String   @db.Text
+  genderEntry String   @db.Text
+  genderOther String   @db.Text
+  raceEntry   String   @db.Text
+  raceOther   String   @db.Text
+  hrtType     String
+
+  mascEffectsEntry          String @db.Text
+  mascEffectsOther          String @db.Text
+  mascEffectsSexComfortable String
+  mascEffectsSexEntry       String @db.Text
+  mascEffectsSexOther       String @db.Text
+
+  femEffectsEntry          String @db.Text
+  femEffectsOther          String @db.Text
+  femEffectsCyclicEntry    String @db.Text
+  femEffectsCyclicOther    String @db.Text
+  femEffectsSexComfortable String
+  femEffectsSexEntry       String @db.Text
+  femEffectsSexOther       String @db.Text
+
+  otherMedications String @db.Text
+  otherConditions  String @db.Text
+  bloodTests       String
+  source           String @db.Text
+  additions        String @db.Text
+  experience       String @db.Text
+  feedback         String @db.Text
+
+  medication MedicationData[]
+}
+
+model MedicationData {
+  medId          Int      @id @default(autoincrement())
+  submittedAt    DateTime @default(now())
+  medicationType String
+  row            Int
+  method         String
+  medication     String
+  amount         String   @db.Text
+  frequency      String
+  start          String
+  end            String
+  ongoing        String
+  termination    String   @db.Text
+
+  submitter   MainForm @relation(fields: [submitterId], references: [id])
+  submitterId Int
+}
