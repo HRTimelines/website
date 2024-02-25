@@ -57,9 +57,7 @@ const Description = () => {
         </p>
         {isFormActive && (
           <div>
-            We are currently collecting data on some common trans milestones,
-            such as when trans people start socially transitioning or when they
-            start HRT. If you are interested in filling it out, please click the
+            We are currently collecting data on when trans people start HRT, what medications they are on, and what physical effects they have experienced. If you are interested in filling it out, please click the
             button below.
           </div>
         )}
