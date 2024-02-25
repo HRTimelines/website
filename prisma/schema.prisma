@@ -79,17 +79,18 @@ model MainForm {
 }
 
 model MedicationData {
-  medId       Int      @id @default(autoincrement())
-  submittedAt DateTime @default(now())
-  row         Int
-  method      String
-  medication  String
-  amount      String   @db.Text
-  frequency   String
-  start       String
-  end         String
-  ongoing     String
-  termination String   @db.Text
+  medId          Int      @id @default(autoincrement())
+  submittedAt    DateTime @default(now())
+  medicationType String
+  row            Int
+  method         String
+  medication     String
+  amount         String   @db.Text
+  frequency      String
+  start          String
+  end            String
+  ongoing        String
+  termination    String   @db.Text
 
   submitter   MainForm @relation(fields: [submitterId], references: [id])
   submitterId Int

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { api } from "~/utils/api";
 import MedicationTable from "./medications";
 import { NextSectionButton, SkipSectionButton } from "./nextSectionButton";
@@ -57,6 +57,7 @@ export type medicationDataType = {
   end: string;
   ongoing: string;
   termination: string;
+  medicationType: string;
 };
 
 export const medicationData: medicationDataType[] = [
@@ -70,6 +71,7 @@ export const medicationData: medicationDataType[] = [
     end: "",
     ongoing: "",
     termination: "",
+    medicationType: "",
   },
 ];
 
@@ -179,6 +181,9 @@ const femEffectsSex: Record<string, boolean> = {
   "Reduced libido": false,
 };
 
+
+
+
 export const MainForm = () => {
   const [dateOfBirth, setDateOfBirth] = useState("");
   const [country, setCountry] = useState("");
@@ -246,6 +251,30 @@ export const MainForm = () => {
   const [feedback, setFeedback] = useState("");
 
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const updateFirstMedicationType = (
+    newMedicationType: string,
+    setMedicationData: React.Dispatch<React.SetStateAction<medicationDataType[]>>,
+  ) => {
+    setMedicationData((prevData) => {
+      // Create a new array with the first instance updated
+      const updatedData = [...prevData];
+      if (updatedData.length > 0) {
+        updatedData[0] = {
+          ...updatedData[0],
+          medicationType: newMedicationType,
+        } as Required<medicationDataType>;
+      }
+      return updatedData;
+    });
+  };
+
+  useEffect(() =>{
+    updateFirstMedicationType("testosterone", setMascMedicationData)
+    updateFirstMedicationType("anti-androgen", setFemAntiandrogenData)
+    updateFirstMedicationType("estrogen", setFemEstrogenData)
+    updateFirstMedicationType("progesterone", setFemProgesteroneData)
+  }, [])
 
   const mainMutation = api.main.create.useMutation({
     onSuccess: () => {
@@ -315,6 +344,7 @@ export const MainForm = () => {
         end,
         ongoing,
         termination,
+        medicationType,
       }) => {
         console.log(submitter);
         medicalMutation
@@ -328,6 +358,7 @@ export const MainForm = () => {
             end,
             ongoing,
             termination,
+            medicationType,
             submitterId: submitter,
           })
           .catch((e) => console.log("mutation error"));
@@ -575,7 +606,8 @@ export const MainForm = () => {
               If you are on`}{" "}
               <b>injections</b>,{" "}
               {`please input your volume and
-              concentration (if you know it) in the "amount" column.  Please also specify if you do intramuscular or subcutaneous injections.`}  The following table is to be used as an example.
+              concentration (if you know it) in the "amount" column.  Please also specify if you do intramuscular or subcutaneous injections.`}{" "}
+              The following table is to be used as an example.
               <MedicationTable
                 data={mascMedicationData}
                 setData={setMascMedicationData}
@@ -673,13 +705,15 @@ export const MainForm = () => {
               <h2 id="hormonesHeader">Feminizing HRT</h2>
               <p>
                 What follows are some questions about your experience on
-                feminizing HRT, including questions about the medications you may
-                have taken, start and end dates, and effects you experienced.
+                feminizing HRT, including questions about the medications you
+                may have taken, start and end dates, and effects you
+                experienced.
               </p>
               <br />
             </div>
             <div className="question">
-              Please input your medication history with <b>anti-androgens</b>{" "}.  The following table is to be used as an example.
+              Please input your medication history with <b>anti-androgens</b> .
+              The following table is to be used as an example.
               <MedicationTable
                 data={femAntiandrogenData}
                 setData={setFemAntiandrogenData}
@@ -694,7 +728,8 @@ export const MainForm = () => {
               according to the table below. If you are on <b>injections</b>,{" "}
               {`
               please input your volume and concentration (if you know it) in the
-              "amount" column.  Please also specify if you do intramuscular or subcutaneous injections.`}  The following table is to be used as an example.
+              "amount" column.  Please also specify if you do intramuscular or subcutaneous injections.`}{" "}
+              The following table is to be used as an example.
               <MedicationTable
                 data={femEstrogenData}
                 setData={setFemEstrogenData}
@@ -706,7 +741,8 @@ export const MainForm = () => {
             </div>
             <div className="question">
               Please input your medication history with <b>progesterone</b>{" "}
-              according to the table below.  The following table is to be used as an example.
+              according to the table below. The following table is to be used as
+              an example.
               <MedicationTable
                 data={femProgesteroneData}
                 setData={setFemProgesteroneData}
@@ -840,7 +876,8 @@ export const MainForm = () => {
             <br />
             <div className="question">
               Are you taking any (non-HRT) medications that may affect or
-              interfere with any of the symptoms previously listed?  Please list them if so.
+              interfere with any of the symptoms previously listed? Please list
+              them if so.
               <br />
               <textarea
                 id="otherMedications"
@@ -850,7 +887,8 @@ export const MainForm = () => {
             </div>
             <div className="question">
               Do you have any medical conditions that may affect or interfere
-              with any of the symptoms or effects previously discussed?  Please list them if so.
+              with any of the symptoms or effects previously discussed? Please
+              list them if so.
               <br />
               <textarea
                 id="otherConditions"
@@ -974,7 +1012,7 @@ export const MainForm = () => {
                 )
               }
             >
-              Submit  
+              Submit
             </button>
             <br />
             {isSubmitting && <LoadingSpinner />}

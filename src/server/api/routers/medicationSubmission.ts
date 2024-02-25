@@ -17,6 +17,7 @@ export const medicationRouter = createTRPCRouter({
         end: z.string(),
         ongoing: z.string(),
         termination: z.string(),
+        medicationType: z.string(),
 
         submitterId: z.number(),
       }),
@@ -31,11 +32,13 @@ export const medicationRouter = createTRPCRouter({
         const end = input.end;
         const ongoing = input.ongoing;
         const termination = input.termination;
+        const medicationType = input.medicationType
 
         const submitterId = input.submitterId;
 
       return await db.medicationData.create({
         data: {
+          medicationType,
           row,
           method,
           medication,

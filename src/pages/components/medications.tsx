@@ -149,6 +149,7 @@ const MedicationTable = ({
       end: "",
       ongoing: "",
       termination: "",
+      medicationType: exampleSource,
     };
     const newData = data.concat(newRow);
     setData(newData);
