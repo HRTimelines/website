@@ -57,8 +57,10 @@ const Description = () => {
         </p>
         {isFormActive && (
           <div>
-            We are currently collecting data on when trans people start HRT, what medications they are on, and what physical effects they have experienced. If you are interested in filling it out, please click the
-            button below.
+            We are currently collecting data on when trans people start HRT,
+            what medications they are on, and what physical effects they have
+            experienced. If you are interested in filling it out, please click
+            the button below.
           </div>
         )}
       </div>
@@ -141,20 +143,19 @@ const FormCoverText = () => {
       <div className="mt-24 p-5">
         <h2>Form Consent</h2>
         <p>
-          What follows is a form about what kinds of Hormone Replacement Therapy (HRT) you are on and the
-          physical effects you have experienced. It will be used to draw
-          conclusions about the different physical effects of HRT, as well as if those
-          effects correlate with age, ethnicity, medication, dosage, or other medications
-          or medical conditions. It is expected to take around 10 minutes.
-          You must be 18 years or older to complete this survey. We understand
-          that some of these questions may be difficult to answer. You are not
-          expected to have an exact date, just a best guess. If you have any
-          questions or are interested in helping out with the project you can
-          email us at{" "}
+          What follows is a form about what kinds of Hormone Replacement Therapy
+          (HRT) you are on and the physical effects you have experienced. It
+          will be used to draw conclusions about the different physical effects
+          of HRT, as well as if those effects correlate with age, ethnicity,
+          medication, dosage, other medications, or medical conditions. It is
+          expected to take around 10 minutes. You must be 18 years or older to
+          complete this survey. For some questions, you are not expected to have
+          an exact date, just a best guess. If you have any questions or are
+          interested in helping out with the project you can email us at{" "}
           <button onClick={() => copy("hrtimelines@gmail.com")}>
             <u>hrtimelines@gmail.com</u>
           </button>{" "}
-          or on instagram{" "}
+          or reach us on instagram{" "}
           <a href="https://instagram.com/hrtimelines?igshid=MzMyNGUyNmU2YQ%3D%3D&utm_source=qr">
             <u>@hrtimelines</u>.
           </a>
