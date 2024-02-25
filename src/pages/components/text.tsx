@@ -151,13 +151,13 @@ const FormCoverText = () => {
           expected to take around 10 minutes. You must be 18 years or older to
           complete this survey. For some questions, you are not expected to have
           an exact date, just a best guess.{" "}
-        </p>
+        </p><br />
         <p>
           Data is encrypted and stored on servers in the eastern United States.
           We do not collect any identifying information (such as name or email).
           This data will be retained for analyzing for any future projects
           HRTimelines may work on, but will not be shared outside of the
-          organization for any other research or commercial purpose. If you have
+          research team for any other research or commercial purpose. If you have
           any questions or are interested in helping out with the project you
           can email us at{" "}
           <button onClick={() => copy("hrtimelines@gmail.com")}>

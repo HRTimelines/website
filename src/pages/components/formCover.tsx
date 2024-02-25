@@ -46,7 +46,7 @@ const FormCover = () => {
             className="p-5"
           />
           <label htmlFor="consent" className="p-2">
-            I have read the above information. agree to participate in the
+            I have read the above information. I agree to participate in the
             survey, and agree to have my data retained for research purposes as described above
           </label>
           <br />
