@@ -28,7 +28,7 @@ const Description = () => {
             based research. Our goal is to create better timelines for physical
             effects of HRT while taking into account other factors such as
             application method, dosage, type, and other potential variables like age
-            and race.`}
+            and ethnicity.`}
           <br />
           <br />
           {`
